@@ -988,9 +988,12 @@ body {
   margin-right: 6px;
   line-height: 1;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
 }
 
 .category-item-flat span {
@@ -998,6 +1001,9 @@ body {
   font-weight: 500;
   color: #ffffff;
   text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* 右侧紧凑搜索栏 */

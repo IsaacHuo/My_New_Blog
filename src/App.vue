@@ -393,12 +393,13 @@ button, .category-item-flat span, .article-title-compact {
 
 /* 修复类别图标显示 */
 .category-icon-flat {
-  width: 24px;
-  height: 24px;
-  display: flex;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-right: 8px;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 /* 搜索按钮样式 */
