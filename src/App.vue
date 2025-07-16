@@ -126,7 +126,7 @@
 
             <!-- 精选推荐栏 -->
             <div class="column-section">
-              <div class="column-header">精选推荐</div>
+              <div class="column-header">我的推荐</div>
               <div class="column-content">
                 <div 
                   v-for="article in getArticlesByCategory('featured')" 
@@ -144,7 +144,7 @@
 
             <!-- 文章归档栏 -->
             <div class="column-section">
-              <div class="column-header">文章归档</div>
+              <div class="column-header">GitHub数据统计</div>
               <div class="column-content">
                 <div 
                   v-for="article in getArticlesByCategory('archived')" 
