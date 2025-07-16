@@ -13,7 +13,7 @@ function initSidebarToggle() {
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     
     sidebarItems.forEach(item => {
-        item.addEventListener('click', function(e) {
+        item.addEventListener('click', function() {
             // 移除其他项目的active状态
             sidebarItems.forEach(otherItem => {
                 otherItem.classList.remove('current');

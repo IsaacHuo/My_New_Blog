@@ -154,9 +154,9 @@ body {
   gap: 20px;
 }
 
-/* 侧边栏 - 移到左边，缩小宽度 */
+/* 侧边栏 - 移到左边，与column-section宽度一致 */
 .sidebar {
-  width: 200px;
+  width: calc((100% - 60px) / 5); /* 大约等于column-section的宽度 */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -271,6 +271,10 @@ body {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  align-self: stretch;
 }
 
 .sidebar-header {
@@ -279,14 +283,20 @@ body {
   padding: 12px 15px;
   font-size: 14px;
   font-weight: bold;
+  text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   border-bottom: 2px solid #1d4ed8;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .sidebar-content {
   padding: 15px;
   background: #f8fafc;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .sidebar-menu {
@@ -617,12 +627,13 @@ body {
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 15px 20px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
   border-radius: 8px 8px 0 0;
+  position: relative;
 }
 
 .modal-header h3 {
@@ -645,6 +656,10 @@ body {
   justify-content: center;
   border-radius: 50%;
   transition: background 0.3s;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .close-btn:hover {
@@ -905,7 +920,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* 横栏布局：标语+按钮+搜索栏 */
+/* 横栏布局：时间+标语+按钮+搜索栏 */
 .nav-search-row {
   display: flex;
   justify-content: space-between;
@@ -914,13 +929,39 @@ body {
   gap: 20px;
 }
 
-/* 左侧标语 */
+/* 时间显示样式 */
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.current-time {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'WenQuanYi Bitmap Song', 'Courier New', monospace;
+  margin-bottom: 2px;
+}
+
+.current-date {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* 中间标语 */
 .site-slogan {
   font-size: 16px;
   color: #ffffff;
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  flex-shrink: 0;
+  flex: 1;
+  text-align: center;
 }
 
 /* 中间和右侧区域 */
@@ -983,9 +1024,12 @@ body {
   margin-right: 6px;
   line-height: 1;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
 }
 
 .category-item-flat span {
@@ -993,6 +1037,9 @@ body {
   font-weight: 500;
   color: #ffffff;
   text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* 右侧紧凑搜索栏 */
@@ -1018,16 +1065,6 @@ body {
   box-shadow: 
     inset 0 1px 3px rgba(0,0,0,0.1),
     0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-.search-select-compact {
-  padding: 6px 8px;
-  border: 2px solid #3b82f6;
-  border-radius: 6px;
-  font-size: 12px;
-  background: white;
-  cursor: pointer;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .search-btn-compact {
@@ -1183,10 +1220,6 @@ body {
     font-size: 11px;
   }
   
-  .search-select-compact {
-    font-size: 11px;
-  }
-  
   .search-btn-compact {
     font-size: 11px;
     padding: 5px 10px;
@@ -1247,11 +1280,6 @@ body {
   .search-input-compact {
     width: 100px;
     padding: 4px 8px;
-    font-size: 10px;
-  }
-  
-  .search-select-compact {
-    padding: 4px 6px;
     font-size: 10px;
   }
   
