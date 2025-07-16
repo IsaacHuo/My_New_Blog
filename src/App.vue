@@ -4,7 +4,7 @@
     <header class="top-nav">
       <div class="nav-content">
         <div class="logo">
-          Isaac的个人博客
+          霍玮放的博客
         </div>
         <nav class="nav-links">
           <a href="#" @click="activeSection = 'articles'" :class="{ active: activeSection === 'articles' }">文章</a>
@@ -141,7 +141,7 @@
         </div>
         
         <div class="stats-bar">
-          欢迎来到我的个人博客，分享技术心得和生活感悟 (2025-7-17)
+          欢迎来到霍玮放的博客，分享技术心得和生活感悟 (2025-7-17)
         </div>
         
         <div class="site-stats">
@@ -152,38 +152,85 @@
           <a href="#" class="latest-reply">最新文章</a>
         </div>
 
-        <!-- 文章列表 -->
+        <!-- 文章列表 - 四栏并排展示 -->
         <div class="topic-list">
-          <div class="section-tabs">
-            <div class="tab" :class="{ active: activeTab === 'latest' }" @click="activeTab = 'latest'">
-              最新发布
-            </div>
-            <div class="tab" :class="{ active: activeTab === 'popular' }" @click="activeTab = 'popular'">
-              热门文章
-            </div>
-            <div class="tab" :class="{ active: activeTab === 'featured' }" @click="activeTab = 'featured'">
-              精选推荐
-            </div>
-            <div class="tab" :class="{ active: activeTab === 'archived' }" @click="activeTab = 'archived'">
-              文章归档
-            </div>
-          </div>
-          
-          <TransitionGroup name="slide-up" tag="div" class="articles-grid">
-            <div 
-              v-for="article in getArticlesByTab()" 
-              :key="article.id" 
-              class="article-item"
-            >
-              <div class="article-status">{{ article.status }}</div>
-              <a href="#" @click="selectArticle(article)" class="article-title">{{ article.title }}</a>
-              <div class="article-meta">
-                <span class="article-author">{{ article.author }}</span>
-                <span class="article-stats">{{ article.readCount }}阅读</span>
-                <span class="article-date">{{ article.date }}</span>
+          <div class="four-columns-layout">
+            <!-- 最新发布栏 -->
+            <div class="column-section">
+              <div class="column-header">最新发布</div>
+              <div class="column-content">
+                <div 
+                  v-for="article in getArticlesByCategory('latest')" 
+                  :key="'latest-' + article.id" 
+                  class="article-item-compact"
+                >
+                  <div class="article-status">{{ article.status }}</div>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
+                  <div class="article-meta-compact">
+                    <span class="article-stats">{{ article.readCount }}阅读</span>
+                    <span class="article-date">{{ article.date }}</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </TransitionGroup>
+
+            <!-- 热门文章栏 -->
+            <div class="column-section">
+              <div class="column-header">热门文章</div>
+              <div class="column-content">
+                <div 
+                  v-for="article in getArticlesByCategory('popular')" 
+                  :key="'popular-' + article.id" 
+                  class="article-item-compact"
+                >
+                  <div class="article-status">{{ article.status }}</div>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
+                  <div class="article-meta-compact">
+                    <span class="article-stats">{{ article.readCount }}阅读</span>
+                    <span class="article-date">{{ article.date }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 精选推荐栏 -->
+            <div class="column-section">
+              <div class="column-header">精选推荐</div>
+              <div class="column-content">
+                <div 
+                  v-for="article in getArticlesByCategory('featured')" 
+                  :key="'featured-' + article.id" 
+                  class="article-item-compact"
+                >
+                  <div class="article-status">{{ article.status }}</div>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
+                  <div class="article-meta-compact">
+                    <span class="article-stats">{{ article.readCount }}阅读</span>
+                    <span class="article-date">{{ article.date }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 文章归档栏 -->
+            <div class="column-section">
+              <div class="column-header">文章归档</div>
+              <div class="column-content">
+                <div 
+                  v-for="article in getArticlesByCategory('archived')" 
+                  :key="'archived-' + article.id" 
+                  class="article-item-compact"
+                >
+                  <div class="article-status">{{ article.status }}</div>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
+                  <div class="article-meta-compact">
+                    <span class="article-stats">{{ article.readCount }}阅读</span>
+                    <span class="article-date">{{ article.date }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -236,6 +283,66 @@
         </div>
       </aside>
     </main>
+    
+    <!-- 页脚 -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>关于本站</h4>
+          <p>霍玮放的个人博客，专注于前端技术分享与交流</p>
+          <p>记录技术成长路径，分享编程心得体会</p>
+        </div>
+        
+        <div class="footer-section">
+          <h4>技术栈</h4>
+          <ul>
+            <li>Vue.js 3</li>
+            <li>JavaScript ES6+</li>
+            <li>CSS3 & HTML5</li>
+            <li>Node.js</li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>联系方式</h4>
+          <ul>
+            <li>📧 huowf@example.com</li>
+            <li>🔗 github.com/huowf</li>
+            <li>💬 QQ群: 105653726</li>
+            <li>📱 微信: huowf2024</li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>友情链接</h4>
+          <ul>
+            <li><a href="#">Vue.js 官网</a></li>
+            <li><a href="#">MDN Web Docs</a></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">掘金</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-info">
+          <p>&copy; 2025 霍玮放的博客. All rights reserved.</p>
+          <p>本站已运行 <span class="running-time">365</span> 天 | 总访问量 <span class="visit-count">{{ stats.totalVisits }}</span></p>
+          <p>
+            <a href="#">隐私政策</a> | 
+            <a href="#">使用条款</a> | 
+            <a href="#">RSS订阅</a> |
+            <a href="#">网站地图</a>
+          </p>
+        </div>
+        
+        <div class="footer-badges">
+          <span class="badge">Vue 3</span>
+          <span class="badge">响应式设计</span>
+          <span class="badge">开源</span>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <!-- 联系方式模态框 -->
@@ -254,8 +361,8 @@
             </div>
             <p class="contact-desc">扫描二维码或搜索群号加入技术交流群</p>
             <div style="margin-top: 15px;">
-              <p><strong>邮箱:</strong> isaac@example.com</p>
-              <p><strong>GitHub:</strong> github.com/isaac</p>
+              <p><strong>邮箱:</strong> huowf@example.com</p>
+              <p><strong>GitHub:</strong> github.com/huowf</p>
             </div>
           </div>
         </div>
@@ -287,7 +394,7 @@ export default {
         id: 1,
         status: '🔥',
         title: 'Vue 3 组合式API详解与实践',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 1205,
         date: '07-16',
         tab: 'latest'
@@ -296,7 +403,7 @@ export default {
         id: 2,
         status: '📌',
         title: 'JavaScript异步编程完全指南',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 856,
         date: '07-15',
         tab: 'popular'
@@ -305,7 +412,7 @@ export default {
         id: 3,
         status: '✨',
         title: 'CSS Grid布局从入门到精通',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 642,
         date: '07-14',
         tab: 'featured'
@@ -314,7 +421,7 @@ export default {
         id: 4,
         status: '🔥',
         title: 'React Hooks最佳实践总结',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 789,
         date: '07-13',
         tab: 'latest'
@@ -323,7 +430,7 @@ export default {
         id: 5,
         status: '📚',
         title: '前端性能优化技巧汇总',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 923,
         date: '07-12',
         tab: 'popular'
@@ -332,7 +439,7 @@ export default {
         id: 6,
         status: '✨',
         title: 'TypeScript进阶使用技巧',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 567,
         date: '07-11',
         tab: 'featured'
@@ -341,7 +448,7 @@ export default {
         id: 7,
         status: '🎯',
         title: 'Webpack配置优化实战',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 435,
         date: '07-10',
         tab: 'latest'
@@ -350,7 +457,7 @@ export default {
         id: 8,
         status: '🚀',
         title: 'Node.js微服务架构设计',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 678,
         date: '07-09',
         tab: 'popular'
@@ -359,7 +466,7 @@ export default {
         id: 9,
         status: '💡',
         title: '前端工程化最佳实践',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 812,
         date: '07-08',
         tab: 'featured'
@@ -368,7 +475,7 @@ export default {
         id: 10,
         status: '📖',
         title: '算法与数据结构学习笔记',
-        author: 'Isaac',
+        author: '霍玮放',
         readCount: 345,
         date: '07-07',
         tab: 'archived'
@@ -393,6 +500,16 @@ export default {
       return articles.filter(article => article.tab === activeTab.value)
     }
 
+    const getArticlesByCategory = (category) => {
+      const categoryMap = {
+        'latest': 'latest',
+        'popular': 'popular', 
+        'featured': 'featured',
+        'archived': 'archived'
+      }
+      return articles.filter(article => article.tab === categoryMap[category]).slice(0, 6)
+    }
+
     const selectArticle = (article) => {
       selectedArticle.value = article
       console.log('选中文章:', article.title)
@@ -411,6 +528,7 @@ export default {
       articles,
       getSectionTitle,
       getArticlesByTab,
+      getArticlesByCategory,
       selectArticle
     }
   }

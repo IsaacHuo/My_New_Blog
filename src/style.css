@@ -456,6 +456,82 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* 四栏布局样式 */
+.four-columns-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.column-section {
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.column-header {
+  background: linear-gradient(to bottom, #4a90e2 0%, #357abd 100%);
+  color: white;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.column-content {
+  padding: 8px;
+  min-height: 300px;
+}
+
+.article-item-compact {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.article-item-compact:hover {
+  border-color: #4a90e2;
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
+}
+
+.article-item-compact:last-child {
+  margin-bottom: 0;
+}
+
+.article-title-compact {
+  display: block;
+  color: #2c5282;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.article-title-compact:hover {
+  color: #4a90e2;
+  text-decoration: underline;
+}
+
+.article-meta-compact {
+  font-size: 10px;
+  color: #718096;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.article-status {
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
 /* 统计栏样式 */
 .site-stats {
   display: flex;
@@ -564,6 +640,138 @@ body {
   margin-top: 10px;
 }
 
+/* 页脚样式 */
+.site-footer {
+  background: linear-gradient(to bottom, #2c3e50 0%, #34495e 100%);
+  color: #ecf0f1;
+  margin-top: 40px;
+  font-size: 12px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section h4 {
+  color: #3498db;
+  font-size: 14px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+
+.footer-section p {
+  line-height: 1.6;
+  margin-bottom: 8px;
+  color: #bdc3c7;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+  color: #bdc3c7;
+  line-height: 1.4;
+}
+
+.footer-section ul li a {
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #4a5568;
+  padding: 20px;
+  background: #1a202c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-info {
+  flex: 1;
+}
+
+.footer-info p {
+  margin-bottom: 5px;
+  color: #a0aec0;
+  line-height: 1.4;
+}
+
+.footer-info a {
+  color: #63b3ed;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.footer-info a:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.running-time, .visit-count {
+  color: #f6e05e;
+  font-weight: bold;
+}
+
+.footer-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #3498db;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* 页脚响应式设计 */
+@media (max-width: 992px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px 15px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .footer-badges {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;
@@ -610,6 +818,24 @@ body {
   
   .search-input {
     min-width: auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .four-columns-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .four-columns-layout {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .column-content {
+    min-height: 200px;
   }
 }
 
