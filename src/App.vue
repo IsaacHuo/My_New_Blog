@@ -1,5 +1,5 @@
 <template>
-  <div class="cont                <div class="category-icon-flat">💻</div>iner">
+  <div class="container">
     <!-- 顶部导航 -->
     <header class="top-nav">
       <div class="nav-content">
@@ -27,11 +27,11 @@
             <!-- 按钮组 -->
             <div class="category-buttons-center">
               <div class="category-item-flat" @click="activeSection = 'tech'">
-                <div class="category-icon-flat">�</div>
+                <div class="category-icon-flat">💻</div>
                 <span>技术随笔</span>
               </div>
               <div class="category-item-flat" @click="activeSection = 'projects'">
-                <div class="category-icon-flat">�</div>
+                <div class="category-icon-flat">🚀</div>
                 <span>项目分享</span>
               </div>
               <div class="category-item-flat" @click="activeSection = 'life'">
@@ -43,7 +43,7 @@
                 <span>关于我</span>
               </div>
               <div class="category-item-flat" @click="activeSection = 'wishes'">
-                <div class="category-icon-flat">�</div>
+                <div class="category-icon-flat">⭐</div>
                 <span>我的愿望</span>
               </div>
             </div>
@@ -371,4 +371,47 @@ export default {
 
 <style>
 /* 组件特定样式 */
+/* 全局字体设置 */
+* {
+  font-family: 'WenQuanYi Bitmap Song', sans-serif;
+}
+
+/* Emoji 专用样式 */
+.category-icon-flat,
+.search-btn-compact,
+.emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 18px;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* 确保按钮文字使用指定字体 */
+button, .category-item-flat span, .article-title-compact {
+  font-family: 'WenQuanYi Bitmap Song', sans-serif;
+}
+
+/* 修复类别图标显示 */
+.category-icon-flat {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+/* 搜索按钮样式 */
+.search-btn-compact {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.search-btn-compact:hover {
+  background: #e5e5e5;
+}
 </style>
+
