@@ -1,0 +1,549 @@
+/* 字体定义 */
+@font-face {
+    font-family: 'WenQuanYi';
+    src: url('WenQuanYi Bitmap Song 16px.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM_VGA';
+    src: url('Ac437_IBM_VGA_8x16-2x.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'WenQuanYi', 'IBM_VGA', serif;
+    font-size: 12px;
+    line-height: 1.4;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #003d7a;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ff6600;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* 顶部导航栏 */
+.header {
+    background: linear-gradient(to bottom, #4a90e2, #357abd);
+    border-bottom: 2px solid #2c5c8f;
+    position: relative;
+    z-index: 100;
+}
+
+.nav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    min-height: 40px;
+}
+
+.logo {
+    font-family: 'WenQuanYi', serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-item {
+    color: white;
+    font-family: 'WenQuanYi', serif;
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.nav-item.hot {
+    background-color: #ff6600;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-item.dropdown::after {
+    content: '';
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-family: 'WenQuanYi', serif;
+}
+
+.login-btn, .register-btn, .service-btn {
+    color: white;
+    font-size: 12px;
+}
+
+.separator {
+    color: #ccc;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px 0 0 3px;
+    font-size: 12px;
+    width: 120px;
+    font-family: 'IBM_VGA', monospace;
+}
+
+.search-box button {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 3px 3px 0;
+    background: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* 侧边栏 */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    width: 150px;
+    height: calc(100vh - 60px);
+    background-color: #e8f4ff;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    z-index: 50;
+}
+
+.sidebar-section {
+    padding: 10px 0;
+}
+
+.sidebar-item {
+    display: block;
+    padding: 6px 15px;
+    color: #003d7a;
+    font-family: 'WenQuanYi', serif;
+    font-size: 12px;
+    border-bottom: 1px solid #d0e5ff;
+}
+
+.sidebar-item:hover {
+    background-color: #d0e5ff;
+    text-decoration: none;
+}
+
+.sidebar-item.current {
+    background-color: #b8d4f0;
+    font-weight: bold;
+}
+
+.subsection {
+    margin-left: 10px;
+}
+
+.sidebar-subitem {
+    display: block;
+    padding: 4px 15px;
+    color: #666;
+    font-family: 'WenQuanYi', serif;
+    font-size: 11px;
+    border-bottom: 1px solid #e8f4ff;
+}
+
+.sidebar-subitem:hover {
+    background-color: #f0f8ff;
+    text-decoration: none;
+}
+
+.sidebar-subitem.current {
+    color: #ff6600;
+    font-weight: bold;
+}
+
+/* 主要内容区域 */
+.main-content {
+    margin-left: 150px;
+    margin-right: 200px;
+    padding: 0 20px;
+    min-height: 100vh;
+}
+
+/* 分类信息横幅 */
+.category-banner {
+    margin: 20px 0;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.banner-bg {
+    background: linear-gradient(135deg, #4fb3d9 0%, #5bc0de 50%, #87ceeb 100%);
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.banner-content {
+    z-index: 2;
+    position: relative;
+}
+
+.banner-title {
+    font-family: 'WenQuanYi', serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.highlight-red {
+    color: #ff3333;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.highlight-orange {
+    color: #ff6600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.banner-subtitle {
+    font-family: 'WenQuanYi', serif;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.decorative-circles {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.circle-1 {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    right: 0;
+}
+
+.circle-2 {
+    width: 25px;
+    height: 25px;
+    top: 10px;
+    right: 30px;
+}
+
+.circle-3 {
+    width: 15px;
+    height: 15px;
+    top: -5px;
+    right: 50px;
+}
+
+/* 功能导航区 */
+.function-nav {
+    background-color: #f0f8ff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.nav-links {
+    margin-bottom: 5px;
+    font-family: 'WenQuanYi', serif;
+    font-size: 12px;
+}
+
+.label {
+    color: #666;
+    margin-right: 10px;
+}
+
+.category-link, .update-link, .default-link {
+    margin-right: 15px;
+    color: #003d7a;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    font-family: 'WenQuanYi', serif;
+}
+
+.post-btn {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'WenQuanYi', serif;
+    font-size: 12px;
+}
+
+.post-btn:hover {
+    background-color: #e55a00;
+}
+
+/* 版面推荐 */
+.section-header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    font-family: 'WenQuanYi', serif;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.recommendation {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    font-family: 'WenQuanYi', serif;
+    font-size: 12px;
+}
+
+.rec-link {
+    color: #003d7a;
+}
+
+/* 帖子列表 */
+.posts-container {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.posts-header {
+    background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+    border-bottom: 1px solid #ccc;
+    display: grid;
+    grid-template-columns: 1fr 120px 80px 100px;
+    padding: 8px 10px;
+    font-family: 'WenQuanYi', serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: #333;
+}
+
+.post-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.post-item {
+    display: grid;
+    grid-template-columns: 30px 1fr 120px 80px 100px;
+    padding: 8px 5px;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+    font-family: 'WenQuanYi', serif;
+    font-size: 12px;
+}
+
+.post-item:hover {
+    background-color: #f8f8ff;
+}
+
+.post-item.pinned {
+    background-color: #fff9e6;
+}
+
+.post-icon {
+    text-align: center;
+    font-size: 14px;
+}
+
+.post-topic {
+    padding: 0 10px;
+}
+
+.post-title {
+    color: #003d7a;
+    line-height: 1.3;
+}
+
+.post-author {
+    text-align: center;
+}
+
+.author-link {
+    color: #666;
+    font-size: 11px;
+}
+
+.post-stats {
+    text-align: center;
+    color: #666;
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.post-date {
+    text-align: center;
+    color: #666;
+    font-size: 11px;
+}
+
+/* 右侧广告区 */
+.right-sidebar {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    width: 200px;
+    height: calc(100vh - 60px);
+    background-color: #f5f5f5;
+    padding: 20px 10px;
+    overflow-y: auto;
+}
+
+.ad-banner {
+    background: linear-gradient(135deg, #1a1a3a 0%, #2d2d5a 50%, #4a4a7a 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ad-content h3 {
+    font-family: 'WenQuanYi', serif;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #ffd700;
+}
+
+.ad-content p {
+    font-family: 'WenQuanYi', serif;
+    font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.price {
+    color: #ff6600;
+    font-weight: bold;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .main-content {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .sidebar {
+        display: none;
+    }
+    
+    .right-sidebar {
+        display: none;
+    }
+    
+    .nav-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .posts-header,
+    .post-item {
+        grid-template-columns: 1fr 80px 60px;
+    }
+    
+    .col-author,
+    .post-author {
+        display: none;
+    }
+    
+    .banner-title {
+        font-size: 20px;
+    }
+    
+    .banner-subtitle {
+        font-size: 14px;
+    }
+    
+    .user-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .search-box input {
+        width: 100px;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
