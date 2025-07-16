@@ -154,9 +154,9 @@ body {
   gap: 20px;
 }
 
-/* 侧边栏 - 移到左边，缩小宽度 */
+/* 侧边栏 - 移到左边，与column-section宽度一致 */
 .sidebar {
-  width: 200px;
+  width: calc((100% - 60px) / 5); /* 大约等于column-section的宽度 */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -271,6 +271,10 @@ body {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  align-self: stretch;
 }
 
 .sidebar-header {
@@ -279,14 +283,20 @@ body {
   padding: 12px 15px;
   font-size: 14px;
   font-weight: bold;
+  text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   border-bottom: 2px solid #1d4ed8;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .sidebar-content {
   padding: 15px;
   background: #f8fafc;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .sidebar-menu {
@@ -910,7 +920,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* 横栏布局：标语+按钮+搜索栏 */
+/* 横栏布局：时间+标语+按钮+搜索栏 */
 .nav-search-row {
   display: flex;
   justify-content: space-between;
@@ -919,13 +929,39 @@ body {
   gap: 20px;
 }
 
-/* 左侧标语 */
+/* 时间显示样式 */
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.current-time {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'WenQuanYi Bitmap Song', 'Courier New', monospace;
+  margin-bottom: 2px;
+}
+
+.current-date {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* 中间标语 */
 .site-slogan {
   font-size: 16px;
   color: #ffffff;
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  flex-shrink: 0;
+  flex: 1;
+  text-align: center;
 }
 
 /* 中间和右侧区域 */

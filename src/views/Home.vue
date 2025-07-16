@@ -17,12 +17,18 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="nav-search-row">
-          <!-- 左侧标语 -->
+          <!-- 左侧时间显示 -->
+          <div class="time-display">
+            <div class="current-time">{{ currentTime }}</div>
+            <div class="current-date">{{ currentDate }}</div>
+          </div>
+          
+          <!-- 中间标语 -->
           <div class="site-slogan">
             分享收获、感悟生活、共同成长！
           </div>
           
-          <!-- 中间和右侧区域 -->
+          <!-- 右侧区域 -->
           <div class="buttons-search-area">
             <!-- 按钮组 -->
             <div class="category-buttons-center">
@@ -63,18 +69,35 @@
       <!-- 侧边栏 - 移到最左边 -->
       <aside class="sidebar">
         <div class="sidebar-section">
-          <div class="sidebar-header">博客导航</div>
+          <div class="sidebar-header">个人介绍</div>
           <div class="sidebar-content">
-            <ul class="sidebar-menu">
-              <li><a href="#">首页</a></li>
-              <li><a href="#">技术文章</a></li>
-              <li><a href="#">项目展示</a></li>
-              <li><a href="#">学习笔记</a></li>
-              <li><a href="#">生活随笔</a></li>
-              <li><a href="#">友情链接</a></li>
-              <li><a href="#">关于我</a></li>
-              <li><a href="#">RSS订阅</a></li>
-            </ul>
+            <div class="profile-intro">
+              <div class="profile-avatar">👨‍💻</div>
+              <div class="profile-info">
+                <h3 class="profile-name">霍玮放</h3>
+                <p class="profile-title">北京林业大学 本科生</p>
+                <p class="profile-desc">
+                  电气工程及其自动化专业在读，对编程和机器学习充满热情。
+                  喜欢通过代码解决实际问题，探索技术与专业的结合点。
+                </p>
+                <div class="profile-skills">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">机器学习</span>
+                  <span class="skill-tag">Vue.js</span>
+                </div>
+                <div class="profile-contact">
+                  <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="contact-info">2210286979@qq.com</span>
+                  </div>
+                  <div class="contact-item">
+                    <span class="contact-icon">🐙</span>
+                    <a href="https://github.com/IsaacHuo" target="_blank" class="contact-link">GitHub.com/IsaacHuo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </aside>
@@ -241,6 +264,8 @@ export default {
     const activeTab = ref('latest')
     const showContact = ref(false)
     const selectedArticle = ref(null)
+    const currentTime = ref('')
+    const currentDate = ref('')
     
     const stats = reactive({
       todayVisits: 156,
@@ -405,6 +430,21 @@ export default {
       }
     }
 
+    // 时间更新函数
+    const updateTime = () => {
+      const now = new Date()
+      currentTime.value = now.toLocaleTimeString('zh-CN', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })
+      currentDate.value = now.toLocaleDateString('zh-CN', { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit' 
+      })
+    }
+
     const goToTechArticles = () => {
       console.log('跳转到技术文章页面')
       router.push('/tech')
@@ -432,6 +472,10 @@ export default {
 
     onMounted(() => {
       console.log('个人博客应用已启动')
+      // 立即更新一次时间
+      updateTime()
+      // 每分钟更新一次时间
+      setInterval(updateTime, 60000)
     })
 
     return {
@@ -439,6 +483,8 @@ export default {
       activeTab,
       showContact,
       selectedArticle,
+      currentTime,
+      currentDate,
       stats,
       articles,
       getSectionTitle,
@@ -513,6 +559,122 @@ button, .category-item-flat span, .article-title-compact {
 .article-title-compact.no-detail:hover {
   color: #999 !important;
   text-decoration: none !important;
+}
+
+/* 时间显示样式 */
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  min-width: 100px;
+}
+
+.current-time {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'WenQuanYi Bitmap Song', 'Courier New', monospace;
+  margin-bottom: 2px;
+}
+
+.current-date {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* 个人介绍卡片样式 */
+.profile-intro {
+  text-align: center;
+  padding: 8px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-avatar {
+  font-size: 40px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.profile-name {
+  font-size: 16px;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+  font-weight: bold;
+}
+
+.profile-title {
+  font-size: 13px;
+  color: #3b82f6;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.profile-desc {
+  font-size: 12px;
+  color: #4b5563;
+  line-height: 1.4;
+  margin: 0 0 12px 0;
+  text-align: left;
+  flex: 1;
+}
+
+.profile-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.skill-tag {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+  border: 1px solid #bae6fd;
+}
+
+.profile-contact {
+  text-align: left;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 11px;
+}
+
+.contact-icon {
+  font-size: 12px;
+  width: 16px;
+  text-align: center;
+}
+
+.contact-info {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.contact-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #2563eb;
+  text-decoration: underline;
 }
 </style>
 

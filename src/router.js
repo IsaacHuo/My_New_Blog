@@ -90,7 +90,7 @@ const routes = [
   },
   {
     path: '/article/:id',
-    redirect: to => {
+    redirect: () => {
       return `/tech`
     }
   }

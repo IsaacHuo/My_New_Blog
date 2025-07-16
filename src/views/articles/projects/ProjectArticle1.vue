@@ -17,11 +17,11 @@
     <section class="article-banner">
       <div class="banner-content">
         <div class="article-breadcrumb">
-          <span @click="goBack" class="breadcrumb-link">首页</span>
+          <button @click="goBack" class="breadcrumb-btn">首页</button>
           <span class="breadcrumb-separator">></span>
-          <span @click="goToCategory" class="breadcrumb-link">项目分享</span>
+          <button @click="goToCategory" class="breadcrumb-btn">项目分享</button>
           <span class="breadcrumb-separator">></span>
-          <span class="breadcrumb-current">{{ article.title }}</span>
+          <button class="breadcrumb-current-btn">{{ article.title }}</button>
         </div>
       </div>
     </section>
@@ -404,29 +404,65 @@ export default {
 }
 
 .article-breadcrumb {
+  display: flex;
+  align-items: center;
   font-size: 14px;
-  color: #ffffff;
+  gap: 10px;
 }
 
-.breadcrumb-link {
-  color: #ffffff;
+.breadcrumb-btn {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
+  border: 1px solid #1d4ed8;
+  border-radius: 6px;
   cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.3s;
+  transition: all 0.2s ease;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.2),
+    0 2px 4px rgba(0,0,0,0.15);
+  min-width: 80px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  justify-content: center;
 }
 
-.breadcrumb-link:hover {
-  color: #93c5fd;
+.breadcrumb-btn:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 3px 6px rgba(0,0,0,0.2);
 }
 
 .breadcrumb-separator {
   margin: 0 8px;
   color: #e2e8f0;
+  font-weight: bold;
 }
 
-.breadcrumb-current {
-  color: #ffd700;
+.breadcrumb-current-btn {
+  background: linear-gradient(to bottom, #ffd700 0%, #f59e0b 100%);
+  color: #1d4ed8;
+  border: 1px solid #f59e0b;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: default;
   font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  white-space: nowrap;
+  font-size: 12px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 2px 4px rgba(0,0,0,0.15);
 }
 
 .article-main {

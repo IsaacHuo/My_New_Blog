@@ -17,7 +17,7 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="category-breadcrumb">
-          <button @click="goHome" class="breadcrumb-btn breadcrumb-link">首页</button>
+          <button @click="goHome" class="breadcrumb-btn">首页</button>
           <span class="breadcrumb-separator">></span>
           <button class="breadcrumb-btn breadcrumb-current" disabled>技术随笔</button>
         </div>

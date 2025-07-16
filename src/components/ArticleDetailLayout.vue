@@ -21,7 +21,7 @@
           <span class="breadcrumb-separator">></span>
           <button @click="goToCategory" class="breadcrumb-btn">{{ categoryDisplayName }}</button>
           <span class="breadcrumb-separator">></span>
-          <span class="breadcrumb-current-btn">{{ article.title }}</span>
+          <button class="breadcrumb-current-btn">{{ article.title }}</button>
         </div>
       </div>
     </section>
@@ -234,7 +234,7 @@ export default {
       const relatedArticlesSection = document.querySelector('.sidebar-fixed')
       const headerHeight = header ? header.offsetHeight : 0
       const bannerHeight = banner ? banner.offsetHeight : 0
-      const relatedHeight = relatedArticlesSection ? relatedArticlesSection.offsetHeight : 0
+      // const relatedHeight = relatedArticlesSection ? relatedArticlesSection.offsetHeight : 0
       const topOffset = headerHeight + bannerHeight + 20 // 与顶部保持距离
       
       // 检查是否需要吸顶
@@ -321,8 +321,9 @@ export default {
     }
 
     const toggleLike = () => {
-      props.article.likes++
-      emit('like-toggled', props.article.likes)
+      // 不直接修改props，而是通过emit传递新值
+      const newLikes = props.article.likes + 1
+      emit('like-toggled', newLikes)
     }
 
     const shareArticle = () => {
@@ -366,7 +367,8 @@ export default {
     }
 
     onMounted(() => {
-      props.article.readCount++
+      // 不直接修改props，而是通过emit传递阅读数增加事件
+      emit('read-count-increased')
       
       // 添加滚动监听
       window.addEventListener('scroll', handleScroll)
@@ -435,24 +437,32 @@ export default {
 }
 
 .breadcrumb-btn {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
   background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
-  color: #ffd700;
   border: 1px solid #1d4ed8;
-  padding: 6px 12px;
   border-radius: 6px;
-  font-size: 13px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.2),
+    0 2px 4px rgba(0,0,0,0.15);
+  min-width: 80px;
+  white-space: nowrap;
+  font-size: 12px;
   font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  justify-content: center;
 }
 
 .breadcrumb-btn:hover {
   background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
-  border-color: #1d4ed8;
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 3px 6px rgba(0,0,0,0.2);
 }
 
 .breadcrumb-separator {
@@ -461,16 +471,22 @@ export default {
 }
 
 .breadcrumb-current-btn {
-  background: linear-gradient(to bottom, #1e40af 0%, #1e3a8a 100%);
-  color: #ffd700;
-  border: 1px solid #1d4ed8;
-  padding: 6px 12px;
+  background: linear-gradient(to bottom, #ffd700 0%, #f59e0b 100%);
+  color: #1d4ed8;
+  border: 1px solid #f59e0b;
+  padding: 6px 16px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
-  backdrop-filter: blur(10px);
-  display: inline-block;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  white-space: nowrap;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 2px 4px rgba(0,0,0,0.15);
 }
 
 .article-main {

@@ -17,7 +17,7 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="category-breadcrumb">
-          <button @click="goHome" class="breadcrumb-btn breadcrumb-link">首页</button>
+          <button @click="goHome" class="breadcrumb-btn">首页</button>
           <span class="breadcrumb-separator">></span>
           <button class="breadcrumb-btn breadcrumb-current" disabled>关于我</button>
         </div>
@@ -38,12 +38,12 @@
               <div class="avatar-container">
                 <div class="avatar">👨‍💻</div>
                 <h3 class="name">霍玮放</h3>
-                <p class="title">全栈开发工程师</p>
+                <p class="title">北京林业大学 本科生</p>
               </div>
               <div class="intro-text">
-                <p>大家好，我是霍玮放，一名热爱技术的全栈开发工程师。</p>
-                <p>专注于前端开发，同时也涉足后端技术。喜欢探索新技术，分享学习心得，记录生活点滴。</p>
-                <p>相信技术改变生活，用代码创造价值。希望通过这个博客与大家交流学习，共同进步。</p>
+                <p>大家好，我是霍玮放，北京林业大学电气工程及其自动化专业的一名本科生。</p>
+                <p>对编程和机器学习有着浓厚的兴趣，喜欢用代码解决实际问题。在学习专业知识的同时，也在不断探索计算机技术的魅力。</p>
+                <p>希望通过这个博客记录我的学习历程，分享技术心得和成长感悟，与大家一起交流进步。</p>
               </div>
             </div>
           </div>
@@ -72,10 +72,10 @@
           </div>
         </div>
 
-        <!-- 工作经历 -->
+        <!-- 项目经历 -->
         <div class="about-section experience-section">
           <div class="section-header">
-            <h2 class="section-title">💼 工作经历</h2>
+            <h2 class="section-title">💼 项目经历</h2>
           </div>
           <div class="section-content">
             <div class="timeline">
@@ -165,7 +165,15 @@
                 <span class="contact-icon">{{ contact.icon }}</span>
                 <div class="contact-info">
                   <div class="contact-type">{{ contact.type }}</div>
-                  <div class="contact-value">{{ contact.value }}</div>
+                  <div class="contact-value">
+                    <a v-if="contact.type === 'GitHub'" 
+                       :href="'https://' + contact.value" 
+                       target="_blank" 
+                       class="contact-link">
+                      {{ contact.value }}
+                    </a>
+                    <span v-else>{{ contact.value }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -265,7 +273,7 @@
             <p class="contact-desc">扫描二维码或搜索群号加入技术交流群</p>
             <div style="margin-top: 15px;">
               <p><strong>邮箱:</strong> 2210286979@qq.com</p>
-              <p><strong>GitHub:</strong> https://github.com/IsaacHuo</p>
+              <p><strong>GitHub:</strong> <a href="https://github.com/IsaacHuo" target="_blank" style="color: #3b82f6; text-decoration: none;">https://github.com/IsaacHuo</a></p>
             </div>
           </div>
         </div>
@@ -286,33 +294,43 @@ export default {
 
     const skills = reactive([
       {
-        category: '前端技术',
+        category: '编程语言',
         items: [
-          { name: 'JavaScript', level: 90 },
-          { name: 'Vue.js', level: 85 },
-          { name: 'React', level: 80 },
-          { name: 'TypeScript', level: 75 },
-          { name: 'CSS/SCSS', level: 85 }
+          { name: 'Python', level: 80 },
+          { name: 'JavaScript', level: 75 },
+          { name: 'C/C++', level: 70 },
+          { name: 'MATLAB', level: 65 },
+          { name: 'HTML/CSS', level: 75 }
         ]
       },
       {
-        category: '后端技术',
+        category: '机器学习',
         items: [
-          { name: 'Node.js', level: 80 },
-          { name: 'Python', level: 70 },
-          { name: 'Express', level: 75 },
-          { name: 'MongoDB', level: 70 },
-          { name: 'MySQL', level: 65 }
+          { name: 'Scikit-learn', level: 70 },
+          { name: 'TensorFlow', level: 60 },
+          { name: 'Pandas', level: 75 },
+          { name: 'NumPy', level: 80 },
+          { name: 'Matplotlib', level: 70 }
+        ]
+      },
+      {
+        category: '专业技能',
+        items: [
+          { name: '电路分析', level: 85 },
+          { name: '自动控制原理', level: 80 },
+          { name: 'PLC编程', level: 70 },
+          { name: '单片机开发', level: 75 },
+          { name: '信号处理', level: 70 }
         ]
       },
       {
         category: '开发工具',
         items: [
-          { name: 'Git', level: 85 },
-          { name: 'Webpack', level: 75 },
-          { name: 'Vite', level: 80 },
-          { name: 'Docker', level: 60 },
-          { name: 'VS Code', level: 95 }
+          { name: 'Git', level: 75 },
+          { name: 'VS Code', level: 90 },
+          { name: 'Jupyter Notebook', level: 85 },
+          { name: 'Vue.js', level: 70 },
+          { name: 'Linux', level: 65 }
         ]
       }
     ])
@@ -320,48 +338,48 @@ export default {
     const experiences = reactive([
       {
         id: 1,
-        position: '高级前端开发工程师',
-        company: '某科技有限公司',
-        period: '2023.03 - 至今',
+        position: '机器学习项目',
+        company: '个人学习项目',
+        period: '2024.03 - 2024.06',
         description: [
-          '负责公司主要产品的前端开发工作，使用 Vue3 + TypeScript 技术栈',
-          '优化前端性能，提升用户体验，页面加载速度提升 30%',
-          '参与技术架构设计，制定前端开发规范和最佳实践'
+          '基于Python开发房价预测模型，使用线性回归和随机森林算法',
+          '数据预处理和特征工程，模型准确率达到85%',
+          '使用Flask搭建简单的Web应用展示预测结果'
         ],
-        technologies: ['Vue.js', 'TypeScript', 'Vite', 'Element Plus']
+        technologies: ['Python', 'Scikit-learn', 'Pandas', 'Flask']
       },
       {
         id: 2,
-        position: '前端开发工程师',
-        company: '互联网创业公司',
-        period: '2021.06 - 2023.02',
+        position: '电气自动化课程设计',
+        company: '北京林业大学',
+        period: '2023.11 - 2023.12',
         description: [
-          '独立完成多个项目的前端开发，从0到1搭建前端工程',
-          '负责移动端H5页面开发，兼容性处理和性能优化',
-          '与后端工程师协作，定义API接口规范'
+          '设计并实现基于PLC的自动化控制系统',
+          '完成电路设计、程序编写和系统调试',
+          '项目获得课程设计优秀奖'
         ],
-        technologies: ['React', 'JavaScript', 'Webpack', 'Ant Design']
+        technologies: ['PLC编程', '电路设计', '自动控制', 'MATLAB']
       },
       {
         id: 3,
-        position: 'Web开发实习生',
-        company: '某软件公司',
-        period: '2020.07 - 2021.05',
+        position: '个人博客开发',
+        company: '个人项目',
+        period: '2023.09 - 至今',
         description: [
-          '参与公司官网和管理系统的开发维护',
-          '学习前端开发技术栈，快速上手项目开发',
-          '协助测试和bug修复工作'
+          '使用Vue.js开发个人技术博客，记录学习心得',
+          '响应式设计，支持多种设备访问',
+          '持续更新和维护，分享技术文章和学习笔记'
         ],
-        technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery']
+        technologies: ['Vue.js', 'JavaScript', 'CSS', 'Vite']
       }
     ])
 
     const education = reactive([
       {
         id: 1,
-        school: '某某大学',
-        major: '计算机科学与技术 本科',
-        period: '2017.09 - 2021.06'
+        school: '北京林业大学',
+        major: '电气工程及其自动化 本科',
+        period: '2022.09 - 2026.06（在读）'
       }
     ])
 
@@ -379,11 +397,11 @@ export default {
 
     const hobbies = reactive([
       { name: '编程', icon: '💻' },
+      { name: '机器学习', icon: '🤖' },
       { name: '阅读', icon: '📚' },
       { name: '音乐', icon: '🎵' },
-      { name: '摄影', icon: '📷' },
-      { name: '旅行', icon: '✈️' },
-      { name: '健身', icon: '💪' }
+      { name: '电子制作', icon: '⚡' },
+      { name: '篮球', icon: '🏀' }
     ])
 
     const blogStats = reactive([
@@ -394,37 +412,37 @@ export default {
     ])
 
     const topTechnologies = reactive([
-      { name: 'JavaScript', level: 90 },
-      { name: 'Vue.js', level: 85 },
-      { name: 'React', level: 80 },
-      { name: 'TypeScript', level: 75 },
-      { name: 'Node.js', level: 70 }
+      { name: 'Python', level: 80 },
+      { name: 'JavaScript', level: 75 },
+      { name: 'MATLAB', level: 65 },
+      { name: 'C/C++', level: 70 },
+      { name: 'Vue.js', level: 70 }
     ])
 
     const recentActivities = reactive([
       {
         id: 1,
         icon: '📝',
-        title: '发布了新文章',
-        time: '2天前'
+        title: '完成了机器学习项目',
+        time: '3天前'
       },
       {
         id: 2,
         icon: '💻',
-        title: '更新了项目代码',
-        time: '5天前'
+        title: '更新了个人博客',
+        time: '1周前'
       },
       {
         id: 3,
         icon: '🎯',
-        title: '完成了技术目标',
-        time: '1周前'
+        title: '学习了深度学习',
+        time: '2周前'
       },
       {
         id: 4,
         icon: '📚',
-        title: '学习了新技术',
-        time: '2周前'
+        title: '完成了课程设计',
+        time: '3周前'
       },
       {
         id: 5,
@@ -1118,5 +1136,18 @@ export default {
   .sidebar-section {
     margin-bottom: 0;
   }
+}
+
+/* 联系方式链接样式 */
+.contact-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #2563eb;
+  text-decoration: underline;
 }
 </style>

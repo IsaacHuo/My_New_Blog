@@ -61,7 +61,7 @@ export const copyToClipboard = async (text) => {
   try {
     await navigator.clipboard.writeText(text)
     return true
-  } catch (err) {
+  } catch {
     // 降级方案
     const textArea = document.createElement('textarea')
     textArea.value = text
@@ -83,7 +83,7 @@ export const shareArticle = async (title, text, url) => {
         url
       })
       return true
-    } catch (err) {
+    } catch {
       console.log('分享被取消')
       return false
     }
