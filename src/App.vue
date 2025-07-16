@@ -189,14 +189,14 @@
         </div>
         <div class="modal-content">
           <div class="contact-info">
-            <h4>加 QQ 群：105653726</h4>
+            <h4>加Q群：105653726</h4>
             <div class="qr-code">
               <img src="/QQ 群.png" alt="QQ群二维码" class="qr-image">
             </div>
             <p class="contact-desc">扫描二维码或搜索群号加入技术交流群</p>
             <div style="margin-top: 15px;">
-              <p><strong>邮箱:</strong> huowf@example.com</p>
-              <p><strong>GitHub:</strong> github.com/huowf</p>
+              <p><strong>邮箱:</strong> 2210286979@qq.com</p>
+              <p><strong>GitHub:</strong> https://github.com/IsaacHuo</p>
             </div>
           </div>
         </div>

@@ -617,12 +617,13 @@ body {
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 15px 20px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
   border-radius: 8px 8px 0 0;
+  position: relative;
 }
 
 .modal-header h3 {
@@ -645,6 +646,10 @@ body {
   justify-content: center;
   border-radius: 50%;
   transition: background 0.3s;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .close-btn:hover {
