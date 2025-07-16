@@ -476,41 +476,52 @@ export default {
 }
 
 .breadcrumb-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
+  border: 1px solid #1d4ed8;
   border-radius: 6px;
-  font-size: 13px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.2),
+    0 2px 4px rgba(0,0,0,0.15);
+  min-width: 80px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  justify-content: center;
 }
 
 .breadcrumb-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 3px 6px rgba(0,0,0,0.2);
 }
 
 .breadcrumb-btn:disabled {
-  background: #ffd700;
+  background: linear-gradient(to bottom, #ffd700 0%, #f59e0b 100%);
   color: #1d4ed8;
-  border-color: #fbbf24;
+  border-color: #f59e0b;
   cursor: default;
   font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 2px 4px rgba(0,0,0,0.15);
 }
 
-.breadcrumb-link {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.breadcrumb-current {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  font-weight: bold;
+.breadcrumb-btn:active:not(:disabled) {
+  background: linear-gradient(to bottom, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(0);
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.2),
+    0 1px 2px rgba(0,0,0,0.15);
 }
 
 /* 主要内容布局 */
@@ -652,9 +663,21 @@ export default {
   background: #f1f5f9;
   color: #3b82f6;
   padding: 4px 10px;
-  border-radius: 16px;
+  border-radius: 6px;
   font-size: 12px;
   border: 1px solid #e2e8f0;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.article-tag:hover {
+  background: #3b82f6;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
 }
 
 /* 分页 */
@@ -679,6 +702,7 @@ export default {
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+  height: 36px;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -695,6 +719,8 @@ export default {
   border-color: #d1d5db;
   cursor: not-allowed;
   transform: none;
+  height: 36px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .page-info {
@@ -739,15 +765,20 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-bottom: 5px;
+  height: 36px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .category-item.active {
   background: linear-gradient(to right, #60a5fa 0%, #3b82f6 100%);
   color: white;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
 }
 
 .category-item:not(.active):hover {
   background: #e2e8f0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .category-icon {
@@ -775,16 +806,22 @@ export default {
   background: #f1f5f9;
   color: #3b82f6;
   padding: 4px 8px;
-  border-radius: 12px;
+  border-radius: 6px;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid #e2e8f0;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .popular-tag:hover {
   background: #3b82f6;
   color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
 }
 
 /* 生活杂想特定样式 */
@@ -802,17 +839,37 @@ export default {
   background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
   color: #10b981;
   border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.life-tag:hover {
+  background: #10b981;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .mood-tag {
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   color: #d97706;
   border: 1px solid #fbbf24;
+  border-radius: 6px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .mood-tag:hover {
   background: #d97706;
   color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(217, 119, 6, 0.2);
 }
 
 .article-mood {
@@ -838,11 +895,22 @@ export default {
 .milestone-date {
   background: #10b981;
   color: white;
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
   font-size: 11px;
   font-weight: bold;
   white-space: nowrap;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.milestone-date:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .milestone-content {
@@ -862,15 +930,23 @@ export default {
 .mood-day {
   text-align: center;
   padding: 8px 4px;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .mood-day:hover {
   background: #e2e8f0;
-  transform: scale(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .mood-date {

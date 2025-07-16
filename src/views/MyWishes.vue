@@ -482,41 +482,52 @@ export default {
 }
 
 .breadcrumb-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
+  border: 1px solid #1d4ed8;
   border-radius: 6px;
-  font-size: 13px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.2),
+    0 2px 4px rgba(0,0,0,0.15);
+  min-width: 80px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  justify-content: center;
 }
 
 .breadcrumb-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 3px 6px rgba(0,0,0,0.2);
 }
 
 .breadcrumb-btn:disabled {
-  background: #ffd700;
+  background: linear-gradient(to bottom, #ffd700 0%, #f59e0b 100%);
   color: #1d4ed8;
-  border-color: #fbbf24;
+  border-color: #f59e0b;
   cursor: default;
   font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 2px 4px rgba(0,0,0,0.15);
 }
 
-.breadcrumb-link {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.breadcrumb-current {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  font-weight: bold;
+.breadcrumb-btn:active:not(:disabled) {
+  background: linear-gradient(to bottom, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(0);
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.2),
+    0 1px 2px rgba(0,0,0,0.15);
 }
 
 /* 我的愿望页面特定样式 */
