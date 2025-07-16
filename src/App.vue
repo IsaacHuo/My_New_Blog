@@ -1,21 +1,11 @@
 <template>
-  <div class="container">
+  <div class="cont                <div class="category-icon-flat">💻</div>iner">
     <!-- 顶部导航 -->
     <header class="top-nav">
       <div class="nav-content">
-        <div class="logo">
+        <div class="logo-centered">
           霍玮放的博客
         </div>
-        <nav class="nav-links">
-          <a href="#" @click="activeSection = 'articles'" :class="{ active: activeSection === 'articles' }">文章</a>
-          <a href="#" @click="activeSection = 'projects'" :class="{ active: activeSection === 'projects' }">项目</a>
-          <a href="#" @click="activeSection = 'notes'" :class="{ active: activeSection === 'notes' }">笔记</a>
-          <a href="#" @click="activeSection = 'resources'" :class="{ active: activeSection === 'resources' }">资源</a>
-          <a href="#" @click="activeSection = 'life'" :class="{ active: activeSection === 'life' }">生活</a>
-          <a href="#" @click="activeSection = 'about'" :class="{ active: activeSection === 'about' }">关于</a>
-          <a href="#" @click="activeSection = 'archive'" :class="{ active: activeSection === 'archive' }">归档</a>
-          <a href="#" @click="activeSection = 'help'" :class="{ active: activeSection === 'help' }">帮助</a>
-        </nav>
         <div class="user-actions">
           <button @click="showContact = true" class="contact-btn">联系我</button>
           <button class="nav-toggle">快捷导航 ▼</button>
@@ -26,107 +16,48 @@
     <!-- 分类导航横幅 -->
     <section class="category-banner">
       <div class="banner-content">
-        <div class="category-icons">
-          <div class="category-item" @click="activeSection = 'tech'">
-            <div class="category-icon">💻</div>
-            <span>技术文章</span>
+        <div class="nav-search-row">
+          <!-- 左侧标语 -->
+          <div class="site-slogan">
+            分享收获、感悟生活、共同成长！
           </div>
-          <div class="category-item" @click="activeSection = 'frontend'">
-            <div class="category-icon">🎨</div>
-            <span>前端开发</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'backend'">
-            <div class="category-icon">⚙️</div>
-            <span>后端技术</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'algorithm'">
-            <div class="category-icon">🧮</div>
-            <span>算法题解</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'tools'">
-            <div class="category-icon">🔧</div>
-            <span>开发工具</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'tutorials'">
-            <div class="category-icon">📚</div>
-            <span>教程分享</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'projects'">
-            <div class="category-icon">🚀</div>
-            <span>项目展示</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'thoughts'">
-            <div class="category-icon">💭</div>
-            <span>技术思考</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'books'">
-            <div class="category-icon">📖</div>
-            <span>读书笔记</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'archives'">
-            <div class="category-icon">📂</div>
-            <span>文章归档</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'about-me'">
-            <div class="category-icon">👤</div>
-            <span>关于我</span>
-          </div>
-        </div>
-        
-        <div class="second-row">
-          <div class="category-item" @click="activeSection = 'life'">
-            <div class="category-icon">🌱</div>
-            <span>生活随笔</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'travel'">
-            <div class="category-icon">✈️</div>
-            <span>旅行记录</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'photography'">
-            <div class="category-icon">📸</div>
-            <span>摄影作品</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'music'">
-            <div class="category-icon">🎵</div>
-            <span>音乐分享</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'movies'">
-            <div class="category-icon">🎬</div>
-            <span>影视评论</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'links'">
-            <div class="category-icon">🔗</div>
-            <span>友情链接</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'timeline'">
-            <div class="category-icon">⏰</div>
-            <span>时间轴</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'guestbook'">
-            <div class="category-icon">💬</div>
-            <span>留言板</span>
-          </div>
-          <div class="category-item" @click="activeSection = 'rss'">
-            <div class="category-icon">📡</div>
-            <span>RSS订阅</span>
-          </div>
-        </div>
-        
-        <div class="search-section">
-          <input type="text" placeholder="搜索文章内容..." class="search-input">
-          <select class="search-select">
-            <option>全部</option>
-            <option>技术</option>
-            <option>生活</option>
-          </select>
-          <button class="search-btn">🔍</button>
-          <div class="hot-tags">
-            热搜: 
-            <a href="#">Vue</a>
-            <a href="#">JavaScript</a> 
-            <a href="#">React</a>
-            <a href="#">Node.js</a>
-            <a href="#">前端</a>
+          
+          <!-- 中间和右侧区域 -->
+          <div class="buttons-search-area">
+            <!-- 按钮组 -->
+            <div class="category-buttons-center">
+              <div class="category-item-flat" @click="activeSection = 'tech'">
+                <div class="category-icon-flat">�</div>
+                <span>技术随笔</span>
+              </div>
+              <div class="category-item-flat" @click="activeSection = 'projects'">
+                <div class="category-icon-flat">�</div>
+                <span>项目分享</span>
+              </div>
+              <div class="category-item-flat" @click="activeSection = 'life'">
+                <div class="category-icon-flat">🌱</div>
+                <span>生活杂想</span>
+              </div>
+              <div class="category-item-flat" @click="activeSection = 'about'">
+                <div class="category-icon-flat">👤</div>
+                <span>关于我</span>
+              </div>
+              <div class="category-item-flat" @click="activeSection = 'wishes'">
+                <div class="category-icon-flat">�</div>
+                <span>我的愿望</span>
+              </div>
+            </div>
+            
+            <!-- 右侧搜索栏 -->
+            <div class="search-section-compact">
+              <input type="text" placeholder="搜索文章..." class="search-input-compact">
+              <select class="search-select-compact">
+                <option>全部</option>
+                <option>技术</option>
+                <option>生活</option>
+              </select>
+              <button class="search-btn-compact">🔍</button>
+            </div>
           </div>
         </div>
       </div>
@@ -134,24 +65,26 @@
 
     <!-- 主要内容区域 -->
     <main class="main-content">
-      <div class="content-area">
-        <div class="breadcrumb">
-          <a href="#">🏠</a> > 
-          <a href="#">{{ getSectionTitle() }}</a>
+      <!-- 侧边栏 - 移到最左边 -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-header">博客导航</div>
+          <div class="sidebar-content">
+            <ul class="sidebar-menu">
+              <li><a href="#">首页</a></li>
+              <li><a href="#">技术文章</a></li>
+              <li><a href="#">项目展示</a></li>
+              <li><a href="#">学习笔记</a></li>
+              <li><a href="#">生活随笔</a></li>
+              <li><a href="#">友情链接</a></li>
+              <li><a href="#">关于我</a></li>
+              <li><a href="#">RSS订阅</a></li>
+            </ul>
+          </div>
         </div>
-        
-        <div class="stats-bar">
-          欢迎来到霍玮放的博客，分享技术心得和生活感悟 (2025-7-17)
-        </div>
-        
-        <div class="site-stats">
-          今日访问: <span class="stat-number">{{ stats.todayVisits }}</span> 
-          总访问: <span class="stat-number">{{ stats.totalVisits }}</span>
-          文章数: <span class="stat-number">{{ stats.articleCount }}</span>
-          最新更新: <span class="new-member">{{ stats.lastUpdate }}</span>
-          <a href="#" class="latest-reply">最新文章</a>
-        </div>
+      </aside>
 
+      <div class="content-area">
         <!-- 文章列表 - 四栏并排展示 -->
         <div class="topic-list">
           <div class="four-columns-layout">
@@ -164,7 +97,6 @@
                   :key="'latest-' + article.id" 
                   class="article-item-compact"
                 >
-                  <div class="article-status">{{ article.status }}</div>
                   <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
@@ -183,7 +115,6 @@
                   :key="'popular-' + article.id" 
                   class="article-item-compact"
                 >
-                  <div class="article-status">{{ article.status }}</div>
                   <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
@@ -202,7 +133,6 @@
                   :key="'featured-' + article.id" 
                   class="article-item-compact"
                 >
-                  <div class="article-status">{{ article.status }}</div>
                   <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
@@ -221,7 +151,6 @@
                   :key="'archived-' + article.id" 
                   class="article-item-compact"
                 >
-                  <div class="article-status">{{ article.status }}</div>
                   <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
@@ -233,114 +162,19 @@
           </div>
         </div>
       </div>
-
-      <!-- 侧边栏 -->
-      <aside class="sidebar">
-        <div class="sidebar-section">
-          <div class="sidebar-header">博客导航</div>
-          <div class="sidebar-content">
-            <ul class="sidebar-menu">
-              <li><a href="#">首页</a></li>
-              <li><a href="#">技术文章</a></li>
-              <li><a href="#">项目展示</a></li>
-              <li><a href="#">学习笔记</a></li>
-              <li><a href="#">生活随笔</a></li>
-              <li><a href="#">友情链接</a></li>
-              <li><a href="#">关于我</a></li>
-              <li><a href="#">RSS订阅</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="ad-banner">
-            <h3>技术分享</h3>
-            <p>分享前端开发经验<br>探讨技术发展趋势</p>
-            <p style="margin-top: 10px; color: #ffd700;">持续更新中</p>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-header">热门标签</div>
-          <div class="sidebar-content">
-            <ul class="sidebar-menu">
-              <li><a href="#">Vue.js</a></li>
-              <li><a href="#">JavaScript</a></li>
-              <li><a href="#">React</a></li>
-              <li><a href="#">Node.js</a></li>
-              <li><a href="#">CSS</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-header">最近更新</div>
-          <div class="sidebar-content">
-            <p style="font-size: 12px; color: #666; line-height: 1.4;">
-              持续分享技术文章和生活感悟
-            </p>
-          </div>
-        </div>
-      </aside>
     </main>
     
     <!-- 页脚 -->
     <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h4>关于本站</h4>
-          <p>霍玮放的个人博客，专注于前端技术分享与交流</p>
-          <p>记录技术成长路径，分享编程心得体会</p>
-        </div>
-        
-        <div class="footer-section">
-          <h4>技术栈</h4>
-          <ul>
-            <li>Vue.js 3</li>
-            <li>JavaScript ES6+</li>
-            <li>CSS3 & HTML5</li>
-            <li>Node.js</li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h4>联系方式</h4>
-          <ul>
-            <li>📧 huowf@example.com</li>
-            <li>🔗 github.com/huowf</li>
-            <li>💬 QQ群: 105653726</li>
-            <li>📱 微信: huowf2024</li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h4>友情链接</h4>
-          <ul>
-            <li><a href="#">Vue.js 官网</a></li>
-            <li><a href="#">MDN Web Docs</a></li>
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">掘金</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <div class="footer-info">
-          <p>&copy; 2025 霍玮放的博客. All rights reserved.</p>
-          <p>本站已运行 <span class="running-time">365</span> 天 | 总访问量 <span class="visit-count">{{ stats.totalVisits }}</span></p>
-          <p>
-            <a href="#">隐私政策</a> | 
-            <a href="#">使用条款</a> | 
-            <a href="#">RSS订阅</a> |
-            <a href="#">网站地图</a>
-          </p>
-        </div>
-        
-        <div class="footer-badges">
-          <span class="badge">Vue 3</span>
-          <span class="badge">响应式设计</span>
-          <span class="badge">开源</span>
-        </div>
+      <div class="footer-simple">
+        <p>&copy; 2025 霍玮放的博客. All rights reserved.</p>
+        <p>本站已运行 <span class="running-time">365</span> 天 | 总访问量 <span class="visit-count">{{ stats.totalVisits }}</span></p>
+        <p>
+          <a href="#">隐私政策</a> | 
+          <a href="#">使用条款</a> | 
+          <a href="#">RSS订阅</a> |
+          <a href="#">网站地图</a>
+        </p>
       </div>
     </footer>
   </div>
@@ -392,7 +226,7 @@ export default {
     const articles = reactive([
       {
         id: 1,
-        status: '🔥',
+        status: '',
         title: 'Vue 3 组合式API详解与实践',
         author: '霍玮放',
         readCount: 1205,
@@ -401,7 +235,7 @@ export default {
       },
       {
         id: 2,
-        status: '📌',
+        status: '',
         title: 'JavaScript异步编程完全指南',
         author: '霍玮放',
         readCount: 856,
@@ -410,7 +244,7 @@ export default {
       },
       {
         id: 3,
-        status: '✨',
+        status: '',
         title: 'CSS Grid布局从入门到精通',
         author: '霍玮放',
         readCount: 642,
@@ -419,7 +253,7 @@ export default {
       },
       {
         id: 4,
-        status: '🔥',
+        status: '',
         title: 'React Hooks最佳实践总结',
         author: '霍玮放',
         readCount: 789,
@@ -428,7 +262,7 @@ export default {
       },
       {
         id: 5,
-        status: '📚',
+        status: '',
         title: '前端性能优化技巧汇总',
         author: '霍玮放',
         readCount: 923,
@@ -437,7 +271,7 @@ export default {
       },
       {
         id: 6,
-        status: '✨',
+        status: '',
         title: 'TypeScript进阶使用技巧',
         author: '霍玮放',
         readCount: 567,
@@ -446,7 +280,7 @@ export default {
       },
       {
         id: 7,
-        status: '🎯',
+        status: '',
         title: 'Webpack配置优化实战',
         author: '霍玮放',
         readCount: 435,
@@ -455,7 +289,7 @@ export default {
       },
       {
         id: 8,
-        status: '🚀',
+        status: '',
         title: 'Node.js微服务架构设计',
         author: '霍玮放',
         readCount: 678,
@@ -464,7 +298,7 @@ export default {
       },
       {
         id: 9,
-        status: '💡',
+        status: '',
         title: '前端工程化最佳实践',
         author: '霍玮放',
         readCount: 812,
@@ -473,7 +307,7 @@ export default {
       },
       {
         id: 10,
-        status: '📖',
+        status: '',
         title: '算法与数据结构学习笔记',
         author: '霍玮放',
         readCount: 345,
