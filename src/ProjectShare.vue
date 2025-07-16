@@ -17,9 +17,9 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="category-breadcrumb">
-          <button @click="goHome" class="breadcrumb-btn breadcrumb-link">首页</button>
+          <span @click="goHome" class="breadcrumb-link">首页</span>
           <span class="breadcrumb-separator">></span>
-          <button class="breadcrumb-btn breadcrumb-current" disabled>项目分享</button>
+          <span class="breadcrumb-current">项目分享</span>
         </div>
       </div>
     </section>
@@ -43,7 +43,6 @@
             v-for="project in projects" 
             :key="project.id" 
             class="article-card"
-            :class="{ 'no-detail': !hasArticleDetail('projects', project.id - 100) }"
             @click="goToArticle(project)"
           >
             <div class="article-status" v-if="project.status">
@@ -182,7 +181,6 @@
 <script>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { hasArticleDetail } from '../utils/helpers.js'
 
 export default {
   name: 'ProjectShare',
@@ -349,16 +347,7 @@ export default {
     }
 
     const goToArticle = (project) => {
-      // 将项目 ID 转换为文章 ID（项目 ID 101-110 对应文章 ID 1-10）
-      const articleId = project.id - 100
-      
-      // 检查是否有详情页
-      if (hasArticleDetail('projects', articleId)) {
-        router.push(`/article/projects/${articleId}`)
-      } else {
-        console.log('项目暂无详情页，点击无效')
-        // 无详情页的项目点击无反应
-      }
+      router.push(`/article/${project.id}`)
     }
 
     const goToCategory = (category) => {
@@ -405,362 +394,14 @@ export default {
       goToArticle,
       goToCategory,
       prevPage,
-      nextPage,
-      hasArticleDetail
+      nextPage
     }
   }
 }
 </script>
 
 <style scoped>
-/* 分类页面特定样式 */
-
-/* 分类导航横幅 */
-.category-banner {
-  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
-  padding: 10px 20px;
-  border-top: 3px solid #1d4ed8;
-  border-bottom: 3px solid #1d4ed8;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.category-breadcrumb {
-  font-size: 14px;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.breadcrumb-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.breadcrumb-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.breadcrumb-btn:disabled {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  cursor: default;
-  font-weight: bold;
-}
-
-.breadcrumb-link {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.breadcrumb-current {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  font-weight: bold;
-}
-
-/* 主要内容布局 */
-.main-content {
-  display: flex;
-  background: white;
-  gap: 20px;
-  padding: 20px;
-}
-
-.articles-container {
-  flex: 1;
-  max-width: calc(100% - 280px);
-}
-
-.sidebar {
-  width: 260px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* 分类标题区域 */
-.category-header {
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-}
-
-.category-title {
-  font-size: 24px;
-  color: #1f2937;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.category-stats {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  color: #6b7280;
-  padding-top: 10px;
-  border-top: 1px solid #e2e8f0;
-}
-
-/* 文章列表 */
-.articles-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.article-card {
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-  position: relative;
-}
-
-.article-card:hover {
-  border-color: #3b82f6;
-  background: #f8fafc;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
-}
-
-/* 无详情页项目卡片样式 */
-.article-card.no-detail {
-  cursor: default !important;
-  opacity: 0.6;
-}
-
-.article-card.no-detail:hover {
-  border-color: #e2e8f0 !important;
-  background: white !important;
-  transform: none !important;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08) !important;
-}
-
-.article-card.no-detail .article-title {
-  color: #9ca3af !important;
-}
-
-.article-card.no-detail .article-summary {
-  color: #d1d5db !important;
-}
-
-.article-status {
-  position: absolute;
-  top: -2px;
-  right: 15px;
-  background: linear-gradient(to bottom, #ef4444 0%, #dc2626 100%);
-  color: white;
-  padding: 4px 12px;
-  border-radius: 0 0 8px 8px;
-  font-size: 12px;
-  font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.article-main {
-  margin-bottom: 8px;
-}
-
-.article-title {
-  font-size: 18px;
-  color: #1f2937;
-  margin-bottom: 8px;
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-.article-summary {
-  color: #4b5563;
-  line-height: 1.6;
-  margin-bottom: 12px;
-  font-size: 14px;
-}
-
-.article-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  color: #6b7280;
-}
-
-.meta-left span,
-.meta-right span {
-  margin-right: 15px;
-}
-
-.meta-right span {
-  margin-right: 0;
-  margin-left: 15px;
-}
-
-.article-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 12px;
-  border-top: 1px solid #f1f5f9;
-}
-
-.article-tag {
-  background: #f1f5f9;
-  color: #3b82f6;
-  padding: 4px 10px;
-  border-radius: 16px;
-  font-size: 12px;
-  border: 1px solid #e2e8f0;
-}
-
-/* 分页 */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-top: 30px;
-  padding: 20px;
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-}
-
-.page-btn {
-  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
-  color: white;
-  border: 1px solid #1d4ed8;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.page-btn:hover:not(.disabled) {
-  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
-}
-
-.page-btn.disabled {
-  background: #e5e7eb;
-  color: #9ca3af;
-  border-color: #d1d5db;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.page-info {
-  color: #4b5563;
-  font-size: 14px;
-}
-
-/* 侧边栏样式 */
-.sidebar-section {
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-}
-
-.sidebar-header {
-  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
-  color: white;
-  padding: 12px 15px;
-  font-size: 14px;
-  font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.sidebar-content {
-  padding: 15px;
-  background: #f8fafc;
-}
-
-.category-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.category-item {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 5px;
-}
-
-.category-item.active {
-  background: linear-gradient(to right, #60a5fa 0%, #3b82f6 100%);
-  color: white;
-}
-
-.category-item:not(.active):hover {
-  background: #e2e8f0;
-}
-
-.category-icon {
-  margin-right: 8px;
-  font-size: 16px;
-}
-
-.category-name {
-  flex: 1;
-  font-size: 13px;
-}
-
-.category-count {
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.popular-tag {
-  background: #f1f5f9;
-  color: #3b82f6;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid #e2e8f0;
-}
-
-.popular-tag:hover {
-  background: #3b82f6;
-  color: white;
-}
+@import './style.css';
 
 /* 项目特定样式 */
 .project-stat {
@@ -789,46 +430,5 @@ export default {
 .project-stars {
   color: #f59e0b;
   font-weight: 600;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .main-content {
-    flex-direction: column;
-    padding: 15px;
-  }
-  
-  .articles-container {
-    max-width: 100%;
-  }
-  
-  .sidebar {
-    width: 100%;
-  }
-  
-  .category-header {
-    padding: 20px;
-  }
-  
-  .category-title {
-    font-size: 20px;
-  }
-  
-  .category-stats {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  
-  .article-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  
-  .pagination {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
 </style>

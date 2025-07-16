@@ -12,6 +12,18 @@ export const formatDate = (date) => {
   return `${year}-${month}-${day}`
 }
 
+// 检查文章是否有详情页
+export const hasArticleDetail = (category, articleId) => {
+  // 定义存在详情页的文章
+  const existingArticles = {
+    'tech': [1, 2], // 技术文章只有 ID 1 和 2 有详情页
+    'projects': [1], // 项目分享只有 ID 1 有详情页
+    'life': [1] // 生活杂想只有 ID 1 有详情页
+  }
+  
+  return existingArticles[category] && existingArticles[category].includes(articleId)
+}
+
 // 格式化中文日期
 export const formatChineseDate = (date) => {
   if (typeof date === 'string') {

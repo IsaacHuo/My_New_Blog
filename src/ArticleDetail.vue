@@ -19,7 +19,7 @@
         <div class="article-breadcrumb">
           <span @click="goBack" class="breadcrumb-link">首页</span>
           <span class="breadcrumb-separator">></span>
-          <span @click="goToCategory" class="breadcrumb-link">{{ getCategoryName(articleCategory) }}</span>
+          <span @click="goBack" class="breadcrumb-link">技术文章</span>
           <span class="breadcrumb-separator">></span>
           <span class="breadcrumb-current">{{ article.title }}</span>
         </div>
@@ -37,7 +37,7 @@
             <div class="meta-left">
               <span class="article-author">作者：{{ article.author }}</span>
               <span class="article-date">发布时间：{{ article.fullDate }}</span>
-              <span class="article-category">分类：{{ article.category }}</span>
+              <span class="article-category">分类：技术随笔</span>
             </div>
             <div class="meta-right">
               <span class="article-views">阅读量：{{ article.readCount }}</span>
@@ -48,16 +48,16 @@
 
         <!-- 文章正文 -->
         <article class="article-content">
-          <div 
-            v-for="(section, index) in article.content?.sections || defaultSections" 
-            :key="index" 
-            class="content-section"
-          >
-            <h2>{{ section.title }}</h2>
-            <p>{{ section.content }}</p>
+          <div class="content-section">
+            <h2>前言</h2>
+            <p>Vue 3 作为 Vue.js 的最新版本，引入了许多令人兴奋的新特性，其中最重要的就是组合式 API（Composition API）。本文将深入探讨 Vue 3 组合式 API 的核心概念、使用方法和最佳实践。</p>
+          </div>
+
+          <div class="content-section">
+            <h2>什么是组合式 API？</h2>
+            <p>组合式 API 是 Vue 3 中引入的一套全新的 API，它提供了一种更灵活的方式来组织组件逻辑。与传统的选项式 API 不同，组合式 API 允许我们将相关的逻辑组织在一起，提高代码的可维护性和重用性。</p>
             
-            <!-- Vue3 组合式API文章的特殊代码块 -->
-            <div v-if="articleId === 1 && articleCategory === 'tech' && index === 1" class="code-block">
+            <div class="code-block">
               <div class="code-header">
                 <span class="code-title">示例代码</span>
                 <button class="copy-btn">复制</button>
@@ -97,8 +97,7 @@ export default {
             </div>
           </div>
 
-          <!-- Vue3 组合式API文章的特殊内容 -->
-          <div v-if="articleId === 1 && articleCategory === 'tech'" class="content-section">
+          <div class="content-section">
             <h2>核心概念详解</h2>
             
             <h3>1. ref 和 reactive</h3>
@@ -111,7 +110,7 @@ export default {
             <p>侦听器用于响应数据变化，执行相应的副作用操作。</p>
           </div>
 
-          <div v-if="articleId === 1 && articleCategory === 'tech'" class="content-section">
+          <div class="content-section">
             <h2>最佳实践</h2>
             <div class="practice-list">
               <div class="practice-item">
@@ -138,12 +137,9 @@ export default {
             </div>
           </div>
 
-          <!-- 通用结尾部分 -->
           <div class="content-section">
             <h2>总结</h2>
-            <p v-if="articleCategory === 'tech'">通过本文的学习，希望能帮助您更好地理解和应用相关技术。技术的学习是一个持续的过程，需要在实践中不断总结和提升。</p>
-            <p v-else-if="articleCategory === 'projects'">这个项目的开发过程让我学到了很多，也希望能够对其他开发者有所帮助。欢迎大家交流讨论，共同进步。</p>
-            <p v-else>生活中的每一个瞬间都值得记录，每一次思考都是成长的印记。感谢您阅读我的分享，希望能给您带来一些启发。</p>
+            <p>Vue 3 的组合式 API 为我们提供了更灵活、更强大的开发体验。通过合理使用这些新特性，我们可以编写出更加清晰、可维护的代码。希望本文能帮助您更好地理解和应用 Vue 3 组合式 API。</p>
           </div>
         </article>
 
@@ -270,108 +266,24 @@ import { useRouter } from 'vue-router'
 
 export default {
   name: 'ArticleDetail',
-  props: ['id', 'category'],
+  props: ['id'],
   setup(props) {
     const router = useRouter()
     const showContact = ref(false)
     const showComments = ref(false)
     const newComment = ref('')
     
-    // 根据传入的 category 和 id 获取文章信息
-    const articleId = parseInt(props.id) || 1
-    const articleCategory = props.category || 'tech'
-    
-    // 文章数据库
-    const articlesData = {
-      tech: {
-        1: {
-          id: 1,
-          title: 'Vue 3 组合式API详解与实践',
-          author: '霍玮放',
-          readCount: 1205,
-          likes: 48,
-          fullDate: '2025年7月16日',
-          category: '前端框架',
-          tags: ['Vue.js', 'JavaScript', '前端开发', '组合式API'],
-          content: {
-            sections: [
-              {
-                title: '前言',
-                content: 'Vue 3 作为 Vue.js 的最新版本，引入了许多令人兴奋的新特性，其中最重要的就是组合式 API（Composition API）。本文将深入探讨 Vue 3 组合式 API 的核心概念、使用方法和最佳实践。'
-              },
-              {
-                title: '什么是组合式 API？',
-                content: '组合式 API 是 Vue 3 中引入的一套全新的 API，它提供了一种更灵活的方式来组织组件逻辑。与传统的选项式 API 不同，组合式 API 允许我们将相关的逻辑组织在一起，提高代码的可维护性和重用性。'
-              }
-            ]
-          }
-        },
-        2: {
-          id: 2,
-          title: 'JavaScript异步编程完全指南',
-          author: '霍玮放',
-          readCount: 892,
-          likes: 35,
-          fullDate: '2025年7月15日',
-          category: '编程语言',
-          tags: ['JavaScript', '异步编程', 'Promise', 'async/await'],
-          content: {
-            sections: [
-              {
-                title: '前言',
-                content: 'JavaScript的异步编程是现代前端开发中不可或缺的技能。从回调函数到Promise，再到async/await，本文将带您深入了解JavaScript异步编程的发展历程和最佳实践。'
-              }
-            ]
-          }
-        }
-      },
-      projects: {
-        101: {
-          id: 101,
-          title: '个人博客系统 - Vue3 + Vite',
-          author: '霍玮放',
-          readCount: 523,
-          likes: 28,
-          fullDate: '2025年7月16日',
-          category: '开源项目',
-          tags: ['Vue3', 'Vite', '博客系统', '响应式设计'],
-          content: {
-            sections: [
-              {
-                title: '项目简介',
-                content: '基于 Vue3 和 Vite 构建的现代化个人博客系统，支持文章管理、分类浏览、评论互动等功能，采用响应式设计，兼容多端设备。'
-              }
-            ]
-          }
-        }
-      },
-      life: {
-        201: {
-          id: 201,
-          title: '从程序员到生活家：寻找代码之外的美好',
-          author: '霍玮放',
-          readCount: 867,
-          likes: 52,
-          fullDate: '2025年7月16日',
-          category: '生活感悟',
-          tags: ['生活感悟', '工作生活平衡', '个人成长'],
-          content: {
-            sections: [
-              {
-                title: '前言',
-                content: '作为一名程序员，我们总是沉浸在代码的世界里。但生活不只有代码，还有诗和远方。这篇文章分享我在工作之余探索生活的一些感悟。'
-              }
-            ]
-          }
-        }
-      }
-    }
-
-    // 获取当前文章数据
-    const currentArticle = articlesData[articleCategory]?.[articleId] || articlesData.tech[1]
+    // 根据传入的 id 获取文章信息
+    const articleId = props.id || 1
     
     const article = reactive({
-      ...currentArticle
+      id: articleId,
+      title: 'Vue 3 组合式API详解与实践',
+      author: '霍玮放',
+      readCount: 1205,
+      likes: 48,
+      fullDate: '2025年7月16日',
+      tags: ['Vue.js', 'JavaScript', '前端开发', '组合式API']
     })
 
     const comments = reactive([
@@ -401,35 +313,8 @@ export default {
       { id: 6, title: 'TypeScript进阶使用技巧', date: '07-11' }
     ])
 
-    // 默认文章内容（当找不到文章时使用）
-    const defaultSections = [
-      {
-        title: '文章内容',
-        content: '抱歉，该文章内容正在完善中，敬请期待...'
-      }
-    ]
-
-    // 获取分类名称的辅助函数
-    const getCategoryName = (category) => {
-      const categoryNames = {
-        tech: '技术文章',
-        projects: '项目分享',
-        life: '生活杂想'
-      }
-      return categoryNames[category] || '技术文章'
-    }
-
     const goBack = () => {
       router.push('/')
-    }
-
-    const goToCategory = () => {
-      const categoryRoutes = {
-        tech: '/tech',
-        projects: '/projects',
-        life: '/life'
-      }
-      router.push(categoryRoutes[articleCategory] || '/tech')
     }
 
     const toggleLike = () => {
@@ -472,12 +357,7 @@ export default {
       article,
       comments,
       relatedArticles,
-      defaultSections,
-      articleId,
-      articleCategory,
-      getCategoryName,
       goBack,
-      goToCategory,
       toggleLike,
       shareArticle,
       addComment

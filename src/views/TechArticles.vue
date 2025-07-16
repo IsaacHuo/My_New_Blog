@@ -17,9 +17,9 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="category-breadcrumb">
-          <span @click="goHome" class="breadcrumb-link">首页</span>
+          <button @click="goHome" class="breadcrumb-btn breadcrumb-link">首页</button>
           <span class="breadcrumb-separator">></span>
-          <span class="breadcrumb-current">技术文章</span>
+          <button class="breadcrumb-btn breadcrumb-current" disabled>技术随笔</button>
         </div>
       </div>
     </section>
@@ -43,6 +43,7 @@
             v-for="article in techArticles" 
             :key="article.id" 
             class="article-card"
+            :class="{ 'no-detail': !hasArticleDetail('tech', article.id) }"
             @click="goToArticle(article)"
           >
             <div class="article-status" v-if="article.status">
@@ -186,6 +187,7 @@
 <script>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { hasArticleDetail } from '../utils/helpers.js'
 
 export default {
   name: 'TechArticles',
@@ -352,7 +354,13 @@ export default {
     }
 
     const goToArticle = (article) => {
-      router.push(`/article/${article.id}`)
+      // 检查是否有详情页
+      if (hasArticleDetail('tech', article.id)) {
+        router.push(`/article/tech/${article.id}`)
+      } else {
+        console.log('文章暂无详情页，点击无效')
+        // 无详情页的文章点击无反应
+      }
     }
 
     const goToCategory = (category) => {
@@ -404,7 +412,8 @@ export default {
       goToArticle,
       goToCategory,
       prevPage,
-      nextPage
+      nextPage,
+      hasArticleDetail
     }
   }
 }
@@ -425,26 +434,46 @@ export default {
 .category-breadcrumb {
   font-size: 14px;
   color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.breadcrumb-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.breadcrumb-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.breadcrumb-btn:disabled {
+  background: #ffd700;
+  color: #1d4ed8;
+  border-color: #fbbf24;
+  cursor: default;
+  font-weight: bold;
 }
 
 .breadcrumb-link {
-  color: #ffffff;
-  cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.3s;
-}
-
-.breadcrumb-link:hover {
-  color: #93c5fd;
-}
-
-.breadcrumb-separator {
-  margin: 0 8px;
-  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .breadcrumb-current {
-  color: #ffd700;
+  background: #ffd700;
+  color: #1d4ed8;
+  border-color: #fbbf24;
   font-weight: bold;
 }
 
@@ -520,6 +549,27 @@ export default {
   background: #f8fafc;
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
+}
+
+/* 无详情页文章卡片样式 */
+.article-card.no-detail {
+  cursor: default !important;
+  opacity: 0.6;
+}
+
+.article-card.no-detail:hover {
+  border-color: #e2e8f0 !important;
+  background: white !important;
+  transform: none !important;
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08) !important;
+}
+
+.article-card.no-detail .article-title {
+  color: #9ca3af !important;
+}
+
+.article-card.no-detail .article-summary {
+  color: #d1d5db !important;
 }
 
 .article-status {

@@ -19,7 +19,7 @@
         <div class="article-breadcrumb">
           <span @click="goBack" class="breadcrumb-link">首页</span>
           <span class="breadcrumb-separator">></span>
-          <span @click="goToCategory" class="breadcrumb-link">{{ getCategoryName(articleCategory) }}</span>
+          <span @click="goToCategory" class="breadcrumb-link">项目分享</span>
           <span class="breadcrumb-separator">></span>
           <span class="breadcrumb-current">{{ article.title }}</span>
         </div>
@@ -36,114 +36,120 @@
           <div class="article-meta">
             <div class="meta-left">
               <span class="article-author">作者：{{ article.author }}</span>
-              <span class="article-date">发布时间：{{ article.fullDate }}</span>
+              <span class="article-date">发布时间：{{ article.date }}</span>
               <span class="article-category">分类：{{ article.category }}</span>
             </div>
             <div class="meta-right">
               <span class="article-views">阅读量：{{ article.readCount }}</span>
               <span class="article-likes">点赞：{{ article.likes }}</span>
+              <span class="project-stars">⭐ {{ article.stars }}</span>
             </div>
           </div>
         </header>
 
         <!-- 文章正文 -->
         <article class="article-content">
-          <div 
-            v-for="(section, index) in article.content?.sections || defaultSections" 
-            :key="index" 
-            class="content-section"
-          >
-            <h2>{{ section.title }}</h2>
-            <p>{{ section.content }}</p>
-            
-            <!-- Vue3 组合式API文章的特殊代码块 -->
-            <div v-if="articleId === 1 && articleCategory === 'tech' && index === 1" class="code-block">
+          <div class="content-section">
+            <h2>项目简介</h2>
+            <p>基于 Vue3 和 Vite 构建的现代化个人博客系统，支持文章管理、分类浏览、评论互动等功能，采用响应式设计，兼容多端设备。这个项目展示了现代前端技术栈的完整应用，是学习Vue3开发的优秀案例。</p>
+          </div>
+
+          <div class="content-section">
+            <h2>技术栈</h2>
+            <div class="tech-stack">
+              <div class="tech-item">
+                <div class="tech-icon">⚡</div>
+                <div class="tech-content">
+                  <h4>Vue 3</h4>
+                  <p>使用最新的组合式API，享受更好的TypeScript支持和性能优化</p>
+                </div>
+              </div>
+              <div class="tech-item">
+                <div class="tech-icon">🚀</div>
+                <div class="tech-content">
+                  <h4>Vite</h4>
+                  <p>极速的开发服务器和构建工具，提供更好的开发体验</p>
+                </div>
+              </div>
+              <div class="tech-item">
+                <div class="tech-icon">🎨</div>
+                <div class="tech-content">
+                  <h4>CSS3</h4>
+                  <p>现代CSS特性，支持响应式设计和动画效果</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section">
+            <h2>核心功能</h2>
+            <ul class="feature-list">
+              <li>✅ 文章分类管理（技术文章、项目分享、生活杂想等）</li>
+              <li>✅ 响应式设计，支持桌面端和移动端</li>
+              <li>✅ 评论系统，支持实时互动</li>
+              <li>✅ 文章搜索和标签过滤</li>
+              <li>✅ 黑暗模式支持</li>
+              <li>✅ SEO优化</li>
+            </ul>
+          </div>
+
+          <div class="content-section">
+            <h2>项目结构</h2>
+            <div class="code-block">
               <div class="code-header">
-                <span class="code-title">示例代码</span>
+                <span class="code-title">目录结构</span>
                 <button class="copy-btn">复制</button>
               </div>
-              <pre><code>import { ref, reactive, computed, onMounted } from 'vue'
-
-export default {
-  setup() {
-    // 响应式数据
-    const count = ref(0)
-    const user = reactive({
-      name: '张三',
-      age: 25
-    })
-    
-    // 计算属性
-    const doubleCount = computed(() => count.value * 2)
-    
-    // 方法
-    const increment = () => {
-      count.value++
-    }
-    
-    // 生命周期
-    onMounted(() => {
-      console.log('组件已挂载')
-    })
-    
-    return {
-      count,
-      user,
-      doubleCount,
-      increment
-    }
-  }
-}</code></pre>
+              <pre><code>src/
+├── components/          # 公共组件
+│   ├── TopNavigation.vue
+│   ├── SiteFooter.vue
+│   └── ContactModal.vue
+├── views/              # 页面组件
+│   ├── Home.vue
+│   ├── TechArticles.vue
+│   ├── ProjectShare.vue
+│   ├── LifeThoughts.vue
+│   └── articles/       # 文章详情页
+│       ├── tech/
+│       ├── projects/
+│       └── life/
+├── styles/             # 样式文件
+├── utils/              # 工具函数
+└── router.js           # 路由配置</code></pre>
             </div>
           </div>
 
-          <!-- Vue3 组合式API文章的特殊内容 -->
-          <div v-if="articleId === 1 && articleCategory === 'tech'" class="content-section">
-            <h2>核心概念详解</h2>
-            
-            <h3>1. ref 和 reactive</h3>
-            <p><code>ref</code> 用于创建单个响应式数据，而 <code>reactive</code> 用于创建响应式对象。这两个函数是组合式 API 的基础。</p>
-            
-            <h3>2. computed 计算属性</h3>
-            <p>计算属性在组合式 API 中通过 <code>computed</code> 函数创建，它会根据依赖的响应式数据自动更新。</p>
-            
-            <h3>3. watch 侦听器</h3>
-            <p>侦听器用于响应数据变化，执行相应的副作用操作。</p>
-          </div>
-
-          <div v-if="articleId === 1 && articleCategory === 'tech'" class="content-section">
-            <h2>最佳实践</h2>
-            <div class="practice-list">
-              <div class="practice-item">
-                <div class="practice-icon">💡</div>
-                <div class="practice-content">
-                  <h4>逻辑分组</h4>
-                  <p>将相关的响应式数据、计算属性和方法组织在一起，提高代码的可读性。</p>
+          <div class="content-section">
+            <h2>开发心得</h2>
+            <div class="experience-list">
+              <div class="experience-item">
+                <div class="experience-icon">💡</div>
+                <div class="experience-content">
+                  <h4>组件化设计</h4>
+                  <p>合理拆分组件，提高代码复用性和维护性。每个组件都有单一职责，便于测试和调试。</p>
                 </div>
               </div>
-              <div class="practice-item">
-                <div class="practice-icon">🔧</div>
-                <div class="practice-content">
-                  <h4>可组合函数</h4>
-                  <p>将可重用的逻辑提取到独立的可组合函数中，实现逻辑复用。</p>
+              <div class="experience-item">
+                <div class="experience-icon">🎯</div>
+                <div class="experience-content">
+                  <h4>用户体验优化</h4>
+                  <p>注重页面加载速度和交互流畅性，使用合适的动画效果提升用户体验。</p>
                 </div>
               </div>
-              <div class="practice-item">
-                <div class="practice-icon">⚡</div>
-                <div class="practice-content">
-                  <h4>性能优化</h4>
-                  <p>合理使用 ref 和 reactive，避免不必要的响应式转换。</p>
+              <div class="experience-item">
+                <div class="experience-icon">📱</div>
+                <div class="experience-content">
+                  <h4>响应式布局</h4>
+                  <p>采用移动优先的设计策略，确保在各种设备上都有良好的显示效果。</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 通用结尾部分 -->
           <div class="content-section">
             <h2>总结</h2>
-            <p v-if="articleCategory === 'tech'">通过本文的学习，希望能帮助您更好地理解和应用相关技术。技术的学习是一个持续的过程，需要在实践中不断总结和提升。</p>
-            <p v-else-if="articleCategory === 'projects'">这个项目的开发过程让我学到了很多，也希望能够对其他开发者有所帮助。欢迎大家交流讨论，共同进步。</p>
-            <p v-else>生活中的每一个瞬间都值得记录，每一次思考都是成长的印记。感谢您阅读我的分享，希望能给您带来一些启发。</p>
+            <p>这个博客项目的开发过程让我学到了很多，也希望能够对其他开发者有所帮助。从技术选型到架构设计，从UI实现到性能优化，每一个环节都是宝贵的学习经验。欢迎大家交流讨论，共同进步。</p>
           </div>
         </article>
 
@@ -161,6 +167,10 @@ export default {
             <button class="action-btn comment-btn" @click="showComments = !showComments">
               <span class="btn-icon">💬</span>
               <span>评论</span>
+            </button>
+            <button class="action-btn github-btn" @click="openGithub">
+              <span class="btn-icon">🔗</span>
+              <span>GitHub</span>
             </button>
           </div>
           
@@ -205,24 +215,35 @@ export default {
       <!-- 侧边栏 -->
       <aside class="article-sidebar">
         <div class="sidebar-section">
-          <div class="sidebar-header">文章目录</div>
+          <div class="sidebar-header">项目信息</div>
           <div class="sidebar-content">
-            <ul class="toc-list">
-              <li><a href="#section1">前言</a></li>
-              <li><a href="#section2">什么是组合式 API？</a></li>
-              <li><a href="#section3">核心概念详解</a></li>
-              <li><a href="#section4">最佳实践</a></li>
-              <li><a href="#section5">总结</a></li>
-            </ul>
+            <div class="project-info">
+              <div class="info-item">
+                <span class="info-label">开发时间:</span>
+                <span class="info-value">2025年7月</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">技术栈:</span>
+                <span class="info-value">Vue3 + Vite</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">项目状态:</span>
+                <span class="info-value status-active">进行中</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">开源协议:</span>
+                <span class="info-value">MIT</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="sidebar-section">
-          <div class="sidebar-header">相关文章</div>
+          <div class="sidebar-header">相关项目</div>
           <div class="sidebar-content">
-            <div class="related-article" v-for="related in relatedArticles" :key="related.id">
+            <div class="related-article" v-for="related in relatedProjects" :key="related.id">
               <a href="#" class="related-link">{{ related.title }}</a>
-              <div class="related-meta">{{ related.date }}</div>
+              <div class="related-meta">{{ related.tech }}</div>
             </div>
           </div>
         </div>
@@ -269,167 +290,52 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default {
-  name: 'ArticleDetail',
-  props: ['id', 'category'],
-  setup(props) {
+  name: 'ProjectArticle1',
+  setup() {
     const router = useRouter()
     const showContact = ref(false)
     const showComments = ref(false)
     const newComment = ref('')
     
-    // 根据传入的 category 和 id 获取文章信息
-    const articleId = parseInt(props.id) || 1
-    const articleCategory = props.category || 'tech'
-    
-    // 文章数据库
-    const articlesData = {
-      tech: {
-        1: {
-          id: 1,
-          title: 'Vue 3 组合式API详解与实践',
-          author: '霍玮放',
-          readCount: 1205,
-          likes: 48,
-          fullDate: '2025年7月16日',
-          category: '前端框架',
-          tags: ['Vue.js', 'JavaScript', '前端开发', '组合式API'],
-          content: {
-            sections: [
-              {
-                title: '前言',
-                content: 'Vue 3 作为 Vue.js 的最新版本，引入了许多令人兴奋的新特性，其中最重要的就是组合式 API（Composition API）。本文将深入探讨 Vue 3 组合式 API 的核心概念、使用方法和最佳实践。'
-              },
-              {
-                title: '什么是组合式 API？',
-                content: '组合式 API 是 Vue 3 中引入的一套全新的 API，它提供了一种更灵活的方式来组织组件逻辑。与传统的选项式 API 不同，组合式 API 允许我们将相关的逻辑组织在一起，提高代码的可维护性和重用性。'
-              }
-            ]
-          }
-        },
-        2: {
-          id: 2,
-          title: 'JavaScript异步编程完全指南',
-          author: '霍玮放',
-          readCount: 892,
-          likes: 35,
-          fullDate: '2025年7月15日',
-          category: '编程语言',
-          tags: ['JavaScript', '异步编程', 'Promise', 'async/await'],
-          content: {
-            sections: [
-              {
-                title: '前言',
-                content: 'JavaScript的异步编程是现代前端开发中不可或缺的技能。从回调函数到Promise，再到async/await，本文将带您深入了解JavaScript异步编程的发展历程和最佳实践。'
-              }
-            ]
-          }
-        }
-      },
-      projects: {
-        101: {
-          id: 101,
-          title: '个人博客系统 - Vue3 + Vite',
-          author: '霍玮放',
-          readCount: 523,
-          likes: 28,
-          fullDate: '2025年7月16日',
-          category: '开源项目',
-          tags: ['Vue3', 'Vite', '博客系统', '响应式设计'],
-          content: {
-            sections: [
-              {
-                title: '项目简介',
-                content: '基于 Vue3 和 Vite 构建的现代化个人博客系统，支持文章管理、分类浏览、评论互动等功能，采用响应式设计，兼容多端设备。'
-              }
-            ]
-          }
-        }
-      },
-      life: {
-        201: {
-          id: 201,
-          title: '从程序员到生活家：寻找代码之外的美好',
-          author: '霍玮放',
-          readCount: 867,
-          likes: 52,
-          fullDate: '2025年7月16日',
-          category: '生活感悟',
-          tags: ['生活感悟', '工作生活平衡', '个人成长'],
-          content: {
-            sections: [
-              {
-                title: '前言',
-                content: '作为一名程序员，我们总是沉浸在代码的世界里。但生活不只有代码，还有诗和远方。这篇文章分享我在工作之余探索生活的一些感悟。'
-              }
-            ]
-          }
-        }
-      }
-    }
-
-    // 获取当前文章数据
-    const currentArticle = articlesData[articleCategory]?.[articleId] || articlesData.tech[1]
-    
     const article = reactive({
-      ...currentArticle
+      id: 101,
+      title: '个人博客系统 - Vue3 + Vite',
+      author: '霍玮放',
+      readCount: 523,
+      likes: 28,
+      stars: 23,
+      date: '2025年7月16日',
+      category: '开源项目',
+      tags: ['Vue3', 'Vite', '博客系统', '响应式设计']
     })
 
     const comments = reactive([
       {
         id: 1,
-        author: '张三',
-        date: '2025-07-16 15:30',
-        content: '写得很详细，对我帮助很大！特别是组合式 API 的实践部分。'
+        author: '开发者小王',
+        date: '2025-07-16 10:30',
+        content: '项目结构很清晰，代码质量很高，学到了很多！'
       },
       {
         id: 2,
-        author: '李四',
-        date: '2025-07-16 16:45',
-        content: '代码示例很清晰，已经收藏了。期待更多 Vue 3 相关的文章。'
-      },
-      {
-        id: 3,
-        author: '王五',
-        date: '2025-07-16 18:20',
-        content: '学到了很多新知识，感谢分享！'
+        author: '前端爱好者',
+        date: '2025-07-16 14:20',
+        content: 'Vue3的组合式API用得很好，响应式设计也很棒。'
       }
     ])
 
-    const relatedArticles = reactive([
-      { id: 2, title: 'JavaScript异步编程完全指南', date: '07-15' },
-      { id: 4, title: 'React Hooks最佳实践总结', date: '07-13' },
-      { id: 6, title: 'TypeScript进阶使用技巧', date: '07-11' }
+    const relatedProjects = reactive([
+      { id: 102, title: '智能代码审查工具', tech: 'AI + VSCode' },
+      { id: 103, title: '微信小程序 - 待办清单', tech: '小程序' },
+      { id: 104, title: 'React组件库', tech: 'React + TS' }
     ])
-
-    // 默认文章内容（当找不到文章时使用）
-    const defaultSections = [
-      {
-        title: '文章内容',
-        content: '抱歉，该文章内容正在完善中，敬请期待...'
-      }
-    ]
-
-    // 获取分类名称的辅助函数
-    const getCategoryName = (category) => {
-      const categoryNames = {
-        tech: '技术文章',
-        projects: '项目分享',
-        life: '生活杂想'
-      }
-      return categoryNames[category] || '技术文章'
-    }
 
     const goBack = () => {
       router.push('/')
     }
 
     const goToCategory = () => {
-      const categoryRoutes = {
-        tech: '/tech',
-        projects: '/projects',
-        life: '/life'
-      }
-      router.push(categoryRoutes[articleCategory] || '/tech')
+      router.push('/projects')
     }
 
     const toggleLike = () => {
@@ -439,13 +345,16 @@ export default {
     const shareArticle = () => {
       navigator.share({
         title: article.title,
-        text: '推荐一篇好文章',
+        text: '推荐一个好项目',
         url: window.location.href
       }).catch(() => {
-        // 如果不支持原生分享，可以复制链接
         navigator.clipboard.writeText(window.location.href)
         alert('链接已复制到剪贴板')
       })
+    }
+
+    const openGithub = () => {
+      window.open('https://github.com/IsaacHuo/My_New_Blog', '_blank')
     }
 
     const addComment = () => {
@@ -461,7 +370,6 @@ export default {
     }
 
     onMounted(() => {
-      // 增加阅读量
       article.readCount++
     })
 
@@ -471,15 +379,12 @@ export default {
       newComment,
       article,
       comments,
-      relatedArticles,
-      defaultSections,
-      articleId,
-      articleCategory,
-      getCategoryName,
+      relatedProjects,
       goBack,
       goToCategory,
       toggleLike,
       shareArticle,
+      openGithub,
       addComment
     }
   }
@@ -487,9 +392,9 @@ export default {
 </script>
 
 <style scoped>
-/* 文章页面特定样式 */
+@import '../../../styles/style.css';
 
-/* 文章导航横幅 */
+/* 项目文章特有样式 */
 .article-banner {
   background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
   padding: 10px 20px;
@@ -524,27 +429,28 @@ export default {
   font-weight: bold;
 }
 
-/* 主要内容布局 */
 .article-main {
   display: flex;
   background: white;
   gap: 20px;
   padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .article-container {
   flex: 1;
-  max-width: calc(100% - 280px);
+  min-width: 0;
 }
 
 .article-sidebar {
-  width: 260px;
+  width: 300px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* 文章标题区域 */
 .article-header {
   background: white;
   border: 2px solid #e2e8f0;
@@ -582,7 +488,11 @@ export default {
   margin-left: 15px;
 }
 
-/* 文章正文 */
+.project-stars {
+  color: #f59e0b !important;
+  font-weight: 600;
+}
+
 .article-content {
   background: white;
   border: 2px solid #e2e8f0;
@@ -608,24 +518,57 @@ export default {
   border-bottom: 2px solid #3b82f6;
 }
 
-.content-section h3 {
-  color: #374151;
-  font-size: 18px;
-  margin: 20px 0 10px 0;
-}
-
 .content-section p {
   line-height: 1.7;
   color: #4b5563;
   margin-bottom: 15px;
 }
 
-.content-section code {
-  background: #f1f5f9;
-  color: #3b82f6;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
+/* 技术栈样式 */
+.tech-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tech-item {
+  display: flex;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #10b981;
+}
+
+.tech-icon {
+  font-size: 20px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.tech-content h4 {
+  color: #1f2937;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.tech-content p {
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 功能列表样式 */
+.feature-list {
+  color: #4b5563;
+  line-height: 1.8;
+  padding-left: 0;
+  list-style: none;
+}
+
+.feature-list li {
+  margin-bottom: 8px;
+  padding-left: 0;
 }
 
 /* 代码块样式 */
@@ -681,35 +624,35 @@ export default {
   line-height: 1.5;
 }
 
-/* 最佳实践列表 */
-.practice-list {
+/* 开发心得样式 */
+.experience-list {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.practice-item {
+.experience-item {
   display: flex;
   align-items: flex-start;
-  background: #f8fafc;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   padding: 15px;
   border-radius: 8px;
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #f59e0b;
 }
 
-.practice-icon {
+.experience-icon {
   font-size: 20px;
   margin-right: 12px;
   flex-shrink: 0;
 }
 
-.practice-content h4 {
+.experience-content h4 {
   color: #1f2937;
   margin-bottom: 5px;
   font-size: 16px;
 }
 
-.practice-content p {
+.experience-content p {
   color: #6b7280;
   margin: 0;
   line-height: 1.5;
@@ -750,6 +693,15 @@ export default {
   background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+}
+
+.github-btn {
+  background: linear-gradient(to bottom, #374151 0%, #1f2937 100%);
+  border-color: #111827;
+}
+
+.github-btn:hover {
+  background: linear-gradient(to bottom, #4b5563 0%, #374151 100%);
 }
 
 .btn-icon {
@@ -822,7 +774,7 @@ export default {
   line-height: 1.5;
   resize: vertical;
   margin-bottom: 10px;
-  font-family: 'WenQuanYi Bitmap Song', sans-serif;
+  font-family: inherit;
 }
 
 .comment-input:focus {
@@ -927,30 +879,38 @@ export default {
   background: #f8fafc;
 }
 
-.toc-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.toc-list li {
-  margin-bottom: 8px;
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dotted #cbd5e1;
 }
 
-.toc-list a {
-  color: #475569;
-  text-decoration: none;
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: #6b7280;
   font-size: 13px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  display: block;
-  transition: all 0.2s ease;
 }
 
-.toc-list a:hover {
-  background: linear-gradient(to right, #60a5fa 0%, #3b82f6 100%);
-  color: white;
-  transform: translateX(5px);
+.info-value {
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.status-active {
+  color: #10b981 !important;
+  font-weight: 600 !important;
 }
 
 .related-article {
@@ -985,18 +945,33 @@ export default {
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .article-main {
-    flex-direction: column;
+    max-width: 100%;
     padding: 15px;
   }
   
+  .article-sidebar {
+    width: 280px;
+  }
+}
+
+@media (max-width: 968px) {
+  .article-main {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
   .article-container {
-    max-width: 100%;
+    width: 100%;
   }
   
   .article-sidebar {
     width: 100%;
+    order: -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
   }
   
   .article-header {
@@ -1019,6 +994,22 @@ export default {
   
   .article-actions {
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-section {
+    margin-bottom: 0;
+  }
+  
+  .tech-stack,
+  .experience-list {
+    gap: 12px;
+  }
+  
+  .tech-item,
+  .experience-item {
+    padding: 12px;
   }
 }
 </style>

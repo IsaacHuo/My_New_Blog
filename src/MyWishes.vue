@@ -17,9 +17,9 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="category-breadcrumb">
-          <button @click="goHome" class="breadcrumb-btn breadcrumb-link">首页</button>
+          <span @click="goHome" class="breadcrumb-link">首页</span>
           <span class="breadcrumb-separator">></span>
-          <button class="breadcrumb-btn breadcrumb-current" disabled>我的愿望</button>
+          <span class="breadcrumb-current">我的愿望</span>
         </div>
       </div>
     </section>
@@ -105,12 +105,6 @@
 
       <!-- 侧边栏 -->
       <aside class="sidebar">
-        <!-- 侧边栏顶部对齐区域 -->
-        <div class="sidebar-header-spacer">
-          <div class="sidebar-title">愿望管理</div>
-          <div class="sidebar-subtitle">个人成长与目标追踪</div>
-        </div>
-        
         <div class="sidebar-section">
           <div class="sidebar-header">愿望分类</div>
           <div class="sidebar-content">
@@ -408,116 +402,7 @@ export default {
 </script>
 
 <style scoped>
-@import '../styles/style.css';
-
-/* 我的愿望页面特定样式 */
-
-/* 主要内容布局 */
-.main-content {
-  display: flex;
-  background: white;
-  gap: 20px;
-  padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.articles-container {
-  flex: 1;
-  min-width: 0; /* 防止flex子项溢出 */
-}
-
-.sidebar {
-  width: 300px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* 分类标题区域 */
-.category-header {
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-}
-
-.category-title {
-  font-size: 24px;
-  color: #1f2937;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.category-stats {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  color: #6b7280;
-  padding-top: 10px;
-  border-top: 1px solid #e2e8f0;
-}
-
-/* 分类导航横幅 */
-.category-banner {
-  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
-  padding: 10px 20px;
-  border-top: 3px solid #1d4ed8;
-  border-bottom: 3px solid #1d4ed8;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.category-breadcrumb {
-  font-size: 14px;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.breadcrumb-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.breadcrumb-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.breadcrumb-btn:disabled {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  cursor: default;
-  font-weight: bold;
-}
-
-.breadcrumb-link {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.breadcrumb-current {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  font-weight: bold;
-}
+@import './style.css';
 
 /* 我的愿望页面特定样式 */
 .wishes-container {
@@ -802,73 +687,8 @@ export default {
   color: white;
 }
 
-/* 侧边栏头部对齐区域样式 */
-.sidebar-header-spacer {
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-  text-align: center;
-}
-
-.sidebar-title {
-  font-size: 20px;
-  color: #1f2937;
-  margin-bottom: 8px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.sidebar-title::before {
-  content: '🎯';
-  font-size: 20px;
-}
-
-.sidebar-subtitle {
-  font-size: 13px;
-  color: #6b7280;
-  line-height: 1.4;
-}
-
 /* 响应式设计 */
-@media (max-width: 1200px) {
-  .main-content {
-    max-width: 100%;
-    padding: 15px;
-  }
-  
-  .sidebar {
-    width: 280px;
-  }
-  
-  .wishes-container {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  }
-}
-
-@media (max-width: 968px) {
-  .main-content {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .articles-container {
-    width: 100%;
-  }
-  
-  .sidebar {
-    width: 100%;
-    order: -1; /* 在移动端将侧边栏移到上方 */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-  }
-  
+@media (max-width: 768px) {
   .wishes-container {
     grid-template-columns: 1fr;
   }
@@ -877,34 +697,10 @@ export default {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .category-header {
-    padding: 20px;
-  }
-  
-  .category-title {
-    font-size: 20px;
-  }
-  
-  .category-stats {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-}
-
-@media (max-width: 768px) {
-  .wishes-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
   .wish-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-  }
-  
-  .sidebar-section {
-    margin-bottom: 0;
   }
 }
 </style>

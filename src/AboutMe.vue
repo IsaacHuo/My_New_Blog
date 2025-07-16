@@ -17,9 +17,9 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="category-breadcrumb">
-          <button @click="goHome" class="breadcrumb-btn breadcrumb-link">首页</button>
+          <span @click="goHome" class="breadcrumb-link">首页</span>
           <span class="breadcrumb-separator">></span>
-          <button class="breadcrumb-btn breadcrumb-current" disabled>关于我</button>
+          <span class="breadcrumb-current">关于我</span>
         </div>
       </div>
     </section>
@@ -115,44 +115,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 技术栈概览 -->
-        <div class="about-section tech-overview-section">
-          <div class="section-header">
-            <h2 class="section-title">🛠️ 技术栈概览</h2>
-          </div>
-          <div class="section-content">
-            <div class="tech-overview">
-              <div v-for="tech in topTechnologies" :key="tech.name" class="tech-item">
-                <div class="tech-info">
-                  <span class="tech-name">{{ tech.name }}</span>
-                  <span class="tech-level">{{ tech.level }}%</span>
-                </div>
-                <div class="tech-progress">
-                  <div class="tech-progress-bar" :style="{ width: tech.level + '%' }"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 最近动态 -->
-        <div class="about-section recent-activities-section">
-          <div class="section-header">
-            <h2 class="section-title">📅 最近动态</h2>
-          </div>
-          <div class="section-content">
-            <div class="recent-activities">
-              <div v-for="activity in recentActivities" :key="activity.id" class="activity-item">
-                <div class="activity-icon">{{ activity.icon }}</div>
-                <div class="activity-content">
-                  <div class="activity-title">{{ activity.title }}</div>
-                  <div class="activity-time">{{ activity.time }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- 侧边栏 -->
@@ -200,38 +162,6 @@
               <div v-for="stat in blogStats" :key="stat.label" class="stat-item">
                 <span class="stat-value">{{ stat.value }}</span>
                 <span class="stat-label">{{ stat.label }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-header">技术栈概览</div>
-          <div class="sidebar-content">
-            <div class="tech-overview">
-              <div v-for="tech in topTechnologies" :key="tech.name" class="tech-item">
-                <div class="tech-info">
-                  <span class="tech-name">{{ tech.name }}</span>
-                  <span class="tech-level">{{ tech.level }}%</span>
-                </div>
-                <div class="tech-progress">
-                  <div class="tech-progress-bar" :style="{ width: tech.level + '%' }"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-header">最近动态</div>
-          <div class="sidebar-content">
-            <div class="recent-activities">
-              <div v-for="activity in recentActivities" :key="activity.id" class="activity-item">
-                <div class="activity-icon">{{ activity.icon }}</div>
-                <div class="activity-content">
-                  <div class="activity-title">{{ activity.title }}</div>
-                  <div class="activity-time">{{ activity.time }}</div>
-                </div>
               </div>
             </div>
           </div>
@@ -393,47 +323,6 @@ export default {
       { label: '点赞数', value: '756' }
     ])
 
-    const topTechnologies = reactive([
-      { name: 'JavaScript', level: 90 },
-      { name: 'Vue.js', level: 85 },
-      { name: 'React', level: 80 },
-      { name: 'TypeScript', level: 75 },
-      { name: 'Node.js', level: 70 }
-    ])
-
-    const recentActivities = reactive([
-      {
-        id: 1,
-        icon: '📝',
-        title: '发布了新文章',
-        time: '2天前'
-      },
-      {
-        id: 2,
-        icon: '💻',
-        title: '更新了项目代码',
-        time: '5天前'
-      },
-      {
-        id: 3,
-        icon: '🎯',
-        title: '完成了技术目标',
-        time: '1周前'
-      },
-      {
-        id: 4,
-        icon: '📚',
-        title: '学习了新技术',
-        time: '2周前'
-      },
-      {
-        id: 5,
-        icon: '🎉',
-        title: '项目成功上线',
-        time: '3周前'
-      }
-    ])
-
     const goHome = () => {
       router.push('/')
     }
@@ -451,8 +340,6 @@ export default {
       personalTags,
       hobbies,
       blogStats,
-      topTechnologies,
-      recentActivities,
       goHome
     }
   }
@@ -460,108 +347,7 @@ export default {
 </script>
 
 <style scoped>
-@import '../styles/style.css';
-
-/* 主要布局样式 */
-.main-content {
-  display: flex;
-  background: white;
-  gap: 20px;
-  padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.articles-container {
-  flex: 1;
-  min-width: 0; /* 防止flex子项溢出 */
-}
-
-.sidebar {
-  width: 300px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* 分类导航横幅 */
-.category-banner {
-  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
-  padding: 10px 20px;
-  border-top: 3px solid #1d4ed8;
-  border-bottom: 3px solid #1d4ed8;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.category-breadcrumb {
-  font-size: 14px;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.breadcrumb-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.breadcrumb-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.breadcrumb-btn:disabled {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  cursor: default;
-  font-weight: bold;
-}
-
-.breadcrumb-link {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.breadcrumb-current {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  font-weight: bold;
-}
-
-/* 侧边栏样式 */
-.sidebar-section {
-  background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-}
-
-.sidebar-header {
-  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
-  color: white;
-  padding: 12px 15px;
-  font-size: 14px;
-  font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.sidebar-content {
-  padding: 15px;
-  background: #f8fafc;
-}
+@import './style.css';
 
 /* 关于我页面特定样式 */
 .about-section {
@@ -811,133 +597,96 @@ export default {
 }
 
 /* 侧边栏联系方式 */
-.contact-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px;
-  border-radius: 6px;
+  gap: 12px;
+  margin-bottom: 15px;
+  padding: 10px;
   background: white;
+  border-radius: 6px;
   border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
-}
-
-.contact-item:hover {
-  background: #f1f5f9;
-  transform: translateY(-1px);
 }
 
 .contact-icon {
-  font-size: 18px;
-  width: 24px;
-  text-align: center;
-}
-
-.contact-info {
-  flex: 1;
+  font-size: 20px;
 }
 
 .contact-type {
-  font-size: 12px;
   color: #6b7280;
-  margin-bottom: 2px;
+  font-size: 12px;
 }
 
 .contact-value {
-  font-size: 13px;
   color: #1f2937;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-/* 个人标签样式 */
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
+/* 个人标签 */
 .personal-tag {
-  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
-  color: #8b5cf6;
-  padding: 4px 10px;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  color: #3b82f6;
+  padding: 6px 12px;
+  border-radius: 16px;
   font-size: 12px;
+  border: 1px solid #bfdbfe;
+  margin: 4px;
+  display: inline-block;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 1px solid #c4b5fd;
 }
 
 .personal-tag:hover {
-  background: #8b5cf6;
+  background: #3b82f6;
   color: white;
-  transform: scale(1.05);
 }
 
-/* 兴趣爱好样式 */
-.hobbies-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-
+/* 兴趣爱好 */
 .hobby-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px;
-  border-radius: 6px;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 8px 12px;
   background: white;
+  border-radius: 6px;
   border: 1px solid #e2e8f0;
   transition: all 0.2s ease;
 }
 
 .hobby-item:hover {
-  background: #f1f5f9;
-  transform: translateY(-1px);
+  background: #f8fafc;
+  border-color: #3b82f6;
 }
 
 .hobby-icon {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .hobby-name {
-  font-size: 12px;
   color: #4b5563;
+  font-size: 13px;
 }
 
-/* 博客统计样式 */
-.stats-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
+/* 博客统计 */
 .stat-item {
-  text-align: center;
-  padding: 12px;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
   background: white;
+  border-radius: 8px;
   border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
-}
-
-.stat-item:hover {
-  background: #f1f5f9;
-  transform: translateY(-1px);
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .stat-value {
-  display: block;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   color: #3b82f6;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .stat-label {
@@ -945,137 +694,7 @@ export default {
   font-size: 12px;
 }
 
-/* 技术栈概览样式 */
-.tech-overview {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.tech-item {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 10px;
-}
-
-.tech-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.tech-name {
-  font-size: 13px;
-  color: #1f2937;
-  font-weight: 500;
-}
-
-.tech-level {
-  font-size: 12px;
-  color: #3b82f6;
-  font-weight: 600;
-}
-
-.tech-progress {
-  height: 4px;
-  background: #e2e8f0;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.tech-progress-bar {
-  height: 100%;
-  background: linear-gradient(to right, #3b82f6 0%, #60a5fa 100%);
-  transition: width 0.8s ease;
-}
-
-/* 最近动态样式 */
-.recent-activities {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.activity-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px;
-  border-radius: 6px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
-}
-
-.activity-item:hover {
-  background: #f1f5f9;
-  transform: translateY(-1px);
-}
-
-.activity-icon {
-  font-size: 16px;
-  width: 24px;
-  text-align: center;
-}
-
-.activity-content {
-  flex: 1;
-}
-
-.activity-title {
-  font-size: 12px;
-  color: #1f2937;
-  margin-bottom: 2px;
-}
-
-.activity-time {
-  font-size: 11px;
-  color: #6b7280;
-}
-
 /* 响应式设计 */
-@media (max-width: 1200px) {
-  .main-content {
-    max-width: 100%;
-    padding: 15px;
-  }
-  
-  .sidebar {
-    width: 280px;
-  }
-}
-
-@media (max-width: 968px) {
-  .main-content {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .articles-container {
-    width: 100%;
-  }
-  
-  .sidebar {
-    width: 100%;
-    order: -1; /* 在移动端将侧边栏移到上方 */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-  }
-  
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .exp-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-}
-
 @media (max-width: 768px) {
   .intro-card {
     flex-direction: column;
@@ -1096,16 +715,6 @@ export default {
   .education-item {
     flex-direction: column;
     text-align: center;
-  }
-  
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .sidebar-section {
-    margin-bottom: 0;
   }
 }
 </style>

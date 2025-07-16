@@ -92,14 +92,7 @@
                   :key="'latest-' + article.id" 
                   class="article-item-compact"
                 >
-                  <a 
-                    href="#" 
-                    @click="selectArticle(article)" 
-                    class="article-title-compact"
-                    :class="{ 'no-detail': !hasArticleDetail('tech', article.id) }"
-                  >
-                    {{ article.title }}
-                  </a>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
                     <span class="article-date">{{ article.date }}</span>
@@ -117,14 +110,7 @@
                   :key="'popular-' + article.id" 
                   class="article-item-compact"
                 >
-                  <a 
-                    href="#" 
-                    @click="selectArticle(article)" 
-                    class="article-title-compact"
-                    :class="{ 'no-detail': !hasArticleDetail('tech', article.id) }"
-                  >
-                    {{ article.title }}
-                  </a>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
                     <span class="article-date">{{ article.date }}</span>
@@ -142,14 +128,7 @@
                   :key="'featured-' + article.id" 
                   class="article-item-compact"
                 >
-                  <a 
-                    href="#" 
-                    @click="selectArticle(article)" 
-                    class="article-title-compact"
-                    :class="{ 'no-detail': !hasArticleDetail('tech', article.id) }"
-                  >
-                    {{ article.title }}
-                  </a>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
                     <span class="article-date">{{ article.date }}</span>
@@ -167,14 +146,7 @@
                   :key="'archived-' + article.id" 
                   class="article-item-compact"
                 >
-                  <a 
-                    href="#" 
-                    @click="selectArticle(article)" 
-                    class="article-title-compact"
-                    :class="{ 'no-detail': !hasArticleDetail('tech', article.id) }"
-                  >
-                    {{ article.title }}
-                  </a>
+                  <a href="#" @click="selectArticle(article)" class="article-title-compact">{{ article.title }}</a>
                   <div class="article-meta-compact">
                     <span class="article-stats">{{ article.readCount }}阅读</span>
                     <span class="article-date">{{ article.date }}</span>
@@ -231,7 +203,6 @@
 <script>
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { hasArticleDetail } from '../utils/helpers.js'
 
 export default {
   name: 'App',
@@ -372,37 +343,8 @@ export default {
 
     const selectArticle = (article) => {
       selectedArticle.value = article
-      console.log('点击文章:', article.title)
-      
-      // 根据文章ID确定分类和跳转路径
-      let category = 'tech' // 默认技术文章
-      let articleId = article.id
-      
-      // 根据文章ID判断分类
-      if (article.id <= 10) {
-        // ID 1-10 为技术文章
-        category = 'tech'
-      } else if (article.id <= 20) {
-        // ID 11-20 为项目分享
-        category = 'projects' 
-        articleId = article.id - 10 // 项目文章从1开始编号
-      } else if (article.id <= 30) {
-        // ID 21-30 为生活杂想
-        category = 'life'
-        articleId = article.id - 20 // 生活文章从1开始编号
-      }
-      
-      // 检查是否有对应的详情页面
-      const hasDetail = hasArticleDetail(category, articleId)
-      
-      if (hasDetail) {
-        const routePath = `/article/${category}/${articleId}`
-        console.log('跳转到详情页:', routePath)
-        router.push(routePath)
-      } else {
-        console.log('文章暂无详情页，点击无效')
-        // 无详情页的文章点击无反应
-      }
+      console.log('跳转到文章:', article.title)
+      router.push(`/article/${article.id}`)
     }
 
     const goToTechArticles = () => {
@@ -449,8 +391,7 @@ export default {
       goToProjects,
       goToLife,
       goToAbout,
-      goToWishes,
-      hasArticleDetail
+      goToWishes
     }
   }
 }
@@ -500,19 +441,6 @@ button, .category-item-flat span, .article-title-compact {
 
 .search-btn-compact:hover {
   background: #e5e5e5;
-}
-
-/* 无详情页文章样式 */
-.article-title-compact.no-detail {
-  color: #999 !important;
-  cursor: default !important;
-  text-decoration: none !important;
-  pointer-events: none;
-}
-
-.article-title-compact.no-detail:hover {
-  color: #999 !important;
-  text-decoration: none !important;
 }
 </style>
 

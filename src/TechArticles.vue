@@ -17,9 +17,9 @@
     <section class="category-banner">
       <div class="banner-content">
         <div class="category-breadcrumb">
-          <button @click="goHome" class="breadcrumb-btn breadcrumb-link">首页</button>
+          <span @click="goHome" class="breadcrumb-link">首页</span>
           <span class="breadcrumb-separator">></span>
-          <button class="breadcrumb-btn breadcrumb-current" disabled>生活杂想</button>
+          <span class="breadcrumb-current">技术文章</span>
         </div>
       </div>
     </section>
@@ -30,9 +30,9 @@
       <div class="articles-container">
         <!-- 分类标题 -->
         <header class="category-header">
-          <h1 class="category-title">🌱 生活杂想</h1>
+          <h1 class="category-title">💻 技术文章</h1>
           <div class="category-stats">
-            <span class="article-count">共 {{ lifeArticles.length }} 篇文章</span>
+            <span class="article-count">共 {{ techArticles.length }} 篇文章</span>
             <span class="last-update">最后更新：{{ lastUpdate }}</span>
           </div>
         </header>
@@ -40,9 +40,9 @@
         <!-- 文章列表 -->
         <div class="articles-list">
           <div 
-            v-for="article in lifeArticles" 
+            v-for="article in techArticles" 
             :key="article.id" 
-            class="article-card life-card"
+            class="article-card"
             @click="goToArticle(article)"
           >
             <div class="article-status" v-if="article.status">
@@ -55,7 +55,7 @@
                 <div class="meta-left">
                   <span class="article-author">{{ article.author }}</span>
                   <span class="article-date">{{ article.date }}</span>
-                  <span class="article-mood">{{ article.mood }}</span>
+                  <span class="article-category">{{ article.category }}</span>
                 </div>
                 <div class="meta-right">
                   <span class="article-reads">{{ article.readCount }} 阅读</span>
@@ -64,7 +64,7 @@
               </div>
             </div>
             <div class="article-tags">
-              <span v-for="tag in article.tags" :key="tag" class="article-tag life-tag">{{ tag }}</span>
+              <span v-for="tag in article.tags" :key="tag" class="article-tag">{{ tag }}</span>
             </div>
           </div>
         </div>
@@ -95,80 +95,53 @@
           <div class="sidebar-header">文章分类</div>
           <div class="sidebar-content">
             <ul class="category-menu">
-              <li class="category-item" @click="goToCategory('tech')">
+              <li class="category-item active">
                 <span class="category-icon">💻</span>
                 <span class="category-name">技术文章</span>
-                <span class="category-count">(18)</span>
+                <span class="category-count">({{ techArticles.length }})</span>
               </li>
               <li class="category-item" @click="goToCategory('projects')">
                 <span class="category-icon">🚀</span>
                 <span class="category-name">项目分享</span>
                 <span class="category-count">(12)</span>
               </li>
-              <li class="category-item active">
+              <li class="category-item" @click="goToCategory('life')">
                 <span class="category-icon">🌱</span>
                 <span class="category-name">生活杂想</span>
-                <span class="category-count">({{ lifeArticles.length }})</span>
+                <span class="category-count">(8)</span>
               </li>
               <li class="category-item" @click="goToCategory('about')">
                 <span class="category-icon">👨‍💻</span>
                 <span class="category-name">关于我</span>
                 <span class="category-count">(3)</span>
               </li>
+              <li class="category-item" @click="goToCategory('wishes')">
+                <span class="category-icon">⭐</span>
+                <span class="category-name">我的愿望</span>
+                <span class="category-count">(10)</span>
+              </li>
             </ul>
           </div>
         </div>
 
         <div class="sidebar-section">
-          <div class="sidebar-header">心情标签</div>
+          <div class="sidebar-header">热门标签</div>
           <div class="sidebar-content">
             <div class="tag-cloud">
-              <span v-for="mood in moodTags" :key="mood.name" class="popular-tag mood-tag" :style="{ fontSize: mood.size + 'px' }">
-                {{ mood.name }}
+              <span v-for="tag in popularTags" :key="tag.name" class="popular-tag" :style="{ fontSize: tag.size + 'px' }">
+                {{ tag.name }}
               </span>
             </div>
           </div>
         </div>
 
         <div class="sidebar-section">
-          <div class="sidebar-header">生活足迹</div>
+          <div class="sidebar-header">最新评论</div>
           <div class="sidebar-content">
-            <div v-for="milestone in lifeMilestones" :key="milestone.id" class="life-milestone">
-              <div class="milestone-date">{{ milestone.date }}</div>
-              <div class="milestone-content">{{ milestone.content }}</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-header">心情日历</div>
-          <div class="sidebar-content">
-            <div class="mood-calendar">
-              <div v-for="day in recentMoods" :key="day.date" class="mood-day">
-                <div class="mood-date">{{ day.date }}</div>
-                <div class="mood-emoji">{{ day.emoji }}</div>
-                <div class="mood-text">{{ day.mood }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-header">阅读记录</div>
-          <div class="sidebar-content">
-            <div class="reading-list">
-              <div v-for="book in recentBooks" :key="book.id" class="reading-item">
-                <div class="book-info">
-                  <div class="book-title">{{ book.title }}</div>
-                  <div class="book-author">{{ book.author }}</div>
-                  <div class="book-progress">
-                    <div class="progress-bar-small">
-                      <div class="progress-fill-small" :style="{ width: book.progress + '%' }"></div>
-                    </div>
-                    <span class="progress-text-small">{{ book.progress }}%</span>
-                  </div>
-                </div>
-              </div>
+            <div v-for="comment in recentComments" :key="comment.id" class="recent-comment">
+              <div class="comment-author">{{ comment.author }}</div>
+              <div class="comment-content">{{ comment.content }}</div>
+              <div class="comment-article">在《{{ comment.article }}》</div>
             </div>
           </div>
         </div>
@@ -213,10 +186,9 @@
 <script>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { hasArticleDetail } from '../utils/helpers.js'
 
 export default {
-  name: 'LifeThoughts',
+  name: 'TechArticles',
   setup() {
     const router = useRouter()
     const showContact = ref(false)
@@ -224,166 +196,155 @@ export default {
     const articlesPerPage = 10
     const lastUpdate = ref('2025年7月17日')
 
-    const lifeArticles = reactive([
-      {
-        id: 201,
-        status: '置顶',
-        title: '从程序员到生活家：寻找代码之外的美好',
-        summary: '作为一名程序员，我们总是沉浸在代码的世界里。但生活不只有代码，还有诗和远方。这篇文章分享我在工作之余探索生活的一些感悟。',
-        author: '霍玮放',
-        date: '2025-07-16',
-        mood: '😊 愉快',
-        readCount: 867,
-        likes: 52,
-        tags: ['生活感悟', '工作生活平衡', '个人成长']
-      },
-      {
-        id: 202,
-        title: '咖啡馆里的思考：关于远程工作的那些事',
-        summary: '在这个咖啡馆安静的角落，我想聊聊远程工作这两年来的体验。有收获，也有挑战，更多的是对未来工作方式的思考。',
-        author: '霍玮放',
-        date: '2025-07-15',
-        mood: '☕ 思考',
-        readCount: 634,
-        likes: 38,
-        tags: ['远程工作', '职场思考', '生活方式']
-      },
-      {
-        id: 203,
-        status: '热门',
-        title: '夜深人静写代码的那些心境',
-        summary: '深夜时分，万籁俱寂，只有键盘敲击声陪伴。这是属于程序员的独特时光，也是我最喜欢的编程时刻。',
-        author: '霍玮放',
-        date: '2025-07-14',
-        mood: '🌙 专注',
-        readCount: 1024,
-        likes: 76,
-        tags: ['深夜编程', '心境感悟', '程序员生活']
-      },
-      {
-        id: 204,
-        title: '旅行中的代码灵感：在路上思考技术',
-        summary: '这次云南之行不仅收获了美景，更意外地找到了解决项目难题的灵感。有时候，最好的解决方案往往来自于暂时的放下。',
-        author: '霍玮放',
-        date: '2025-07-13',
-        mood: '🚗 兴奋',
-        readCount: 456,
-        likes: 29,
-        tags: ['旅行', '技术灵感', '生活体验']
-      },
-      {
-        id: 205,
-        title: '读书笔记：《程序员修炼之道》读后感',
-        summary: '重读这本经典，依然有很多新的收获。书中的很多观点不仅适用于编程，更是做人做事的智慧。',
-        author: '霍玮放',
-        date: '2025-07-12',
-        mood: '📚 学习',
-        readCount: 723,
-        likes: 45,
-        tags: ['读书笔记', '技术成长', '人生感悟']
-      },
-      {
-        id: 206,
-        title: '周末农场体验：与大自然的亲密接触',
-        summary: '离开城市的喧嚣，来到郊外的农场。亲手种菜、喂鸡、采摘，体验最原始的生活方式，找回内心的宁静。',
-        author: '霍玮放',
-        date: '2025-07-11',
-        mood: '🌾 放松',
-        readCount: 392,
-        likes: 33,
-        tags: ['农场体验', '自然生活', '周末休闲']
-      },
-      {
-        id: 207,
-        title: '学做饭的程序员：算法思维在厨房的应用',
-        summary: '谁说程序员不会做饭？把写代码的逻辑思维运用到厨房里，竟然意外地做出了不错的菜品。',
-        author: '霍玮放',
-        date: '2025-07-10',
-        mood: '👨‍🍳 创造',
-        readCount: 589,
-        likes: 41,
-        tags: ['学做饭', '生活技能', '创意料理']
-      },
-      {
-        id: 208,
-        title: '雨夜听歌：音乐与代码的奇妙联系',
-        summary: '雨夜，一个人，一首歌，一段代码。发现音乐的节奏和代码的逻辑有着奇妙的相似性。',
-        author: '霍玮放',
-        date: '2025-07-09',
-        mood: '🎵 感性',
-        readCount: 445,
-        likes: 37,
-        tags: ['音乐', '代码艺术', '情感表达']
-      }
-    ])
-
-    const moodTags = reactive([
-      { name: '😊 愉快', size: 14 },
-      { name: '☕ 思考', size: 13 },
-      { name: '🌙 专注', size: 15 },
-      { name: '🚗 兴奋', size: 12 },
-      { name: '📚 学习', size: 13 },
-      { name: '🌾 放松', size: 11 },
-      { name: '👨‍🍳 创造', size: 12 },
-      { name: '🎵 感性', size: 14 }
-    ])
-
-    const lifeMilestones = reactive([
+    const techArticles = reactive([
       {
         id: 1,
-        date: '2025-07',
-        content: '开始写博客，记录技术和生活'
+        status: '置顶',
+        title: 'Vue 3 组合式API详解与实践',
+        summary: '深入探讨 Vue 3 组合式 API 的核心概念、使用方法和最佳实践，帮助开发者更好地理解和应用这一重要特性。',
+        author: '霍玮放',
+        date: '2025-07-16',
+        category: '前端框架',
+        readCount: 1205,
+        likes: 48,
+        tags: ['Vue.js', 'JavaScript', '前端开发']
       },
       {
         id: 2,
-        date: '2025-06',
-        content: '学会了做蛋炒饭，终于不用天天外卖'
+        status: '热门',
+        title: 'JavaScript异步编程完全指南',
+        summary: '从回调函数到Promise，再到async/await，全面讲解JavaScript异步编程的发展历程和最佳实践。',
+        author: '霍玮放',
+        date: '2025-07-15',
+        category: '编程语言',
+        readCount: 856,
+        likes: 32,
+        tags: ['JavaScript', '异步编程', 'Promise']
       },
       {
         id: 3,
-        date: '2025-05',
-        content: '第一次云南旅行，被美景震撼'
+        title: 'CSS Grid布局从入门到精通',
+        summary: 'CSS Grid是一个强大的二维布局系统，本文将带你从基础概念到高级应用，掌握Grid布局的精髓。',
+        author: '霍玮放',
+        date: '2025-07-14',
+        category: '前端样式',
+        readCount: 642,
+        likes: 25,
+        tags: ['CSS', '布局', 'Grid']
       },
       {
         id: 4,
-        date: '2025-04',
-        content: '开始远程工作，生活节奏大改变'
+        title: 'React Hooks最佳实践总结',
+        summary: '总结React Hooks的使用技巧和最佳实践，包括useState、useEffect、useContext等常用Hook的深度应用。',
+        author: '霍玮放',
+        date: '2025-07-13',
+        category: '前端框架',
+        readCount: 789,
+        likes: 41,
+        tags: ['React', 'Hooks', '前端开发']
+      },
+      {
+        id: 5,
+        title: '前端性能优化技巧汇总',
+        summary: '从代码分割到懒加载，从缓存策略到图片优化，全方位提升前端应用性能的实用技巧。',
+        author: '霍玮放',
+        date: '2025-07-12',
+        category: '性能优化',
+        readCount: 923,
+        likes: 56,
+        tags: ['性能优化', '前端开发', '最佳实践']
+      },
+      {
+        id: 6,
+        title: 'TypeScript进阶使用技巧',
+        summary: '深入TypeScript的高级特性，包括泛型、装饰器、模块系统等，提升代码的类型安全和开发效率。',
+        author: '霍玮放',
+        date: '2025-07-11',
+        category: '编程语言',
+        readCount: 567,
+        likes: 28,
+        tags: ['TypeScript', 'JavaScript', '类型系统']
+      },
+      {
+        id: 7,
+        title: 'Webpack配置优化实战',
+        summary: '从基础配置到高级优化，深入理解Webpack的工作原理，提升构建效率和应用性能。',
+        author: '霍玮放',
+        date: '2025-07-10',
+        category: '构建工具',
+        readCount: 435,
+        likes: 22,
+        tags: ['Webpack', '构建工具', '前端工程化']
+      },
+      {
+        id: 8,
+        title: 'Node.js微服务架构设计',
+        summary: '探讨如何使用Node.js构建可扩展的微服务架构，包括服务拆分、通信机制和部署策略。',
+        author: '霍玮放',
+        date: '2025-07-09',
+        category: '后端开发',
+        readCount: 678,
+        likes: 35,
+        tags: ['Node.js', '微服务', '架构设计']
+      },
+      {
+        id: 9,
+        title: '前端工程化最佳实践',
+        summary: '从项目初始化到部署上线，构建现代化前端工程体系的完整指南和最佳实践。',
+        author: '霍玮放',
+        date: '2025-07-08',
+        category: '工程化',
+        readCount: 812,
+        likes: 44,
+        tags: ['前端工程化', '最佳实践', '开发流程']
+      },
+      {
+        id: 10,
+        title: '算法与数据结构学习笔记',
+        summary: '系统梳理常见算法和数据结构，包括排序、搜索、动态规划等，提升编程思维和解决问题的能力。',
+        author: '霍玮放',
+        date: '2025-07-07',
+        category: '算法',
+        readCount: 345,
+        likes: 18,
+        tags: ['算法', '数据结构', '编程基础']
       }
     ])
 
-    const recentMoods = reactive([
-      { date: '07-17', emoji: '😊', mood: '愉快' },
-      { date: '07-16', emoji: '🤔', mood: '思考' },
-      { date: '07-15', emoji: '💪', mood: '充实' },
-      { date: '07-14', emoji: '😴', mood: '放松' },
-      { date: '07-13', emoji: '🎉', mood: '兴奋' },
-      { date: '07-12', emoji: '📚', mood: '学习' },
-      { date: '07-11', emoji: '🌱', mood: '成长' }
+    const popularTags = reactive([
+      { name: 'JavaScript', size: 16 },
+      { name: 'Vue.js', size: 14 },
+      { name: 'React', size: 13 },
+      { name: '前端开发', size: 15 },
+      { name: 'TypeScript', size: 12 },
+      { name: 'CSS', size: 11 },
+      { name: '性能优化', size: 13 },
+      { name: '最佳实践', size: 12 }
     ])
 
-    const recentBooks = reactive([
+    const recentComments = reactive([
       {
         id: 1,
-        title: '程序员修炼之道',
-        author: 'Andrew Hunt',
-        progress: 75
+        author: '张三',
+        content: '写得很详细，学到了很多...',
+        article: 'Vue 3 组合式API详解与实践'
       },
       {
         id: 2,
-        title: '人类简史',
-        author: '尤瓦尔·赫拉利',
-        progress: 45
+        author: '李四',
+        content: '代码示例很清晰，已收藏',
+        article: 'JavaScript异步编程完全指南'
       },
       {
         id: 3,
-        title: '深入理解计算机系统',
-        author: 'Randal E. Bryant',
-        progress: 30
+        author: '王五',
+        content: '感谢分享，很有帮助！',
+        article: 'CSS Grid布局从入门到精通'
       }
     ])
 
     const totalPages = computed(() => {
-      return Math.ceil(lifeArticles.length / articlesPerPage)
+      return Math.ceil(techArticles.length / articlesPerPage)
     })
 
     const goHome = () => {
@@ -391,28 +352,24 @@ export default {
     }
 
     const goToArticle = (article) => {
-      // 将生活文章 ID 转换为详情页 ID（生活文章 ID 201-210 对应详情页 ID 1-10）
-      const articleId = article.id - 200
-      
-      // 检查是否有详情页
-      if (hasArticleDetail('life', articleId)) {
-        router.push(`/article/life/${articleId}`)
-      } else {
-        console.log('文章暂无详情页，点击无效')
-        // 无详情页的文章点击无反应
-      }
+      router.push(`/article/${article.id}`)
     }
 
     const goToCategory = (category) => {
+      console.log('跳转到分类:', category)
+      // 根据分类跳转到相应页面
       switch(category) {
-        case 'tech':
-          router.push('/tech')
-          break
         case 'projects':
           router.push('/projects')
           break
+        case 'life': 
+          router.push('/life')
+          break
         case 'about':
           router.push('/about')
+          break
+        case 'wishes':
+          router.push('/wishes')
           break
         default:
           router.push('/')
@@ -432,24 +389,22 @@ export default {
     }
 
     onMounted(() => {
-      console.log('生活杂想页面已加载')
+      console.log('技术文章页面已加载')
     })
 
     return {
       showContact,
       currentPage,
       lastUpdate,
-      lifeArticles,
-      moodTags,
-      lifeMilestones,
+      techArticles,
+      popularTags,
+      recentComments,
       totalPages,
       goHome,
       goToArticle,
       goToCategory,
       prevPage,
-      nextPage,
-      recentMoods,
-      recentBooks
+      nextPage
     }
   }
 }
@@ -470,46 +425,26 @@ export default {
 .category-breadcrumb {
   font-size: 14px;
   color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.breadcrumb-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.breadcrumb-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.breadcrumb-btn:disabled {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
-  cursor: default;
-  font-weight: bold;
 }
 
 .breadcrumb-link {
-  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.breadcrumb-link:hover {
+  color: #93c5fd;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #e2e8f0;
 }
 
 .breadcrumb-current {
-  background: #ffd700;
-  color: #1d4ed8;
-  border-color: #fbbf24;
+  color: #ffd700;
   font-weight: bold;
 }
 
@@ -519,18 +454,15 @@ export default {
   background: white;
   gap: 20px;
   padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .articles-container {
   flex: 1;
-  min-width: 0; /* 防止flex子项溢出 */
+  max-width: calc(100% - 280px);
 }
 
 .sidebar {
-  width: 300px;
-  flex-shrink: 0;
+  width: 260px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -569,14 +501,14 @@ export default {
 .articles-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
 .article-card {
   background: white;
   border: 2px solid #e2e8f0;
   border-radius: 12px;
-  padding: 12px;
+  padding: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
@@ -604,13 +536,13 @@ export default {
 }
 
 .article-main {
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .article-title {
   font-size: 18px;
   color: #1f2937;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   line-height: 1.4;
   font-weight: 600;
 }
@@ -618,7 +550,7 @@ export default {
 .article-summary {
   color: #4b5563;
   line-height: 1.6;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-size: 14px;
 }
 
@@ -644,7 +576,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding-top: 12px;
+  padding-top: 15px;
   border-top: 1px solid #f1f5f9;
 }
 
@@ -787,194 +719,51 @@ export default {
   color: white;
 }
 
-/* 生活杂想特定样式 */
-.life-card {
-  background: linear-gradient(135deg, #fefefe 0%, #f8f9fa 100%);
-  border-left: 4px solid #10b981;
-}
-
-.life-card:hover {
-  border-left-color: #059669;
-  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15);
-}
-
-.life-tag {
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  color: #10b981;
-  border: 1px solid #a7f3d0;
-}
-
-.mood-tag {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  color: #d97706;
-  border: 1px solid #fbbf24;
-}
-
-.mood-tag:hover {
-  background: #d97706;
-  color: white;
-}
-
-.article-mood {
-  color: #10b981;
-  font-weight: 600;
-}
-
-.life-milestone {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 12px;
-  padding-bottom: 12px;
+.recent-comment {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
   border-bottom: 1px dotted #cbd5e1;
 }
 
-.life-milestone:last-child {
+.recent-comment:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
   border-bottom: none;
 }
 
-.milestone-date {
-  background: #10b981;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: bold;
-  white-space: nowrap;
+.comment-author {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 13px;
+  margin-bottom: 4px;
 }
 
-.milestone-content {
+.comment-content {
   color: #4b5563;
   font-size: 12px;
   line-height: 1.4;
-  flex: 1;
+  margin-bottom: 4px;
 }
 
-/* 心情日历样式 */
-.mood-calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-}
-
-.mood-day {
-  text-align: center;
-  padding: 8px 4px;
-  border-radius: 8px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
-}
-
-.mood-day:hover {
-  background: #e2e8f0;
-  transform: scale(1.05);
-}
-
-.mood-date {
-  font-size: 10px;
+.comment-article {
   color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.mood-emoji {
-  font-size: 16px;
-  margin-bottom: 2px;
-}
-
-.mood-text {
-  font-size: 9px;
-  color: #4b5563;
-}
-
-/* 阅读记录样式 */
-.reading-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.reading-item {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 12px;
-  transition: all 0.2s ease;
-}
-
-.reading-item:hover {
-  background: #f1f5f9;
-  transform: translateY(-1px);
-}
-
-.book-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-
-.book-author {
   font-size: 11px;
-  color: #6b7280;
-  margin-bottom: 8px;
-}
-
-.book-progress {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.progress-bar-small {
-  flex: 1;
-  height: 4px;
-  background: #e2e8f0;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.progress-fill-small {
-  height: 100%;
-  background: linear-gradient(to right, #10b981 0%, #34d399 100%);
-  transition: width 0.8s ease;
-}
-
-.progress-text-small {
-  font-size: 10px;
-  font-weight: 600;
-  color: #10b981;
-  min-width: 30px;
+  font-style: italic;
 }
 
 /* 响应式设计 */
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
   .main-content {
-    max-width: 100%;
+    flex-direction: column;
     padding: 15px;
   }
   
-  .sidebar {
-    width: 280px;
-  }
-}
-
-@media (max-width: 968px) {
-  .main-content {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
   .articles-container {
-    width: 100%;
+    max-width: 100%;
   }
   
   .sidebar {
     width: 100%;
-    order: -1; /* 在移动端将侧边栏移到上方 */
   }
   
   .category-header {
@@ -1000,18 +789,6 @@ export default {
   .pagination {
     flex-direction: column;
     gap: 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-  }
-  
-  .sidebar-section {
-    margin-bottom: 0;
   }
 }
 </style>
