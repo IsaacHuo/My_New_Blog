@@ -4,54 +4,6 @@ const fs = require('fs')
 const path = require('path')
 const readline = require('readline')
 
-// 同步功能模块
-const syncUtils = {
-  // 更新统一数据源
-  updateArticlesData: function(category, articleData) {
-    const articlesDataPath = path.join(ROOT_DIR, 'src', 'data', 'articles.js')
-    try {
-      let content = fs.readFileSync(articlesDataPath, 'utf-8')
-      
-      // 这里简化处理，实际应该用更完善的解析方法
-      const dataPattern = new RegExp(`${category}:\\s*\\[([\\s\\S]*?)\\]`, 'g')
-      const match = content.match(dataPattern)
-      
-      if (match) {
-        // 更新现有分类的数据
-        log(`📊 更新 ${category} 分类数据`, 'cyan')
-      }
-      
-      log(`✅ 已更新数据源文件`, 'green')
-    } catch (error) {
-      log(`❌ 更新数据源失败: ${error.message}`, 'red')
-    }
-  },
-
-  // 同步到所有页面
-  syncToAllPages: function(articleData) {
-    const pagesToUpdate = [
-      { file: 'src/views/Home.vue', type: 'home' },
-      { file: `src/views/${articleData.category.name === 'tech' ? 'TechArticles' : articleData.category.name === 'projects' ? 'ProjectShare' : 'LifeThoughts'}.vue`, type: 'list' }
-    ]
-    
-    pagesToUpdate.forEach(page => {
-      try {
-        const filePath = path.join(ROOT_DIR, page.file)
-        if (fs.existsSync(filePath)) {
-          this.updatePageData(filePath, articleData, page.type)
-        }
-      } catch (error) {
-        log(`❌ 更新页面失败 ${page.file}: ${error.message}`, 'red')
-      }
-    })
-  },
-
-  updatePageData: function(filePath, articleData, pageType) {
-    // 简化的页面数据更新逻辑
-    log(`📝 更新页面: ${path.basename(filePath)}`, 'cyan')
-  }
-}
-
 // 颜色输出函数
 const colors = {
   reset: '\x1b[0m',
@@ -85,10 +37,102 @@ const ROOT_DIR = path.resolve(__dirname, '..')
 const ARTICLES_DIR = path.join(ROOT_DIR, 'articles')
 const SRC_ARTICLES_DIR = path.join(ROOT_DIR, 'src', 'views', 'articles')
 
+// 数据同步工具
+class DataSyncManager {
+  constructor() {
+    this.articlesDataPath = path.join(ROOT_DIR, 'src', 'data', 'articles.js')
+  }
+
+  // 更新统一数据源
+  updateArticlesData(category, articleData) {
+    try {
+      log(`📊 更新 ${category} 分类数据到统一数据源`, 'cyan')
+      
+      // 读取现有数据文件
+      const content = fs.readFileSync(this.articlesDataPath, 'utf-8')
+      
+      // 简单的字符串替换更新（实际项目中可以使用AST解析）
+      const newArticleObject = this.generateArticleObject(articleData)
+      
+      // 找到对应分类的数组并更新
+      const categoryPattern = new RegExp(`(${category}:\\s*\\[)([\\s\\S]*?)(\\]\\s*,)`, 'g')
+      
+      let updatedContent = content.replace(categoryPattern, (match, start, existing, end) => {
+        // 检查文章是否已存在
+        if (existing.includes(`id: ${articleData.id},`)) {
+          // 更新现有文章
+          const articlePattern = new RegExp(`{[^}]*id: ${articleData.id},[^}]*}`, 'g')
+          const updatedExisting = existing.replace(articlePattern, newArticleObject)
+          return start + updatedExisting + end
+        } else {
+          // 添加新文章
+          const trimmedExisting = existing.trim()
+          const separator = trimmedExisting.length > 0 ? ',\n    ' : '\n    '
+          return start + trimmedExisting + separator + newArticleObject + '\n  ' + end
+        }
+      })
+      
+      fs.writeFileSync(this.articlesDataPath, updatedContent, 'utf-8')
+      log(`✅ 已更新统一数据源`, 'green')
+      
+      return true
+    } catch (error) {
+      log(`❌ 更新数据源失败: ${error.message}`, 'red')
+      return false
+    }
+  }
+
+  generateArticleObject(articleData) {
+    return `{
+      id: ${articleData.id},
+      title: '${articleData.title}',
+      summary: '${articleData.summary}',
+      author: '${articleData.author}',
+      date: '${articleData.date}',
+      category: '${articleData.category}',
+      readCount: ${articleData.readCount || Math.floor(Math.random() * 500) + 100},
+      likes: ${articleData.likes || Math.floor(Math.random() * 30) + 5},
+      tags: ${JSON.stringify(articleData.tags)},
+      status: '${articleData.status || ''}'
+    }`
+  }
+
+  // 同步到所有相关页面
+  syncToAllPages(articleData) {
+    const pagesToUpdate = [
+      { file: 'src/views/Home.vue', type: 'home' },
+      { file: `src/views/${this.getCategoryPageName(articleData.category.name)}.vue`, type: 'list' }
+    ]
+    
+    pagesToUpdate.forEach(page => {
+      try {
+        const filePath = path.join(ROOT_DIR, page.file)
+        if (fs.existsSync(filePath)) {
+          log(`📝 页面 ${page.file} 将通过统一数据源自动更新`, 'cyan')
+        }
+      } catch (error) {
+        log(`❌ 检查页面失败 ${page.file}: ${error.message}`, 'red')
+      }
+    })
+    
+    log(`✅ 所有页面将通过 Pinia store 自动同步更新`, 'green')
+  }
+
+  getCategoryPageName(categoryName) {
+    const pageMap = {
+      'tech': 'TechArticles',
+      'projects': 'ProjectShare',
+      'life': 'LifeThoughts'
+    }
+    return pageMap[categoryName] || 'TechArticles'
+  }
+}
+
 class ArticleManager {
   constructor() {
     this.currentStep = 1
     this.articleData = {}
+    this.dataSyncManager = new DataSyncManager()
   }
 
   async start() {
@@ -290,9 +334,13 @@ summary: ${this.articleData.summary}
       await this.convertSpecificMarkdown(this.articleData.filePath)
     }
     
-    // 同步数据
-    syncUtils.updateArticlesData(this.articleData.category.name, this.articleData)
-    syncUtils.syncToAllPages(this.articleData)
+    // 同步数据到统一数据源和所有页面
+    log('\n🔄 正在同步数据...', 'yellow')
+    const syncSuccess = this.dataSyncManager.updateArticlesData(this.articleData.category.name, this.articleData)
+    if (syncSuccess) {
+      this.dataSyncManager.syncToAllPages(this.articleData)
+      log('\n✨ 数据同步完成！所有页面将自动显示新文章', 'green')
+    }
     
     await this.showMenu()
   }
@@ -412,6 +460,26 @@ summary: ${this.articleData.summary}
       fs.writeFileSync(vuePath, vueComponent, 'utf8')
       
       log(`✅ 成功转换为: ${vuePath}`, 'green')
+      
+      // 同步文章数据到统一数据源
+      log('\n🔄 正在同步文章数据...', 'yellow')
+      const categoryKey = this.getCategoryKey(frontmatter.category)
+      const articleData = {
+        id: this.extractIdNumber(frontmatter.id),
+        title: frontmatter.title,
+        summary: frontmatter.summary,
+        author: frontmatter.author,
+        date: frontmatter.date,
+        category: frontmatter.category,
+        tags: frontmatter.tags,
+        status: this.getStatusFromMarkdown(frontmatter)
+      }
+      
+      const syncSuccess = this.dataSyncManager.updateArticlesData(categoryKey, articleData)
+      if (syncSuccess) {
+        this.dataSyncManager.syncToAllPages({ category: { name: categoryKey }, ...articleData })
+        log('✨ 数据同步完成！', 'green')
+      }
       
       // 更新路由（可选）
       await this.updateRoutes(frontmatter, vuePath)
@@ -608,6 +676,17 @@ export default {
       '生活杂想': 'life'
     }
     return reverseMap[categoryDisplayName] || 'tech'
+  }
+
+  getStatusFromMarkdown(frontmatter) {
+    // 根据文章属性判断状态
+    if (frontmatter.featured === 'true' || frontmatter.pinned === 'true') {
+      return '置顶'
+    }
+    if (frontmatter.popular === 'true') {
+      return '热门'
+    }
+    return ''
   }
 
   generateComponentName(frontmatter) {
