@@ -5,8 +5,7 @@
       <div class="nav-content">
         <div class="logo-centered">
           霍玮放的博客
-        </div>
-        <div class="user-actions">
+        </div> class="user-actions">
           <button @click="goHome" class="contact-btn">返回首页</button>
           <button @click="showContact = true" class="contact-btn">联系我</button>
         </div>
@@ -194,17 +193,21 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { hasArticleDetail } from '../utils/helpers.js'
+import { useArticlesStore } from '../stores/articles.js'
 
 export default {
   name: 'TechArticles',
   setup() {
     const router = useRouter()
+    const articlesStore = useArticlesStore()
+    
     const showContact = ref(false)
     const currentPage = ref(1)
     const articlesPerPage = 10
     const lastUpdate = ref('2025年7月17日')
 
-    const techArticles = reactive([
+    // 使用统一数据源
+    const techArticles = computed(() => articlesStore.getByCategory('tech'))
       {
         id: 1,
         status: '置顶',

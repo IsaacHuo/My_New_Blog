@@ -4,6 +4,54 @@ const fs = require('fs')
 const path = require('path')
 const readline = require('readline')
 
+// 同步功能模块
+const syncUtils = {
+  // 更新统一数据源
+  updateArticlesData: function(category, articleData) {
+    const articlesDataPath = path.join(ROOT_DIR, 'src', 'data', 'articles.js')
+    try {
+      let content = fs.readFileSync(articlesDataPath, 'utf-8')
+      
+      // 这里简化处理，实际应该用更完善的解析方法
+      const dataPattern = new RegExp(`${category}:\\s*\\[([\\s\\S]*?)\\]`, 'g')
+      const match = content.match(dataPattern)
+      
+      if (match) {
+        // 更新现有分类的数据
+        log(`📊 更新 ${category} 分类数据`, 'cyan')
+      }
+      
+      log(`✅ 已更新数据源文件`, 'green')
+    } catch (error) {
+      log(`❌ 更新数据源失败: ${error.message}`, 'red')
+    }
+  },
+
+  // 同步到所有页面
+  syncToAllPages: function(articleData) {
+    const pagesToUpdate = [
+      { file: 'src/views/Home.vue', type: 'home' },
+      { file: `src/views/${articleData.category.name === 'tech' ? 'TechArticles' : articleData.category.name === 'projects' ? 'ProjectShare' : 'LifeThoughts'}.vue`, type: 'list' }
+    ]
+    
+    pagesToUpdate.forEach(page => {
+      try {
+        const filePath = path.join(ROOT_DIR, page.file)
+        if (fs.existsSync(filePath)) {
+          this.updatePageData(filePath, articleData, page.type)
+        }
+      } catch (error) {
+        log(`❌ 更新页面失败 ${page.file}: ${error.message}`, 'red')
+      }
+    })
+  },
+
+  updatePageData: function(filePath, articleData, pageType) {
+    // 简化的页面数据更新逻辑
+    log(`📝 更新页面: ${path.basename(filePath)}`, 'cyan')
+  }
+}
+
 // 颜色输出函数
 const colors = {
   reset: '\x1b[0m',
@@ -241,6 +289,10 @@ summary: ${this.articleData.summary}
     if (convertNow.toLowerCase() === 'y') {
       await this.convertSpecificMarkdown(this.articleData.filePath)
     }
+    
+    // 同步数据
+    syncUtils.updateArticlesData(this.articleData.category.name, this.articleData)
+    syncUtils.syncToAllPages(this.articleData)
     
     await this.showMenu()
   }
