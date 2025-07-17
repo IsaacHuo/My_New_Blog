@@ -3,6 +3,17 @@
     <!-- 顶部导航 -->
     <header class="top-nav">
       <div class="nav-content">
+        <!-- 左侧访问量统计 -->
+        <div class="site-stats">
+          <div class="stats-button" @click="animateStats">
+            <div class="stats-icon">👁</div>
+            <div class="stats-content">
+              <span class="stats-label">总访问量:</span>
+              <span class="stats-value" id="busuanzi_value_site_pv">--</span>
+            </div>
+          </div>
+        </div>
+        
         <div class="logo-centered">
           霍玮放的博客
         </div>
@@ -34,31 +45,31 @@
             <div class="category-buttons-center">
               <div class="category-item-flat" @click="goToTechArticles">
                 <div class="category-icon-flat">
-                  <img src="/icons/TechArticle.ico" alt="技术随笔" class="icon-img">
+                  <span class="icon-emoji">💻</span>
                 </div>
                 <span>技术随笔</span>
               </div>
               <div class="category-item-flat" @click="goToProjects">
                 <div class="category-icon-flat">
-                  <img src="/icons/ProjectArticle.ico" alt="项目分享" class="icon-img">
+                  <span class="icon-emoji">🚀</span>
                 </div>
                 <span>项目分享</span>
               </div>
               <div class="category-item-flat" @click="goToLife">
                 <div class="category-icon-flat">
-                  <img src="/icons/LifeArticle.ico" alt="生活杂想" class="icon-img">
+                  <span class="icon-emoji">💭</span>
                 </div>
                 <span>生活杂想</span>
               </div>
               <div class="category-item-flat" @click="goToAbout">
                 <div class="category-icon-flat">
-                  <img src="/icons/AboutMe.ico" alt="关于我" class="icon-img">
+                  <span class="icon-emoji">👤</span>
                 </div>
                 <span>关于我</span>
               </div>
               <div class="category-item-flat" @click="goToWishes">
                 <div class="category-icon-flat">
-                  <img src="/icons/MyWishes.ico" alt="我的愿望" class="icon-img">
+                  <span class="icon-emoji">🌟</span>
                 </div>
                 <span>我的愿望</span>
               </div>
@@ -311,7 +322,7 @@
     <footer class="site-footer">
       <div class="footer-simple">
         <p>&copy; 2025 霍玮放的博客. All rights reserved.</p>
-        <p>本站已运行 <span class="running-time">365</span> 天 | 总访问量 <span class="visit-count">{{ stats.totalVisits }}</span></p>
+        <p>本站已运行 <span class="running-time">365</span> 天 | 总访问量 <span class="visit-count" id="busuanzi_value_site_pv_footer">--</span></p>
       </div>
     </footer>
   </div>
@@ -610,6 +621,17 @@ export default {
       router.push('/wishes')
     }
 
+    // 统计按钮点击动画效果
+    const animateStats = () => {
+      const statsButton = document.querySelector('.stats-button')
+      if (statsButton) {
+        statsButton.style.transform = 'scale(0.95)'
+        setTimeout(() => {
+          statsButton.style.transform = 'scale(1)'
+        }, 150)
+      }
+    }
+
     onMounted(() => {
       console.log('个人博客应用已启动')
       // 立即更新一次时间
@@ -619,9 +641,38 @@ export default {
       
       // 添加键盘事件监听
       document.addEventListener('keydown', handleKeydown)
+      
+      // 加载不蒜子统计脚本
+      const script = document.createElement('script')
+      script.async = true
+      script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+      
+      // 脚本加载完成后同步页尾数据
+      script.onload = () => {
+        setTimeout(() => {
+          const headerPV = document.getElementById('busuanzi_value_site_pv')
+          const footerPV = document.getElementById('busuanzi_value_site_pv_footer')
+          if (headerPV && footerPV && headerPV.textContent !== '--') {
+            footerPV.textContent = headerPV.textContent
+          }
+          
+          // 监听数据变化
+          const observer = new MutationObserver(() => {
+            if (headerPV && footerPV && headerPV.textContent !== '--') {
+              footerPV.textContent = headerPV.textContent
+            }
+          })
+          
+          if (headerPV) {
+            observer.observe(headerPV, { childList: true, subtree: true })
+          }
+        }, 1000)
+      }
+      
+      document.head.appendChild(script)
     })
     
-    // 组件卸载时移除事件监听
+    // 组件卸载时移除事件
     onUnmounted(() => {
       document.removeEventListener('keydown', handleKeydown)
     })
@@ -742,6 +793,7 @@ export default {
       goToLife,
       goToAbout,
       goToWishes,
+      animateStats,
       hasArticleDetail,
       checkArticleDetail,
       getArticleCategory,
@@ -1207,10 +1259,6 @@ button, .category-item-flat span, .article-title-compact {
   padding: 0;
 }
 
-.link-btn:hover {
-  color: #2563eb;
-}
-
 /* 搜索分页样式 */
 .search-pagination {
   display: flex;
@@ -1317,6 +1365,144 @@ button, .category-item-flat span, .article-title-compact {
 .popular-article-likes::before {
   content: "👍";
   font-size: 10px;
+}
+
+/* 网站统计样式 - 完全模仿技术随笔按钮 */
+.site-stats {
+  display: flex;
+  align-items: center;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.stats-button {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
+  border: 1px solid #1d4ed8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.2),
+    0 2px 4px rgba(0,0,0,0.15);
+  min-width: 100px;
+  white-space: nowrap;
+  margin: 0 !important;
+}
+
+.stats-button:hover {
+  background: linear-gradient(to bottom, #60a5fa 0%, #3b82f6 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    0 3px 6px rgba(0,0,0,0.2);
+}
+
+.stats-button:active {
+  background: linear-gradient(to bottom, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(0);
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.2),
+    0 1px 2px rgba(0,0,0,0.15);
+}
+
+.stats-icon {
+  font-size: 16px;
+  margin-right: 6px;
+  line-height: 1;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+.stats-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stats-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+}
+
+.stats-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+}
+
+#busuanzi_value_site_pv,
+#busuanzi_value_site_pv_footer {
+  font-weight: 500 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  outline: none !important;
+}
+
+/* 彻底清除不蒜子相关元素的意外样式 */
+span[id^="busuanzi_"],
+div[id^="busuanzi_"],
+script[src*="busuanzi"],
+*[id*="busuanzi"],
+.site-stats::before,
+.site-stats::after,
+.stats-button::before,
+.stats-button::after {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline !important;
+  content: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+/* 清除任何可能的伪元素和边框 */
+.site-stats,
+.site-stats *,
+.nav-content > * {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.site-stats .stats-button {
+  background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%) !important;
+  border: 1px solid #1d4ed8 !important;
+}
+
+/* 首页按钮 Emoji 样式 */
+.icon-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 16px;
 }
 
 /* 响应式设计 */

@@ -31,7 +31,7 @@
         <!-- 分类标题 -->
         <header class="category-header">
           <h1 class="category-title">
-            <img src="/icons/LifeArticle.ico" alt="生活杂想" class="title-icon"> 生活杂想
+            <span class="title-emoji">💭</span> 生活杂想
           </h1>
           <div class="category-stats">
             <span class="article-count">共 {{ lifeArticles.length }} 篇文章</span>
@@ -112,7 +112,7 @@
               </li>
               <li class="category-item active">
                 <span class="category-icon">
-                  <img src="/icons/LifeArticle.ico" alt="生活" class="sidebar-icon">
+                  <span class="sidebar-emoji">💭</span>
                 </span>
                 <span class="category-name">生活杂想</span>
                 <span class="category-count">({{ lifeArticles.length }})</span>

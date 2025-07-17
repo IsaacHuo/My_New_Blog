@@ -38,10 +38,11 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.08);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
 
 /* 顶部导航 */
@@ -50,7 +51,7 @@ body {
   color: white;
   padding: 6px 0;
   border-bottom: 3px solid #1d4ed8;
-  border-radius: 12px 12px 0 0;
+  border-radius: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -149,7 +150,7 @@ body {
 /* 主要内容区域 */
 .main-content {
   display: flex;
-  background: white;
+  background: transparent;
   align-items: flex-start;
   gap: 20px;
 }
@@ -1601,4 +1602,49 @@ body {
 .slide-up-enter-from {
   transform: translateY(20px);
   opacity: 0;
+}
+
+/* 不蒜子统计元素样式重置 - 彻底清除白线 */
+span[id^="busuanzi_"],
+div[id^="busuanzi_"],
+script[src*="busuanzi"],
+*[id*="busuanzi"],
+.site-stats::before,
+.site-stats::after,
+.stats-button::before,
+.stats-button::after {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline !important;
+  content: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  position: static !important;
+}
+
+/* 确保统计按钮区域完全干净 */
+.site-stats,
+.site-stats *:not(.stats-button) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.stats-button {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+/* 清除导航栏内所有元素的意外边框 */
+.nav-content,
+.nav-content * {
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
 }

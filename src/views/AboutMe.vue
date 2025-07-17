@@ -32,7 +32,7 @@
         <div class="about-section intro-section">
           <div class="section-header">
             <h2 class="section-title">
-              <img src="/icons/AboutMe.ico" alt="个人简介" class="section-icon"> 个人简介
+              <span class="section-emoji">👤</span> 个人简介
             </h2>
           </div>
           <div class="section-content">
@@ -57,7 +57,7 @@
         <div class="about-section skills-section">
           <div class="section-header">
             <h2 class="section-title">
-              <span class="section-icon">💡</span> 技能专长
+              <span class="section-emoji">💪</span> 技能专长
             </h2>
           </div>
           <div class="section-content">
@@ -82,7 +82,7 @@
         <div class="about-section experience-section">
           <div class="section-header">
             <h2 class="section-title">
-              <span class="section-icon">🚀</span> 项目经历
+              <span class="section-emoji">💼</span> 项目经历
             </h2>
           </div>
           <div class="section-content">
@@ -111,13 +111,13 @@
         <div class="about-section education-section">
           <div class="section-header">
             <h2 class="section-title">
-              <span class="section-icon">🎓</span> 教育背景
+              <span class="section-emoji">🎓</span> 教育背景
             </h2>
           </div>
           <div class="section-content">
             <div v-for="edu in education" :key="edu.id" class="education-item">
               <div class="edu-icon">
-                <span class="education-icon">🏫</span>
+                <span class="edu-emoji">🏫</span>
               </div>
               <div class="edu-info">
                 <h4 class="edu-school">{{ edu.school }}</h4>
@@ -132,7 +132,7 @@
         <div class="about-section tech-overview-section">
           <div class="section-header">
             <h2 class="section-title">
-              <span class="section-icon">⚡</span> 技术栈概览
+              <span class="section-emoji">⚡</span> 技术栈概览
             </h2>
           </div>
           <div class="section-content">
@@ -154,7 +154,7 @@
         <div class="about-section recent-activities-section">
           <div class="section-header">
             <h2 class="section-title">
-              <span class="section-icon">📈</span> 最近动态
+              <span class="section-emoji">📰</span> 最近动态
             </h2>
           </div>
           <div class="section-content">
@@ -401,8 +401,8 @@ export default {
 
     const contacts = reactive([
       { type: '邮箱', icon: '📧', value: '2210286979@qq.com' },
-      { type: 'GitHub', icon: '/github-mark.png', value: 'github.com/IsaacHuo' },
-      { type: 'QQ群', icon: '💬', value: '105653726' },
+      { type: 'GitHub', icon: '💻', value: 'github.com/IsaacHuo' },
+      { type: 'QQ群', icon: '👥', value: '105653726' },
       { type: '微信', icon: '💬', value: '请邮件联系' }
     ])
 
@@ -416,7 +416,7 @@ export default {
       { name: '机器学习', icon: '🤖' },
       { name: '阅读', icon: '📚' },
       { name: '音乐', icon: '🎵' },
-      { name: '电子制作', icon: '⚡' },
+      { name: '电子制作', icon: '🔧' },
       { name: '篮球', icon: '🏀' }
     ])
 
@@ -438,7 +438,7 @@ export default {
     const recentActivities = reactive([
       {
         id: 1,
-        icon: '🤖',
+        icon: '🚀',
         title: '完成了机器学习项目',
         time: '3天前'
       },
@@ -462,7 +462,7 @@ export default {
       },
       {
         id: 5,
-        icon: '🚀',
+        icon: '🎯',
         title: '项目成功上线',
         time: '3周前'
       }
@@ -620,8 +620,12 @@ export default {
 
 .section-header {
   background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
-  color: white;
+  color: white !important;
   padding: 15px 20px;
+}
+
+.section-header * {
+  color: white !important;
 }
 
 .section-title {
@@ -629,8 +633,12 @@ export default {
   margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
+  color: white !important;
+}
+
+.section-title * {
+  color: white !important;
 }
 
 .section-content {
@@ -856,6 +864,19 @@ export default {
   font-weight: 600;
 }
 
+/* 章节标题 Emoji 样式 */
+.section-emoji {
+  font-size: 18px;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.edu-emoji {
+  font-size: 20px;
+  display: block;
+  text-align: center;
+}
+
 /* 侧边栏联系方式 */
 .contact-list {
   display: flex;
@@ -883,6 +904,9 @@ export default {
   font-size: 18px;
   width: 24px;
   text-align: center;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .contact-info {
@@ -950,6 +974,9 @@ export default {
 
 .hobby-icon {
   font-size: 16px;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .hobby-name {
@@ -1064,6 +1091,9 @@ export default {
   font-size: 16px;
   width: 24px;
   text-align: center;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .activity-content {
@@ -1099,6 +1129,23 @@ export default {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
+/* Emoji 字体设置 */
+.emoji,
+.activity-icon,
+.contact-icon,
+.hobby-icon,
+.section-emoji,
+.edu-emoji,
+.sidebar-content .activity-icon,
+.sidebar-content .contact-icon,
+.sidebar-content .hobby-icon {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+
 /* 响应式设计 */
 @media (max-width: 1200px) {
   .main-content {
@@ -1123,38 +1170,10 @@ export default {
   
   .sidebar {
     width: 100%;
+    order: -1; /* 在移动端将侧边栏移到上方 */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
-  }
-  
-  /* 移动端卡片优先级排序 */
-  .intro-section {
-    order: 1; /* 个人简介最优先 */
-  }
-  
-  .sidebar {
-    order: 2; /* 联系方式第二位 */
-  }
-  
-  .skills-section {
-    order: 3; /* 技能专长第三位 */
-  }
-  
-  .education-section {
-    order: 4; /* 教育背景第四位 */
-  }
-  
-  .experience-section {
-    order: 5; /* 项目经历第五位 */
-  }
-  
-  .tech-overview-section {
-    order: 6; /* 技术栈概览第六位 */
-  }
-  
-  .recent-activities-section {
-    order: 7; /* 最近动态最后 */
   }
   
   .skills-grid {

@@ -31,7 +31,7 @@
         <!-- 分类标题 -->
         <header class="category-header">
           <h1 class="category-title">
-            <img src="/icons/ProjectArticle.ico" alt="项目分享" class="title-icon"> 项目分享
+            <span class="title-emoji">🚀</span> 项目分享
           </h1>
           <div class="category-stats">
             <span class="article-count">共 {{ projects.length }} 个项目</span>
@@ -106,7 +106,7 @@
               </li>
               <li class="category-item active">
                 <span class="category-icon">
-                  <img src="/icons/ProjectArticle.ico" alt="项目" class="sidebar-icon">
+                  <span class="sidebar-emoji">🚀</span>
                 </span>
                 <span class="category-name">项目分享</span>
                 <span class="category-count">({{ projects.length }})</span>

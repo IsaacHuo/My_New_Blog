@@ -71,14 +71,23 @@
               <span class="btn-icon">👍</span>
               <span>{{ article.likes }}</span>
             </button>
+            <button class="action-btn dislike-btn" @click="toggleDislike">
+              <span class="btn-icon">�</span>
+              <span>{{ article.dislikes || 0 }}</span>
+            </button>
             <button class="action-btn share-btn" @click="shareArticle">
               <span class="btn-icon">📤</span>
               <span>分享</span>
             </button>
-            <button class="action-btn comment-btn" @click="showComments = !showComments">
-              <span class="btn-icon">💬</span>
-              <span>评论</span>
-            </button>
+          </div>
+          
+          <!-- 文章阅读量统计 -->
+          <div class="article-stats">
+            <span class="stats-item">
+              <span class="stats-icon">�</span>
+              <span>本文阅读量：</span>
+              <span id="busuanzi_value_page_pv">--</span>
+            </span>
           </div>
           
           <div class="article-tags">
@@ -97,37 +106,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 评论区域 -->
-        <section v-if="showComments" class="comments-section">
-          <div class="comments-header">
-            <h3>评论区</h3>
-            <span class="comments-count">共 {{ comments.length }} 条评论</span>
-          </div>
-          
-          <div class="comment-form">
-            <textarea 
-              v-model="newComment" 
-              placeholder="写下你的评论..." 
-              class="comment-input"
-              rows="4"
-            ></textarea>
-            <button @click="addComment" class="submit-btn">发表评论</button>
-          </div>
-          
-          <div class="comments-list">
-            <div v-for="comment in comments" :key="comment.id" class="comment-item">
-              <div class="comment-avatar">👤</div>
-              <div class="comment-content">
-                <div class="comment-header">
-                  <span class="comment-author">{{ comment.author }}</span>
-                  <span class="comment-date">{{ comment.date }}</span>
-                </div>
-                <p class="comment-text">{{ comment.content }}</p>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
 
       <!-- 桌面端侧边栏 -->
@@ -216,30 +194,13 @@ export default {
       default: () => []
     }
   },
-  emits: ['like-toggled'],
+  emits: ['like-toggled', 'dislike-toggled'],
   setup(props, { emit }) {
     const router = useRouter()
     const showContact = ref(false)
-    const showComments = ref(false)
-    const newComment = ref('')
     const stickyToc = ref(null)
     const isSticky = ref(false)
     const activeSection = ref('')
-    
-    const comments = reactive([
-      {
-        id: 1,
-        author: '小明',
-        date: '2025-07-15 14:20',
-        content: '这篇文章写得很好，学到了很多！'
-      },
-      {
-        id: 2,
-        author: '前端新手',
-        date: '2025-07-15 16:30',
-        content: '感谢分享，很有帮助！'
-      }
-    ])
 
     const categoryDisplayName = computed(() => {
       const categoryMap = {
@@ -349,6 +310,13 @@ export default {
       emit('like-toggled', newLikes)
     }
 
+    const toggleDislike = () => {
+      // 触发点倒赞事件
+      const currentDislikes = props.article.dislikes || 0
+      const newDislikes = currentDislikes + 1
+      emit('dislike-toggled', newDislikes)
+    }
+
     const shareArticle = () => {
       if (navigator.share) {
         navigator.share({
@@ -371,18 +339,6 @@ export default {
         .catch(() => {
           alert('复制失败，请手动复制链接')
         })
-    }
-
-    const addComment = () => {
-      if (newComment.value.trim()) {
-        comments.push({
-          id: comments.length + 1,
-          author: '游客',
-          date: new Date().toLocaleString('zh-CN'),
-          content: newComment.value
-        })
-        newComment.value = ''
-      }
     }
 
     const goToRelatedArticle = (article) => {
@@ -467,6 +423,14 @@ export default {
           btn.addEventListener('click', copyCode)
         })
       })
+      
+      // 加载不蒜子统计脚本
+      if (!document.querySelector('script[src*="busuanzi"]')) {
+        const script = document.createElement('script')
+        script.async = true
+        script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+        document.head.appendChild(script)
+      }
     })
 
     onUnmounted(() => {
@@ -475,9 +439,6 @@ export default {
 
     return {
       showContact,
-      showComments,
-      newComment,
-      comments,
       categoryDisplayName,
       stickyToc,
       isSticky,
@@ -485,8 +446,8 @@ export default {
       goBack,
       goToCategory,
       toggleLike,
+      toggleDislike,
       shareArticle,
-      addComment,
       goToRelatedArticle,
       scrollToSection,
       copyCode
@@ -963,6 +924,45 @@ export default {
 .related-meta {
   font-size: 12px;
   color: #6b7280;
+}
+
+/* 文章阅读量统计样式 */
+.article-stats {
+  margin: 15px 0;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border-left: 3px solid #10b981;
+}
+
+.article-stats .stats-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.article-stats .stats-icon {
+  font-size: 14px;
+}
+
+.article-stats #busuanzi_value_page_pv {
+  font-weight: 600;
+  color: #10b981;
+}
+
+/* 点倒赞按钮样式 */
+.dislike-btn {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 1px solid #f87171;
+  color: #dc2626;
+}
+
+.dislike-btn:hover {
+  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+  border-color: #ef4444;
+  transform: translateY(-2px);
 }
 
 @media (max-width: 1200px) {

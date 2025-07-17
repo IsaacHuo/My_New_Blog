@@ -31,7 +31,7 @@
         <!-- 分类标题 -->
         <header class="category-header">
           <h1 class="category-title">
-            <img src="/icons/TechArticle.ico" alt="技术文章" class="title-icon"> 技术文章
+            <span class="title-emoji">💻</span> 技术文章
           </h1>
           <div class="category-stats">
             <span class="article-count">共 {{ techArticles.length }} 篇文章</span>
@@ -100,18 +100,18 @@
             <ul class="category-menu">
               <li class="category-item active">
                 <span class="category-icon">
-                  <img src="/icons/TechArticle.ico" alt="技术" class="sidebar-icon">
+                  <span class="sidebar-emoji">💻</span>
                 </span>
                 <span class="category-name">技术文章</span>
                 <span class="category-count">({{ techArticles.length }})</span>
               </li>
               <li class="category-item" @click="goToCategory('projects')">
-                <span class="category-icon">🚀</span>
+                <span class="category-emoji">🚀</span>
                 <span class="category-name">项目分享</span>
                 <span class="category-count">(12)</span>
               </li>
               <li class="category-item" @click="goToCategory('life')">
-                <span class="category-icon">📝</span>
+                <span class="category-emoji">📚</span>
                 <span class="category-name">生活杂想</span>
                 <span class="category-count">(8)</span>
               </li>
@@ -194,21 +194,130 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { hasArticleDetail } from '../utils/helpers.js'
-import { useArticlesStore } from '../stores/articles.js'
 
 export default {
   name: 'TechArticles',
   setup() {
     const router = useRouter()
-    const articlesStore = useArticlesStore()
-    
     const showContact = ref(false)
     const currentPage = ref(1)
     const articlesPerPage = 10
     const lastUpdate = ref('2025年7月17日')
 
-    // 使用统一数据源
-    const techArticles = computed(() => articlesStore.getByCategory('tech'))
+    const techArticles = reactive([
+      {
+        id: 1,
+        status: '置顶',
+        title: 'Vue 3 组合式API详解与实践',
+        summary: '深入探讨 Vue 3 组合式 API 的核心概念、使用方法和最佳实践，帮助开发者更好地理解和应用这一重要特性。',
+        author: '霍玮放',
+        date: '2025-07-16',
+        category: '前端框架',
+        readCount: 1205,
+        likes: 48,
+        tags: ['Vue.js', 'JavaScript', '前端开发']
+      },
+      {
+        id: 2,
+        status: '热门',
+        title: 'JavaScript异步编程完全指南',
+        summary: '从回调函数到Promise，再到async/await，全面讲解JavaScript异步编程的发展历程和最佳实践。',
+        author: '霍玮放',
+        date: '2025-07-15',
+        category: '编程语言',
+        readCount: 856,
+        likes: 32,
+        tags: ['JavaScript', '异步编程', 'Promise']
+      },
+      {
+        id: 3,
+        title: 'CSS Grid布局从入门到精通',
+        summary: 'CSS Grid是一个强大的二维布局系统，本文将带你从基础概念到高级应用，掌握Grid布局的精髓。',
+        author: '霍玮放',
+        date: '2025-07-14',
+        category: '前端样式',
+        readCount: 642,
+        likes: 25,
+        tags: ['CSS', '布局', 'Grid']
+      },
+      {
+        id: 4,
+        title: 'React Hooks最佳实践总结',
+        summary: '总结React Hooks的使用技巧和最佳实践，包括useState、useEffect、useContext等常用Hook的深度应用。',
+        author: '霍玮放',
+        date: '2025-07-13',
+        category: '前端框架',
+        readCount: 789,
+        likes: 41,
+        tags: ['React', 'Hooks', '前端开发']
+      },
+      {
+        id: 5,
+        title: '前端性能优化技巧汇总',
+        summary: '从代码分割到懒加载，从缓存策略到图片优化，全方位提升前端应用性能的实用技巧。',
+        author: '霍玮放',
+        date: '2025-07-12',
+        category: '性能优化',
+        readCount: 923,
+        likes: 56,
+        tags: ['性能优化', '前端开发', '最佳实践']
+      },
+      {
+        id: 6,
+        title: 'TypeScript进阶使用技巧',
+        summary: '深入TypeScript的高级特性，包括泛型、装饰器、模块系统等，提升代码的类型安全和开发效率。',
+        author: '霍玮放',
+        date: '2025-07-11',
+        category: '编程语言',
+        readCount: 567,
+        likes: 28,
+        tags: ['TypeScript', 'JavaScript', '类型系统']
+      },
+      {
+        id: 7,
+        title: 'Webpack配置优化实战',
+        summary: '从基础配置到高级优化，深入理解Webpack的工作原理，提升构建效率和应用性能。',
+        author: '霍玮放',
+        date: '2025-07-10',
+        category: '构建工具',
+        readCount: 435,
+        likes: 22,
+        tags: ['Webpack', '构建工具', '前端工程化']
+      },
+      {
+        id: 8,
+        title: 'Node.js微服务架构设计',
+        summary: '探讨如何使用Node.js构建可扩展的微服务架构，包括服务拆分、通信机制和部署策略。',
+        author: '霍玮放',
+        date: '2025-07-09',
+        category: '后端开发',
+        readCount: 678,
+        likes: 35,
+        tags: ['Node.js', '微服务', '架构设计']
+      },
+      {
+        id: 9,
+        title: '前端工程化最佳实践',
+        summary: '从项目初始化到部署上线，构建现代化前端工程体系的完整指南和最佳实践。',
+        author: '霍玮放',
+        date: '2025-07-08',
+        category: '工程化',
+        readCount: 812,
+        likes: 44,
+        tags: ['前端工程化', '最佳实践', '开发流程']
+      },
+      {
+        id: 10,
+        title: '算法与数据结构学习笔记',
+        summary: '系统梳理常见算法和数据结构，包括排序、搜索、动态规划等，提升编程思维和解决问题的能力。',
+        author: '霍玮放',
+        date: '2025-07-07',
+        category: '算法',
+        readCount: 345,
+        likes: 18,
+        tags: ['算法', '数据结构', '编程基础']
+      }
+    ])
 
     const popularTags = reactive([
       { name: 'JavaScript', size: 16 },
@@ -217,63 +326,67 @@ export default {
       { name: '前端开发', size: 15 },
       { name: 'TypeScript', size: 12 },
       { name: 'CSS', size: 11 },
-      { name: 'Node.js', size: 10 },
-      { name: 'Webpack', size: 9 }
+      { name: '性能优化', size: 13 },
+      { name: '最佳实践', size: 12 }
     ])
 
     const recentComments = reactive([
       {
         id: 1,
-        author: '技术爱好者',
-        content: 'Vue 3的组合式API确实很强大，学到了！',
-        article: 'Vue 3 组合式API详解'
+        author: '张三',
+        content: '写得很详细，学到了很多...',
+        article: 'Vue 3 组合式API详解与实践'
       },
       {
         id: 2,
-        author: '前端小白',
-        content: '请问有更多的实战案例吗？',
-        article: 'CSS Grid布局入门'
+        author: '李四',
+        content: '代码示例很清晰，已收藏',
+        article: 'JavaScript异步编程完全指南'
       },
       {
         id: 3,
-        author: '资深开发',
-        content: '文章写得很详细，收藏了',
-        article: '前端性能优化'
+        author: '王五',
+        content: '感谢分享，很有帮助！',
+        article: 'CSS Grid布局从入门到精通'
       }
     ])
 
-    // 计算总页数
     const totalPages = computed(() => {
-      return Math.ceil(techArticles.value.length / articlesPerPage)
+      return Math.ceil(techArticles.length / articlesPerPage)
     })
 
-    // 当前页的文章
-    const paginatedArticles = computed(() => {
-      const start = (currentPage.value - 1) * articlesPerPage
-      const end = start + articlesPerPage
-      return techArticles.value.slice(start, end)
-    })
+    const goHome = () => {
+      router.push('/')
+    }
 
-    // 选择文章
-    const selectArticle = (article) => {
-      console.log('点击文章:', article.title)
-      
+    const goToArticle = (article) => {
+      // 检查是否有详情页
       if (hasArticleDetail('tech', article.id)) {
-        const routePath = `/article/tech/${article.id}`
-        console.log('跳转到详情页:', routePath)
-        router.push(routePath)
-        
-        // 增加阅读量
-        articlesStore.incrementReadCount('tech', article.id)
+        router.push(`/article/tech/${article.id}`)
       } else {
         console.log('文章暂无详情页，点击无效')
+        // 无详情页的文章点击无反应
       }
     }
 
-    // 分页控制
-    const goToPage = (page) => {
-      if (page >= 1 && page <= totalPages.value) {
-        currentPage.value = page
+    const goToCategory = (category) => {
+      console.log('跳转到分类:', category)
+      // 根据分类跳转到相应页面
+      switch(category) {
+        case 'projects':
+          router.push('/projects')
+          break
+        case 'life': 
+          router.push('/life')
+          break
+        case 'about':
+          router.push('/about')
+          break
+        case 'wishes':
+          router.push('/wishes')
+          break
+        default:
+          router.push('/')
       }
     }
 
@@ -289,43 +402,21 @@ export default {
       }
     }
 
-    // 导航到其他页面
-    const goToCategory = (category) => {
-      const routeMap = {
-        'projects': '/projects',
-        'life': '/life',
-        'about': '/about',
-        'wishes': '/wishes'
-      }
-      
-      if (routeMap[category]) {
-        router.push(routeMap[category])
-      }
-    }
-
-    const goHome = () => {
-      router.push('/')
-    }
-
-    const goToArticle = (article) => {
-      selectArticle(article)
-    }
+    onMounted(() => {
+      console.log('技术文章页面已加载')
+    })
 
     return {
       showContact,
       currentPage,
-      articlesPerPage,
       lastUpdate,
       techArticles,
       popularTags,
       recentComments,
       totalPages,
-      paginatedArticles: techArticles,
-      selectArticle,
-      goToPage,
-      goToCategory,
       goHome,
       goToArticle,
+      goToCategory,
       prevPage,
       nextPage,
       hasArticleDetail
@@ -333,10 +424,6 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-/* Add your styles here */
-</style>
 
 <style scoped>
 /* 分类页面特定样式 */
@@ -729,6 +816,18 @@ export default {
   color: #6b7280;
   font-size: 11px;
   font-style: italic;
+}
+
+/* Emoji 字体设置 */
+.title-emoji,
+.sidebar-emoji,
+.category-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal !important;
+  font-style: normal !important;
+  margin-right: 8px;
 }
 
 /* 图标样式 */
