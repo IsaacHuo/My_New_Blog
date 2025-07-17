@@ -564,37 +564,43 @@ export default {
 .tech-stack {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .tech-item {
   display: flex;
   align-items: flex-start;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  padding: 12px 15px;
-  border-radius: 6px;
-  border-left: 3px solid #10b981;
-  min-height: 50px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-left: 2px solid #10b981;
+  min-height: 45px;
 }
 
 .tech-icon {
-  font-size: 18px;
-  margin-right: 10px;
+  font-size: 14px;
+  margin-right: 8px;
   flex-shrink: 0;
 }
 
 .tech-content h4 {
   color: #1f2937;
-  margin-bottom: 3px;
-  font-size: 15px;
-  line-height: 1.3;
+  margin: 0 0 2px 0;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 .tech-content p {
   color: #6b7280;
   margin: 0;
-  line-height: 1.4;
-  font-size: 13px;
+  line-height: 1.3;
+  font-size: 11px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 /* 功能列表样式 */

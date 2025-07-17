@@ -326,17 +326,18 @@ export default {
 /* 生活语录样式 */
 .life-quote {
   background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  border-left: 3px solid #10b981;
-  border-radius: 6px;
-  padding: 15px 18px;
-  margin: 18px 0;
+  border-left: 2px solid #10b981;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin: 15px 0;
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
 }
 
 .quote-icon {
-  font-size: 18px;
+  font-size: 14px;
   flex-shrink: 0;
   margin-top: 0;
 }
@@ -344,47 +345,56 @@ export default {
 .quote-content p {
   font-style: italic;
   color: #059669;
-  font-size: 14px;
+  font-size: 12px;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 生活时刻样式 */
 .life-moments {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 18px 0;
+  gap: 6px;
+  margin: 15px 0;
 }
 
 .moment-item {
   display: flex;
   align-items: flex-start;
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  padding: 12px 15px;
-  border-radius: 6px;
-  border-left: 3px solid #f59e0b;
-  min-height: 50px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-left: 2px solid #f59e0b;
+  min-height: 45px;
 }
 
 .moment-icon {
-  font-size: 18px;
-  margin-right: 10px;
+  font-size: 14px;
+  margin-right: 8px;
   flex-shrink: 0;
 }
 
 .moment-content h4 {
   color: #1f2937;
-  margin-bottom: 3px;
-  font-size: 15px;
-  line-height: 1.3;
+  margin: 0 0 2px 0;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 .moment-content p {
   color: #6b7280;
   margin: 0;
-  line-height: 1.4;
-  font-size: 13px;
+  line-height: 1.3;
+  font-size: 11px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 /* 平衡法则样式 */
@@ -404,38 +414,44 @@ export default {
 .inspiration-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 18px 0;
+  gap: 6px;
+  margin: 15px 0;
 }
 
 .inspiration-item {
   display: flex;
   align-items: flex-start;
   background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
-  padding: 12px 15px;
-  border-radius: 6px;
-  border-left: 3px solid #8b5cf6;
-  min-height: 50px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-left: 2px solid #8b5cf6;
+  min-height: 45px;
 }
 
 .inspiration-icon {
-  font-size: 18px;
-  margin-right: 10px;
+  font-size: 14px;
+  margin-right: 8px;
   flex-shrink: 0;
 }
 
 .inspiration-content h4 {
   color: #1f2937;
-  margin-bottom: 3px;
-  font-size: 15px;
-  line-height: 1.3;
+  margin: 0 0 2px 0;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 .inspiration-content p {
   color: #6b7280;
   margin: 0;
-  line-height: 1.4;
-  font-size: 13px;
+  line-height: 1.3;
+  font-size: 11px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 /* 文章底部操作 */
