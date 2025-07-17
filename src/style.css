@@ -1378,6 +1378,41 @@ body {
     gap: 20px;
     padding: 25px 15px;
   }
+  
+  /* 平板端四栏布局优化 */
+  .content-area {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .four-columns-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 10px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .column-section {
+    height: auto;
+    min-height: 300px;
+  }
+  
+  /* 优化顶部导航 */
+  .nav-content {
+    padding: 0 15px;
+  }
+  
+  .logo-centered {
+    font-size: 15px;
+  }
+  
+  .user-actions button {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1396,6 +1431,58 @@ body {
   .footer-badges {
     justify-content: center;
   }
+  
+  /* 小屏幕进一步优化 */
+  .container {
+    padding: 5px;
+    margin: 5px auto;
+  }
+  
+  .content-area {
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .four-columns-layout {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 0 10px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .column-section {
+    height: auto;
+    min-height: 220px;
+    border-radius: 6px;
+  }
+  
+  .column-content {
+    padding: 10px;
+    min-height: 180px;
+  }
+  
+  .logo-centered {
+    font-size: 13px;
+  }
+  
+  .user-actions button {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  
+  .site-slogan {
+    font-size: 11px;
+  }
+  
+  .category-btn {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1407,9 +1494,99 @@ body {
     width: 100%;
   }
   
+  /* 修复顶部导航重叠问题 */
   .nav-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .logo-centered {
+    position: static;
+    transform: none;
+    left: auto;
+    font-size: 14px;
+    flex: 1;
+    text-align: left;
+    margin-right: 10px;
+  }
+  
+  .user-actions {
+    flex-shrink: 0;
+    margin-left: 0;
+  }
+  
+  .user-actions button {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  
+  .banner-content {
+    padding: 0 10px;
+  }
+  
+  .nav-search-row {
     flex-direction: column;
     gap: 10px;
+    align-items: center;
+  }
+  
+  .time-display {
+    min-width: auto;
+    order: 1;
+  }
+  
+  .site-slogan {
+    order: 2;
+    text-align: center;
+    font-size: 12px;
+  }
+  
+  .category-links {
+    order: 3;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .category-btn {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  
+  /* 修复四栏布局宽度问题 */
+  .main-content {
+    justify-content: center;
+  }
+  
+  .content-area {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .four-columns-layout {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .column-section {
+    margin: 0;
+    border-radius: 8px;
+    height: auto;
+    min-height: 250px;
+  }
+  
+  .column-content {
+    padding: 12px;
+    min-height: 200px;
   }
   
   .banner-links {
@@ -1444,24 +1621,6 @@ body {
   
   .search-input {
     min-width: auto;
-  }
-}
-
-@media (max-width: 992px) {
-  .four-columns-layout {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-}
-
-@media (max-width: 576px) {
-  .four-columns-layout {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  
-  .column-content {
-    min-height: 200px;
   }
 }
 
