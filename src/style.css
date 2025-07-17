@@ -154,9 +154,9 @@ body {
   gap: 20px;
 }
 
-/* 侧边栏 - 移到左边，与column-section宽度一致 */
+/* 侧边栏 - 移到左边，缩小宽度 */
 .sidebar {
-  width: calc((100% - 60px) / 5); /* 大约等于column-section的宽度 */
+  width: 200px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -271,10 +271,6 @@ body {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
-  display: flex;
-  flex-direction: column;
-  height: 450px;
-  align-self: stretch;
 }
 
 .sidebar-header {
@@ -287,16 +283,11 @@ body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   border-bottom: 2px solid #1d4ed8;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  flex-shrink: 0;
 }
 
 .sidebar-content {
   padding: 15px;
   background: #f8fafc;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
 }
 
 .sidebar-menu {
@@ -540,6 +531,7 @@ body {
   margin-bottom: 10px;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.05);
+  cursor: pointer;
 }
 
 .article-item-compact:hover {
@@ -547,6 +539,18 @@ body {
   background: #f1f5f9;
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.15);
+}
+
+.article-item-compact.no-detail {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.article-item-compact.no-detail:hover {
+  border-color: #e2e8f0;
+  background: white;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.05);
 }
 
 .article-item-compact:last-child {
@@ -859,16 +863,20 @@ body {
 /* 简化版页脚样式 - 复古风格 */
 .footer-simple {
   text-align: center;
-  padding: 30px 20px;
+  padding: 20px 20px;
   max-width: 800px;
   margin: 0 auto;
   color: #e0e7ff;
 }
 
 .footer-simple p {
-  margin-bottom: 12px;
-  line-height: 1.6;
+  margin-bottom: 8px;
+  line-height: 1.5;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.footer-simple p:last-child {
+  margin-bottom: 0;
 }
 
 .footer-simple a {
@@ -920,7 +928,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* 横栏布局：时间+标语+按钮+搜索栏 */
+/* 横栏布局：标语+按钮+搜索栏 */
 .nav-search-row {
   display: flex;
   justify-content: space-between;
@@ -929,39 +937,13 @@ body {
   gap: 20px;
 }
 
-/* 时间显示样式 */
-.time-display {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  min-width: 100px;
-  flex-shrink: 0;
-}
-
-.current-time {
-  font-size: 16px;
-  font-weight: bold;
-  font-family: 'WenQuanYi Bitmap Song', 'Courier New', monospace;
-  margin-bottom: 2px;
-}
-
-.current-date {
-  font-size: 12px;
-  font-weight: 500;
-  opacity: 0.9;
-}
-
-/* 中间标语 */
+/* 左侧标语 */
 .site-slogan {
   font-size: 16px;
   color: #ffffff;
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  flex: 1;
-  text-align: center;
+  flex-shrink: 0;
 }
 
 /* 中间和右侧区域 */
@@ -1093,6 +1075,89 @@ body {
 }
 
 
+
+/* 心情图标样式 */
+.mood-icon,
+.mood-day-icon,
+.mood-tag-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.mood-tag-icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 3px;
+}
+
+/* 联系方式图标样式 */
+.contact-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* 空状态图标样式 */
+.empty-icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
+}
+
+/* 心情日历样式优化 */
+.mood-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  border-radius: 4px;
+  margin: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mood-day:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 分类图标样式统一 */
+.category-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* 文章内图标样式 */
+.quote-img,
+.moment-img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.list-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* 教育背景图标 */
+.education-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+/* 灵感图标样式 */
+.inspiration-img {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
 
 /* 响应式调整 */
 

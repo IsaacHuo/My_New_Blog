@@ -31,12 +31,16 @@
         <!-- 个人简介 -->
         <div class="about-section intro-section">
           <div class="section-header">
-            <h2 class="section-title">👨‍💻 个人简介</h2>
+            <h2 class="section-title">
+              <img src="/icons/AboutMe.ico" alt="个人简介" class="section-icon"> 个人简介
+            </h2>
           </div>
           <div class="section-content">
             <div class="intro-card">
               <div class="avatar-container">
-                <div class="avatar">👨‍💻</div>
+                <div class="avatar">
+                  <img src="/MyPicture.jpeg" alt="霍玮放" class="profile-photo">
+                </div>
                 <h3 class="name">霍玮放</h3>
                 <p class="title">北京林业大学 本科生</p>
               </div>
@@ -52,7 +56,9 @@
         <!-- 技能专长 -->
         <div class="about-section skills-section">
           <div class="section-header">
-            <h2 class="section-title">🚀 技能专长</h2>
+            <h2 class="section-title">
+              <span class="section-icon">💡</span> 技能专长
+            </h2>
           </div>
           <div class="section-content">
             <div class="skills-grid">
@@ -75,7 +81,9 @@
         <!-- 项目经历 -->
         <div class="about-section experience-section">
           <div class="section-header">
-            <h2 class="section-title">💼 项目经历</h2>
+            <h2 class="section-title">
+              <span class="section-icon">🚀</span> 项目经历
+            </h2>
           </div>
           <div class="section-content">
             <div class="timeline">
@@ -102,11 +110,15 @@
         <!-- 教育背景 -->
         <div class="about-section education-section">
           <div class="section-header">
-            <h2 class="section-title">🎓 教育背景</h2>
+            <h2 class="section-title">
+              <span class="section-icon">🎓</span> 教育背景
+            </h2>
           </div>
           <div class="section-content">
             <div v-for="edu in education" :key="edu.id" class="education-item">
-              <div class="edu-icon">🏫</div>
+              <div class="edu-icon">
+                <span class="education-icon">🏫</span>
+              </div>
               <div class="edu-info">
                 <h4 class="edu-school">{{ edu.school }}</h4>
                 <p class="edu-major">{{ edu.major }}</p>
@@ -119,7 +131,9 @@
         <!-- 技术栈概览 -->
         <div class="about-section tech-overview-section">
           <div class="section-header">
-            <h2 class="section-title">🛠️ 技术栈概览</h2>
+            <h2 class="section-title">
+              <span class="section-icon">⚡</span> 技术栈概览
+            </h2>
           </div>
           <div class="section-content">
             <div class="tech-overview">
@@ -139,7 +153,9 @@
         <!-- 最近动态 -->
         <div class="about-section recent-activities-section">
           <div class="section-header">
-            <h2 class="section-title">📅 最近动态</h2>
+            <h2 class="section-title">
+              <span class="section-icon">📈</span> 最近动态
+            </h2>
           </div>
           <div class="section-content">
             <div class="recent-activities">
@@ -385,8 +401,8 @@ export default {
 
     const contacts = reactive([
       { type: '邮箱', icon: '📧', value: '2210286979@qq.com' },
-      { type: 'GitHub', icon: '🐙', value: 'github.com/IsaacHuo' },
-      { type: 'QQ群', icon: '🐧', value: '105653726' },
+      { type: 'GitHub', icon: '/github-mark.png', value: 'github.com/IsaacHuo' },
+      { type: 'QQ群', icon: '💬', value: '105653726' },
       { type: '微信', icon: '💬', value: '请邮件联系' }
     ])
 
@@ -422,19 +438,19 @@ export default {
     const recentActivities = reactive([
       {
         id: 1,
-        icon: '📝',
+        icon: '🤖',
         title: '完成了机器学习项目',
         time: '3天前'
       },
       {
         id: 2,
-        icon: '💻',
+        icon: '📝',
         title: '更新了个人博客',
         time: '1周前'
       },
       {
         id: 3,
-        icon: '🎯',
+        icon: '🧠',
         title: '学习了深度学习',
         time: '2周前'
       },
@@ -446,7 +462,7 @@ export default {
       },
       {
         id: 5,
-        icon: '🎉',
+        icon: '🚀',
         title: '项目成功上线',
         time: '3周前'
       }
@@ -613,6 +629,7 @@ export default {
   margin: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -1062,6 +1079,24 @@ export default {
 .activity-time {
   font-size: 11px;
   color: #6b7280;
+}
+
+/* 图标样式 */
+.section-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #3b82f6;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* 响应式设计 */

@@ -24,30 +24,30 @@
             <span class="code-title">基本的 setup 函数</span>
             <button class="copy-btn">复制</button>
           </div>
-          <pre><code>import { ref, reactive, computed, onMounted } from 'vue'
+          <pre><code><span class="keyword">import</span> { <span class="function">ref</span>, <span class="function">reactive</span>, <span class="function">computed</span>, <span class="function">onMounted</span> } <span class="keyword">from</span> <span class="string">'vue'</span>
 
-export default {
-  setup(props, context) {
-    // 响应式数据
-    const count = ref(0)
-    const user = reactive({
-      name: 'Isaac',
-      age: 25
+<span class="keyword">export</span> <span class="keyword">default</span> {
+  <span class="function">setup</span>(<span class="variable">props</span>, <span class="variable">context</span>) {
+    <span class="comment">// 响应式数据</span>
+    <span class="keyword">const</span> <span class="variable">count</span> <span class="operator">=</span> <span class="function">ref</span>(<span class="number">0</span>)
+    <span class="keyword">const</span> <span class="variable">user</span> <span class="operator">=</span> <span class="function">reactive</span>({
+      <span class="property">name</span>: <span class="string">'Isaac'</span>,
+      <span class="property">age</span>: <span class="number">25</span>
     })
     
-    // 计算属性
-    const doubleCount = computed(() => count.value * 2)
+    <span class="comment">// 计算属性</span>
+    <span class="keyword">const</span> <span class="variable">doubleCount</span> <span class="operator">=</span> <span class="function">computed</span>(() <span class="operator">=></span> <span class="variable">count</span>.<span class="property">value</span> <span class="operator">*</span> <span class="number">2</span>)
     
-    // 生命周期钩子
-    onMounted(() => {
-      console.log('组件已挂载')
+    <span class="comment">// 生命周期钩子</span>
+    <span class="function">onMounted</span>(() <span class="operator">=></span> {
+      <span class="variable">console</span>.<span class="function">log</span>(<span class="string">'组件已挂载'</span>)
     })
     
-    // 返回需要在模板中使用的数据和方法
-    return {
-      count,
-      user,
-      doubleCount
+    <span class="comment">// 返回需要在模板中使用的数据和方法</span>
+    <span class="keyword">return</span> {
+      <span class="variable">count</span>,
+      <span class="variable">user</span>,
+      <span class="variable">doubleCount</span>
     }
   }
 }</code></pre>
@@ -60,21 +60,27 @@ export default {
         
         <div class="feature-list">
           <div class="feature-item">
-            <div class="feature-icon">📦</div>
+            <div class="feature-icon">
+              <span class="feature-img">🔄</span>
+            </div>
             <div class="feature-content">
               <h4>ref()</h4>
               <p>用于创建响应式的基本数据类型，返回一个包含 .value 属性的 ref 对象。</p>
             </div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">🏗️</div>
+            <div class="feature-icon">
+              <span class="feature-img">⚛️</span>
+            </div>
             <div class="feature-content">
               <h4>reactive()</h4>
               <p>用于创建响应式的对象，返回对象的响应式代理。</p>
             </div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">⚡</div>
+            <div class="feature-icon">
+              <span class="feature-img">⚡</span>
+            </div>
             <div class="feature-content">
               <h4>computed()</h4>
               <p>用于创建计算属性，基于其依赖的响应式数据自动更新。</p>
@@ -87,27 +93,27 @@ export default {
             <span class="code-title">响应式 API 示例</span>
             <button class="copy-btn">复制</button>
           </div>
-          <pre><code>// ref - 基本类型
-const count = ref(0)
-const message = ref('Hello Vue 3')
+          <pre><code><span class="comment">// ref - 基本类型</span>
+<span class="keyword">const</span> <span class="variable">count</span> <span class="operator">=</span> <span class="function">ref</span>(<span class="number">0</span>)
+<span class="keyword">const</span> <span class="variable">message</span> <span class="operator">=</span> <span class="function">ref</span>(<span class="string">'Hello Vue 3'</span>)
 
-// reactive - 对象类型
-const state = reactive({
-  user: {
-    name: 'Isaac',
-    email: 'isaac@example.com'
+<span class="comment">// reactive - 对象类型</span>
+<span class="keyword">const</span> <span class="variable">state</span> <span class="operator">=</span> <span class="function">reactive</span>({
+  <span class="property">user</span>: {
+    <span class="property">name</span>: <span class="string">'Isaac'</span>,
+    <span class="property">email</span>: <span class="string">'isaac@example.com'</span>
   },
-  todos: []
+  <span class="property">todos</span>: []
 })
 
-// computed - 计算属性
-const fullName = computed(() => {
-  return `${state.user.firstName} ${state.user.lastName}`
+<span class="comment">// computed - 计算属性</span>
+<span class="keyword">const</span> <span class="variable">fullName</span> <span class="operator">=</span> <span class="function">computed</span>(() <span class="operator">=></span> {
+  <span class="keyword">return</span> <span class="string">`${<span class="variable">state</span>.<span class="property">user</span>.<span class="property">firstName</span>} ${<span class="variable">state</span>.<span class="property">user</span>.<span class="property">lastName</span>}`</span>
 })
 
-// watch - 侦听器
-watch(count, (newValue, oldValue) => {
-  console.log(`count changed from ${oldValue} to ${newValue}`)
+<span class="comment">// watch - 侦听器</span>
+<span class="function">watch</span>(<span class="variable">count</span>, (<span class="variable">newValue</span>, <span class="variable">oldValue</span>) <span class="operator">=></span> {
+  <span class="variable">console</span>.<span class="function">log</span>(<span class="string">`count changed from ${<span class="variable">oldValue</span>} to ${<span class="variable">newValue</span>}`</span>)
 })</code></pre>
         </div>
       </div>
@@ -121,24 +127,24 @@ watch(count, (newValue, oldValue) => {
             <span class="code-title">useCounter 组合式函数</span>
             <button class="copy-btn">复制</button>
           </div>
-          <pre><code>// useCounter.js
-import { ref, computed } from 'vue'
+          <pre><code><span class="comment">// useCounter.js</span>
+<span class="keyword">import</span> { <span class="function">ref</span>, <span class="function">computed</span> } <span class="keyword">from</span> <span class="string">'vue'</span>
 
-export function useCounter(initialValue = 0) {
-  const count = ref(initialValue)
+<span class="keyword">export</span> <span class="keyword">function</span> <span class="function">useCounter</span>(<span class="variable">initialValue</span> <span class="operator">=</span> <span class="number">0</span>) {
+  <span class="keyword">const</span> <span class="variable">count</span> <span class="operator">=</span> <span class="function">ref</span>(<span class="variable">initialValue</span>)
   
-  const increment = () => count.value++
-  const decrement = () => count.value--
-  const reset = () => count.value = initialValue
+  <span class="keyword">const</span> <span class="variable">increment</span> <span class="operator">=</span> () <span class="operator">=></span> <span class="variable">count</span>.<span class="property">value</span><span class="operator">++</span>
+  <span class="keyword">const</span> <span class="variable">decrement</span> <span class="operator">=</span> () <span class="operator">=></span> <span class="variable">count</span>.<span class="property">value</span><span class="operator">--</span>
+  <span class="keyword">const</span> <span class="variable">reset</span> <span class="operator">=</span> () <span class="operator">=></span> <span class="variable">count</span>.<span class="property">value</span> <span class="operator">=</span> <span class="variable">initialValue</span>
   
-  const isEven = computed(() => count.value % 2 === 0)
+  <span class="keyword">const</span> <span class="variable">isEven</span> <span class="operator">=</span> <span class="function">computed</span>(() <span class="operator">=></span> <span class="variable">count</span>.<span class="property">value</span> <span class="operator">%</span> <span class="number">2</span> <span class="operator">===</span> <span class="number">0</span>)
   
-  return {
-    count,
-    increment,
-    decrement,
-    reset,
-    isEven
+  <span class="keyword">return</span> {
+    <span class="variable">count</span>,
+    <span class="variable">increment</span>,
+    <span class="variable">decrement</span>,
+    <span class="variable">reset</span>,
+    <span class="variable">isEven</span>
   }
 }</code></pre>
         </div>
@@ -148,19 +154,19 @@ export function useCounter(initialValue = 0) {
             <span class="code-title">在组件中使用组合式函数</span>
             <button class="copy-btn">复制</button>
           </div>
-          <pre><code>// 在组件中使用
-import { useCounter } from './composables/useCounter'
+          <pre><code><span class="comment">// 在组件中使用</span>
+<span class="keyword">import</span> { <span class="function">useCounter</span> } <span class="keyword">from</span> <span class="string">'./composables/useCounter'</span>
 
-export default {
-  setup() {
-    const { count, increment, decrement, reset, isEven } = useCounter(10)
+<span class="keyword">export</span> <span class="keyword">default</span> {
+  <span class="function">setup</span>() {
+    <span class="keyword">const</span> { <span class="variable">count</span>, <span class="variable">increment</span>, <span class="variable">decrement</span>, <span class="variable">reset</span>, <span class="variable">isEven</span> } <span class="operator">=</span> <span class="function">useCounter</span>(<span class="number">10</span>)
     
-    return {
-      count,
-      increment,
-      decrement,
-      reset,
-      isEven
+    <span class="keyword">return</span> {
+      <span class="variable">count</span>,
+      <span class="variable">increment</span>,
+      <span class="variable">decrement</span>,
+      <span class="variable">reset</span>,
+      <span class="variable">isEven</span>
     }
   }
 }</code></pre>
@@ -171,21 +177,27 @@ export default {
         <h2 id="section5">最佳实践</h2>
         <div class="practice-list">
           <div class="practice-item">
-            <div class="practice-icon">🎯</div>
+            <div class="practice-icon">
+              <span class="practice-img">🎯</span>
+            </div>
             <div class="practice-content">
               <h4>逻辑分离</h4>
               <p>将相关的逻辑组合在一起，使代码更易于理解和维护。</p>
             </div>
           </div>
           <div class="practice-item">
-            <div class="practice-icon">🔄</div>
+            <div class="practice-icon">
+              <span class="practice-img">🔄</span>
+            </div>
             <div class="practice-content">
               <h4>可复用性</h4>
               <p>创建组合式函数来封装可复用的逻辑，提高代码复用率。</p>
             </div>
           </div>
           <div class="practice-item">
-            <div class="practice-icon">📝</div>
+            <div class="practice-icon">
+              <span class="practice-img">🛡️</span>
+            </div>
             <div class="practice-content">
               <h4>类型安全</h4>
               <p>结合 TypeScript 使用，获得更好的类型推导和代码提示。</p>
@@ -199,7 +211,9 @@ export default {
         <p>Vue 3 的组合式 API 为我们提供了更强大、更灵活的开发体验。通过 setup() 函数、响应式 API 和组合式函数，我们可以编写更模块化、可维护的 Vue 应用。虽然学习曲线可能比选项式 API 稍陡，但掌握后将大大提升开发效率和代码质量。</p>
         
         <div class="highlight-box">
-          <h4>💡 提示</h4>
+          <h4>
+            <span class="tip-icon">💡</span> 提示
+          </h4>
           <p>组合式 API 并不是为了取代选项式 API，而是为了提供更好的逻辑复用和更灵活的代码组织方式。在小型项目中，选项式 API 仍然是一个很好的选择。</p>
         </div>
       </div>

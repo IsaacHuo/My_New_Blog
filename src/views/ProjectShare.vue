@@ -30,7 +30,9 @@
       <div class="articles-container">
         <!-- 分类标题 -->
         <header class="category-header">
-          <h1 class="category-title">🚀 项目分享</h1>
+          <h1 class="category-title">
+            <img src="/icons/ProjectArticle.ico" alt="项目分享" class="title-icon"> 项目分享
+          </h1>
           <div class="category-stats">
             <span class="article-count">共 {{ projects.length }} 个项目</span>
             <span class="last-update">最后更新：{{ lastUpdate }}</span>
@@ -103,17 +105,19 @@
                 <span class="category-count">(18)</span>
               </li>
               <li class="category-item active">
-                <span class="category-icon">🚀</span>
+                <span class="category-icon">
+                  <img src="/icons/ProjectArticle.ico" alt="项目" class="sidebar-icon">
+                </span>
                 <span class="category-name">项目分享</span>
                 <span class="category-count">({{ projects.length }})</span>
               </li>
               <li class="category-item" @click="goToCategory('life')">
-                <span class="category-icon">🌱</span>
+                <span class="category-icon">📝</span>
                 <span class="category-name">生活杂想</span>
                 <span class="category-count">(8)</span>
               </li>
               <li class="category-item" @click="goToCategory('about')">
-                <span class="category-icon">👨‍💻</span>
+                <span class="category-icon">👤</span>
                 <span class="category-name">关于我</span>
                 <span class="category-count">(3)</span>
               </li>
@@ -209,6 +213,19 @@ export default {
       },
       {
         id: 102,
+        status: '推荐',
+        title: '国内可用的AI聊天镜像站推荐',
+        summary: '整理了几个目前正常使用的AI聊天镜像站，包括在问、SharedChat、ChatGPT Plus等多个平台，帮助国内用户便捷访问AI服务。',
+        author: '霍玮放',
+        date: '2025-07-17',
+        category: '工具推荐',
+        readCount: 245,
+        likes: 18,
+        stars: 12,
+        tags: ['AI聊天', '镜像站', '工具推荐', 'ChatGPT']
+      },
+      {
+        id: 103,
         status: '进行中',
         title: '智能代码审查工具',
         summary: '基于AI的智能代码审查工具，能够自动检测代码质量问题、安全漏洞和性能优化建议。支持多种编程语言和IDE集成。',
@@ -221,7 +238,7 @@ export default {
         tags: ['AI', '代码审查', 'VSCode', 'Python']
       },
       {
-        id: 103,
+        id: 104,
         title: '微信小程序 - 待办清单',
         summary: '简洁实用的微信小程序待办清单，支持任务分类、提醒设置、数据同步等功能。界面美观，操作流畅。',
         author: '霍玮放',
@@ -233,7 +250,7 @@ export default {
         tags: ['微信小程序', '待办清单', 'JavaScript', '云开发']
       },
       {
-        id: 104,
+        id: 105,
         status: '已完成',
         title: 'React 组件库 - UIKit',
         summary: '轻量级 React 组件库，包含常用的UI组件如按钮、表单、模态框等。支持主题定制，TypeScript 友好。',
@@ -246,7 +263,7 @@ export default {
         tags: ['React', 'TypeScript', '组件库', 'npm']
       },
       {
-        id: 105,
+        id: 106,
         title: 'Node.js API 服务框架',
         summary: '基于 Express 和 TypeScript 的 API 服务框架，集成了用户认证、权限管理、数据验证、日志记录等功能。',
         author: '霍玮放',
@@ -800,6 +817,21 @@ export default {
 .project-stars {
   color: #f59e0b;
   font-weight: 600;
+}
+
+/* 图标样式 */
+.title-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.sidebar-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 /* 响应式设计 */
