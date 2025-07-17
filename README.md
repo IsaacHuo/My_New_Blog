@@ -2,6 +2,8 @@
 
 基于 Vue 3 + Vite 构建的响应式个人博客网站。
 
+**在线访问**: https://isaachuo.github.io/My_New_Blog/
+
 ## 功能特性
 
 - 技术文章、项目分享、生活随想三大内容板块
