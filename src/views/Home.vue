@@ -397,12 +397,12 @@ export default {
       {
         id: 2,
         status: '',
-        title: 'JavaScript异步编程完全指南',
+        title: 'test',
         author: '霍玮放',
-        readCount: 856,
-        date: '07-15',
+        readCount: 818,
+        date: '07-17',
         tab: 'popular',
-        summary: '全面介绍JavaScript异步编程的各种方式，从回调函数到Promise，再到async/await的演进历程和最佳实践。'
+        summary: '测试文章内容，包含前言、主要内容和总结等部分。'
       },
       {
         id: 3,

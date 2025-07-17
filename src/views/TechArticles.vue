@@ -220,14 +220,14 @@ export default {
       {
         id: 2,
         status: '热门',
-        title: 'JavaScript异步编程完全指南',
-        summary: '从回调函数到Promise，再到async/await，全面讲解JavaScript异步编程的发展历程和最佳实践。',
+        title: 'test',
+        summary: '测试文章内容，包含前言、主要内容和总结等部分。',
         author: '霍玮放',
-        date: '2025-07-15',
-        category: '编程语言',
-        readCount: 856,
-        likes: 32,
-        tags: ['JavaScript', '异步编程', 'Promise']
+        date: '2025-07-17',
+        category: '技术随笔',
+        readCount: 818,
+        likes: 29,
+        tags: ['sjf']
       },
       {
         id: 3,
