@@ -346,11 +346,14 @@
 import { ref, reactive, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { hasArticleDetail } from '../utils/helpers.js'
+// import { useArticlesStore } from '../stores/articles.js'
 
 export default {
-  name: 'App',
+  name: 'Home',
   setup() {
     const router = useRouter()
+    // const articlesStore = useArticlesStore()
+    
     const activeSection = ref('articles')
     const activeTab = ref('latest')
     const showContact = ref(false)
@@ -367,138 +370,44 @@ export default {
     const searchPageSize = ref(5) // 每页显示5篇文章
     
     const stats = reactive({
-      todayVisits: 156,
-      totalVisits: 12580,
-      articleCount: 48,
+      articles: '4',
+      views: '12.8K',
+      likes: '856',
       lastUpdate: '2025-7-17'
     })
 
+    // 临时使用静态数据
     const articles = reactive([
       {
-        id: 102,
-        status: '推荐',
-        title: '国内可用的AI聊天镜像站推荐',
-        author: '霍玮放',
-        readCount: 245,
-        date: '07-17',
-        tab: 'latest',
-        summary: '整理了多个稳定可用的AI聊天服务镜像站，包括ChatGPT、Claude等模型的访问方式，为国内用户提供便捷的AI工具体验。'
-      },
-      {
         id: 1,
-        status: '',
+        status: '置顶',
         title: 'Vue 3 组合式API详解与实践',
         author: '霍玮放',
         readCount: 1205,
         date: '07-16',
-        tab: 'latest',
-        summary: '深入解析Vue 3组合式API的核心概念和实际应用，包括setup函数、响应式系统、生命周期钩子等内容的详细说明。'
+        tab: 'featured',
+        summary: '深入解析Vue 3组合式API的核心概念和实际应用。'
       },
       {
         id: 2,
         status: '',
-        title: 'JavaScript异步编程完全指南',
+        title: 'test',
         author: '霍玮放',
-        readCount: 856,
-        date: '07-15',
+        readCount: 818,
+        date: '07-17',
         tab: 'popular',
-        summary: '全面介绍JavaScript异步编程的各种方式，从回调函数到Promise，再到async/await的演进历程和最佳实践。'
-      },
-      {
-        id: 3,
-        status: '',
-        title: 'CSS Grid布局从入门到精通',
-        author: '霍玮放',
-        readCount: 642,
-        date: '07-14',
-        tab: 'featured',
-        summary: '系统学习CSS Grid布局系统，掌握现代网页布局技术，通过实例演示Grid的强大功能和实际应用场景。'
-      },
-      {
-        id: 4,
-        status: '',
-        title: 'React Hooks最佳实践总结',
-        author: '霍玮放',
-        readCount: 789,
-        date: '07-13',
-        tab: 'latest',
-        summary: '总结React Hooks的使用技巧和最佳实践，包括useState、useEffect、useContext等常用Hook的深度解析。'
-      },
-      {
-        id: 5,
-        status: '',
-        title: '前端性能优化技巧汇总',
-        author: '霍玮放',
-        readCount: 923,
-        date: '07-12',
-        tab: 'popular',
-        summary: '整理前端性能优化的各种技巧和策略，从代码层面到网络层面的全方位优化方案，提升用户体验。'
-      },
-      {
-        id: 6,
-        status: '',
-        title: 'TypeScript进阶使用技巧',
-        author: '霍玮放',
-        readCount: 567,
-        date: '07-11',
-        tab: 'featured',
-        summary: '探索TypeScript的高级特性和使用技巧，包括泛型、装饰器、模块系统等进阶内容的实战应用。'
-      },
-      {
-        id: 7,
-        status: '',
-        title: 'Webpack配置优化实战',
-        author: '霍玮放',
-        readCount: 435,
-        date: '07-10',
-        tab: 'latest',
-        summary: '深入Webpack配置优化的实战技巧，包括构建速度优化、打包体积优化、开发体验提升等多个方面。'
-      },
-      {
-        id: 8,
-        status: '',
-        title: 'Node.js微服务架构设计',
-        author: '霍玮放',
-        readCount: 678,
-        date: '07-09',
-        tab: 'popular',
-        summary: '介绍基于Node.js的微服务架构设计原则和实现方案，包括服务拆分、通信机制、部署策略等。'
-      },
-      {
-        id: 9,
-        status: '',
-        title: '前端工程化最佳实践',
-        author: '霍玮放',
-        readCount: 812,
-        date: '07-08',
-        tab: 'featured',
-        summary: '分享前端工程化的完整解决方案，包括项目架构、开发规范、构建流程、部署策略等最佳实践。'
-      },
-      {
-        id: 10,
-        status: '',
-        title: '算法与数据结构学习笔记',
-        author: '霍玮放',
-        readCount: 345,
-        date: '07-07',
-        tab: 'archived',
-        summary: '整理常用算法和数据结构的学习笔记，包括时间复杂度分析、代码实现和实际应用场景的讲解。'
+        summary: '测试文章内容，包含前言、主要内容和总结等部分。'
       }
     ])
 
-    // 热门文章计算属性 - 按阅读量和点赞数排序
+    // 热门文章计算属性
     const popularArticles = computed(() => {
       return [...articles]
-        .sort((a, b) => {
-          // 综合阅读量和点赞数排序
-          const scoreA = a.readCount + (a.likes || 0) * 10
-          const scoreB = b.readCount + (b.likes || 0) * 10
-          return scoreB - scoreA
-        })
-        .slice(0, 6) // 只显示前6篇
+        .sort((a, b) => b.readCount - a.readCount)
+        .slice(0, 6)
         .map(article => ({
           ...article,
-          likes: article.likes || Math.floor(article.readCount / 20) // 如果没有点赞数，根据阅读量估算
+          likes: Math.floor(article.readCount / 20)
         }))
     })
 
