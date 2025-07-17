@@ -12,6 +12,7 @@ import TechArticle2 from './views/articles/tech/TechArticle2.vue'
 
 // 项目分享详情页
 import ProjectArticle1 from './views/articles/projects/ProjectArticle1.vue'
+import ProjectArticle2 from './views/articles/projects/ProjectArticle2.vue'
 
 // 生活杂想详情页
 import LifeArticle1 from './views/articles/life/LifeArticle1.vue'
@@ -63,6 +64,11 @@ const routes = [
     path: '/article/projects/1',
     name: 'ProjectArticle1',
     component: ProjectArticle1
+  },
+  {
+    path: '/article/projects/2',
+    name: 'ProjectArticle2',
+    component: ProjectArticle2
   },
   // 生活杂想详情页路由
   {

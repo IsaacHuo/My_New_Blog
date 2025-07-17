@@ -24,17 +24,17 @@
             <span class="code-title">回调函数示例</span>
             <button class="copy-btn">复制</button>
           </div>
-          <pre><code>function fetchData(callback) {
-  setTimeout(() => {
-    callback(null, 'data from server');
-  }, 1000);
+          <pre><code><span class="keyword">function</span> <span class="function">fetchData</span>(<span class="variable">callback</span>) {
+  <span class="function">setTimeout</span>(() <span class="operator">=></span> {
+    <span class="function">callback</span>(<span class="keyword">null</span>, <span class="string">'data from server'</span>);
+  }, <span class="number">1000</span>);
 }
 
-fetchData((err, data) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log(data);
+<span class="function">fetchData</span>((<span class="variable">err</span>, <span class="variable">data</span>) <span class="operator">=></span> {
+  <span class="keyword">if</span> (<span class="variable">err</span>) {
+    <span class="variable">console</span>.<span class="function">error</span>(<span class="variable">err</span>);
+  } <span class="keyword">else</span> {
+    <span class="variable">console</span>.<span class="function">log</span>(<span class="variable">data</span>);
   }
 });</code></pre>
         </div>
@@ -47,17 +47,17 @@ fetchData((err, data) => {
             <span class="code-title">Promise示例</span>
             <button class="copy-btn">复制</button>
           </div>
-          <pre><code>function fetchData() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve('data from server');
-    }, 1000);
+          <pre><code><span class="keyword">function</span> <span class="function">fetchData</span>() {
+  <span class="keyword">return</span> <span class="keyword">new</span> <span class="function">Promise</span>((<span class="variable">resolve</span>, <span class="variable">reject</span>) <span class="operator">=></span> {
+    <span class="function">setTimeout</span>(() <span class="operator">=></span> {
+      <span class="function">resolve</span>(<span class="string">'data from server'</span>);
+    }, <span class="number">1000</span>);
   });
 }
 
-fetchData()
-  .then(data => console.log(data))
-  .catch(err => console.error(err));</code></pre>
+<span class="function">fetchData</span>()
+  .<span class="function">then</span>(<span class="variable">data</span> <span class="operator">=></span> <span class="variable">console</span>.<span class="function">log</span>(<span class="variable">data</span>))
+  .<span class="function">catch</span>(<span class="variable">err</span> <span class="operator">=></span> <span class="variable">console</span>.<span class="function">error</span>(<span class="variable">err</span>));</code></pre>
         </div>
       </div>
 
@@ -70,16 +70,16 @@ fetchData()
             <span class="code-title">async/await示例</span>
             <button class="copy-btn">复制</button>
           </div>
-          <pre><code>async function fetchUserData() {
-  try {
-    const user = await fetch('/api/user');
-    const userData = await user.json();
-    const posts = await fetch(`/api/posts/${userData.id}`);
-    const postsData = await posts.json();
+          <pre><code><span class="keyword">async</span> <span class="keyword">function</span> <span class="function">fetchUserData</span>() {
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'/api/user'</span>);
+    <span class="keyword">const</span> <span class="variable">userData</span> <span class="operator">=</span> <span class="keyword">await</span> <span class="variable">user</span>.<span class="function">json</span>();
+    <span class="keyword">const</span> <span class="variable">posts</span> <span class="operator">=</span> <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">`/api/posts/${<span class="variable">userData</span>.<span class="property">id</span>}`</span>);
+    <span class="keyword">const</span> <span class="variable">postsData</span> <span class="operator">=</span> <span class="keyword">await</span> <span class="variable">posts</span>.<span class="function">json</span>();
     
-    return { user: userData, posts: postsData };
-  } catch (error) {
-    console.error('Failed to fetch data:', error);
+    <span class="keyword">return</span> { <span class="property">user</span>: <span class="variable">userData</span>, <span class="property">posts</span>: <span class="variable">postsData</span> };
+  } <span class="keyword">catch</span> (<span class="variable">error</span>) {
+    <span class="variable">console</span>.<span class="function">error</span>(<span class="string">'Failed to fetch data:'</span>, <span class="variable">error</span>);
   }
 }</code></pre>
         </div>
@@ -89,21 +89,27 @@ fetchData()
         <h2 id="section4">最佳实践</h2>
         <div class="practice-list">
           <div class="practice-item">
-            <div class="practice-icon">🎯</div>
+            <div class="practice-icon">
+              <span class="practice-img">⭐</span>
+            </div>
             <div class="practice-content">
               <h4>错误处理</h4>
               <p>在async/await中使用try-catch，在Promise中使用.catch()处理错误。</p>
             </div>
           </div>
           <div class="practice-item">
-            <div class="practice-icon">⚡</div>
+            <div class="practice-icon">
+              <span class="practice-img">⭐</span>
+            </div>
             <div class="practice-content">
               <h4>并发处理</h4>
               <p>使用Promise.all()处理并发异步操作，提高性能。</p>
             </div>
           </div>
           <div class="practice-item">
-            <div class="practice-icon">🔄</div>
+            <div class="practice-icon">
+              <span class="practice-img">⭐</span>
+            </div>
             <div class="practice-content">
               <h4>避免阻塞</h4>
               <p>合理使用异步操作，避免阻塞主线程。</p>

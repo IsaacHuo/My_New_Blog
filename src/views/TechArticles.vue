@@ -30,7 +30,9 @@
       <div class="articles-container">
         <!-- 分类标题 -->
         <header class="category-header">
-          <h1 class="category-title">💻 技术文章</h1>
+          <h1 class="category-title">
+            <img src="/icons/TechArticle.ico" alt="技术文章" class="title-icon"> 技术文章
+          </h1>
           <div class="category-stats">
             <span class="article-count">共 {{ techArticles.length }} 篇文章</span>
             <span class="last-update">最后更新：{{ lastUpdate }}</span>
@@ -97,7 +99,9 @@
           <div class="sidebar-content">
             <ul class="category-menu">
               <li class="category-item active">
-                <span class="category-icon">💻</span>
+                <span class="category-icon">
+                  <img src="/icons/TechArticle.ico" alt="技术" class="sidebar-icon">
+                </span>
                 <span class="category-name">技术文章</span>
                 <span class="category-count">({{ techArticles.length }})</span>
               </li>
@@ -107,12 +111,14 @@
                 <span class="category-count">(12)</span>
               </li>
               <li class="category-item" @click="goToCategory('life')">
-                <span class="category-icon">🌱</span>
+                <span class="category-icon">📝</span>
                 <span class="category-name">生活杂想</span>
                 <span class="category-count">(8)</span>
               </li>
               <li class="category-item" @click="goToCategory('about')">
-                <span class="category-icon">👨‍💻</span>
+                <span class="category-icon">
+                  <img src="/MyPicture.jpeg" alt="作者" class="author-avatar">
+                </span>
                 <span class="category-name">关于我</span>
                 <span class="category-count">(3)</span>
               </li>
@@ -810,6 +816,28 @@ export default {
   color: #6b7280;
   font-size: 11px;
   font-style: italic;
+}
+
+/* 图标样式 */
+.title-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.sidebar-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.author-avatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* 响应式设计 */

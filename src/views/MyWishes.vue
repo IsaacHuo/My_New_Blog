@@ -30,7 +30,9 @@
       <div class="articles-container">
         <!-- 页面标题 -->
         <header class="category-header">
-          <h1 class="category-title">🌟 我的愿望</h1>
+          <h1 class="category-title">
+            <span class="title-icon">🌟</span> 我的愿望
+          </h1>
           <div class="category-stats">
             <span class="wish-count">共 {{ wishes.length }} 个愿望</span>
             <span class="last-update">最后更新：{{ lastUpdate }}</span>
@@ -73,28 +75,36 @@
         <!-- 愿望统计 -->
         <div class="wishes-stats">
           <div class="stat-card">
-            <div class="stat-icon">✅</div>
+            <div class="stat-icon">
+              <span class="stat-image">✅</span>
+            </div>
             <div class="stat-info">
               <div class="stat-number">{{ completedCount }}</div>
               <div class="stat-label">已完成</div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">🔄</div>
+            <div class="stat-icon">
+              <span class="stat-image">⏳</span>
+            </div>
             <div class="stat-info">
               <div class="stat-number">{{ inProgressCount }}</div>
               <div class="stat-label">进行中</div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">⭐</div>
+            <div class="stat-icon">
+              <span class="stat-image">📋</span>
+            </div>
             <div class="stat-info">
               <div class="stat-number">{{ plannedCount }}</div>
               <div class="stat-label">计划中</div>
             </div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">🌈</div>
+            <div class="stat-icon">
+              <span class="stat-image">🌟</span>
+            </div>
             <div class="stat-info">
               <div class="stat-number">{{ dreamCount }}</div>
               <div class="stat-label">梦想</div>
@@ -330,7 +340,7 @@ export default {
 
     const wishCategories = reactive([
       { name: '技术成长', icon: '💻', count: 3 },
-      { name: '生活体验', icon: '🌍', count: 2 },
+      { name: '生活体验', icon: '🌈', count: 2 },
       { name: '职业发展', icon: '🚀', count: 2 },
       { name: '生活技能', icon: '🎯', count: 2 },
       { name: '健康生活', icon: '💪', count: 1 }
@@ -750,6 +760,13 @@ export default {
   font-size: 13px;
 }
 
+/* 图标样式 */
+.stat-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
 /* 侧边栏样式 */
 .wishlist-summary {
   line-height: 1.6;
@@ -836,7 +853,7 @@ export default {
 }
 
 .sidebar-title::before {
-  content: '🎯';
+  content: '';
   font-size: 20px;
 }
 

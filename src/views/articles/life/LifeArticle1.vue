@@ -19,7 +19,9 @@
         <p>然而，随着时间的推移，我开始意识到这种生活方式的问题。长期的高强度工作让我感到疲惫，创造力也在下降。更重要的是，我发现自己与周围的世界渐行渐远，除了技术话题，我似乎没有什么可以和朋友们分享的。</p>
         
         <div class="life-quote">
-          <div class="quote-icon">💭</div>
+          <div class="quote-icon">
+            <span class="quote-img">💭</span>
+          </div>
           <div class="quote-content">
             <p>"生活就像编程，需要的不仅仅是逻辑，还需要创意、情感和美感。"</p>
           </div>
@@ -34,21 +36,27 @@
 
         <div class="life-moments">
           <div class="moment-item">
-            <div class="moment-icon">🌄</div>
+            <div class="moment-icon">
+              <span class="moment-img">🌄</span>
+            </div>
             <div class="moment-content">
               <h4>山顶日出</h4>
               <p>早起看日出，感受大自然的力量与美丽</p>
             </div>
           </div>
           <div class="moment-item">
-            <div class="moment-icon">📚</div>
+            <div class="moment-icon">
+              <span class="moment-img">📚</span>
+            </div>
             <div class="moment-content">
               <h4>读书时光</h4>
               <p>放下技术书籍，阅读文学作品，滋养心灵</p>
             </div>
           </div>
           <div class="moment-item">
-            <div class="moment-icon">🍳</div>
+            <div class="moment-icon">
+              <span class="moment-img">🍳</span>
+            </div>
             <div class="moment-content">
               <h4>学做料理</h4>
               <p>用心制作每一道菜，体验创造的乐趣</p>
@@ -63,11 +71,11 @@
         
         <h3>我的平衡法则</h3>
         <ul class="balance-rules">
-          <li>🕕 工作时间内专注工作，下班后不看工作消息</li>
-          <li>📱 减少无意义的网络浏览，多与现实世界互动</li>
-          <li>🚶‍♂️ 每天至少半小时的散步时间，思考和放松</li>
-          <li>👥 保持社交活动，与朋友家人分享生活</li>
-          <li>🎨 培养技术之外的兴趣爱好</li>
+          <li><span class="list-icon">⏰</span> 工作时间内专注工作，下班后不看工作消息</li>
+          <li><span class="list-icon">🌐</span> 减少无意义的网络浏览，多与现实世界互动</li>
+          <li><span class="list-icon">🚶</span> 每天至少半小时的散步时间，思考和放松</li>
+          <li><span class="list-icon">👥</span> 保持社交活动，与朋友家人分享生活</li>
+          <li><span class="list-icon">🎨</span> 培养技术之外的兴趣爱好</li>
         </ul>
       </div>
 
@@ -77,21 +85,27 @@
         
         <div class="inspiration-list">
           <div class="inspiration-item">
-            <div class="inspiration-icon">🌱</div>
+            <div class="inspiration-icon">
+              <span class="inspiration-img">⭐</span>
+            </div>
             <div class="inspiration-content">
               <h4>园艺与代码重构</h4>
               <p>照料植物需要耐心和持续关注，就像代码重构一样，需要持续改进和优化。</p>
             </div>
           </div>
           <div class="inspiration-item">
-            <div class="inspiration-icon">🍰</div>
+            <div class="inspiration-icon">
+              <span class="inspiration-img">⭐</span>
+            </div>
             <div class="inspiration-content">
               <h4>烘焙与算法设计</h4>
               <p>烘焙需要精确的比例和步骤，这让我更好地理解了算法设计的重要性。</p>
             </div>
           </div>
           <div class="inspiration-item">
-            <div class="inspiration-icon">🎵</div>
+            <div class="inspiration-icon">
+              <span class="inspiration-img">⭐</span>
+            </div>
             <div class="inspiration-content">
               <h4>音乐与代码节奏</h4>
               <p>音乐的节拍和代码的逻辑有着相似的美感，都需要和谐与平衡。</p>
@@ -107,7 +121,9 @@
         <p>希望每一位读到这篇文章的朋友，都能在繁忙的工作之余，为自己留出一片天空，去感受生活的美好，去体验代码之外的精彩世界。毕竟，最好的代码，往往来自于对生活的深度理解。</p>
         
         <div class="life-quote">
-          <div class="quote-icon">✨</div>
+          <div class="quote-icon">
+            <span class="quote-img">⭐</span>
+          </div>
           <div class="quote-content">
             <p>"代码是我们的工具，但生活才是我们的目的。"</p>
           </div>

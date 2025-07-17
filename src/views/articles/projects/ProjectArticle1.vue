@@ -100,23 +100,23 @@
                 <span class="code-title">目录结构</span>
                 <button class="copy-btn">复制</button>
               </div>
-              <pre><code>src/
-├── components/          # 公共组件
-│   ├── TopNavigation.vue
-│   ├── SiteFooter.vue
-│   └── ContactModal.vue
-├── views/              # 页面组件
-│   ├── Home.vue
-│   ├── TechArticles.vue
-│   ├── ProjectShare.vue
-│   ├── LifeThoughts.vue
-│   └── articles/       # 文章详情页
-│       ├── tech/
-│       ├── projects/
-│       └── life/
-├── styles/             # 样式文件
-├── utils/              # 工具函数
-└── router.js           # 路由配置</code></pre>
+              <pre><code><span class="property">src</span>/
+├── <span class="property">components</span>/          <span class="comment"># 公共组件</span>
+│   ├── <span class="string">TopNavigation.vue</span>
+│   ├── <span class="string">SiteFooter.vue</span>
+│   └── <span class="string">ContactModal.vue</span>
+├── <span class="property">views</span>/              <span class="comment"># 页面组件</span>
+│   ├── <span class="string">Home.vue</span>
+│   ├── <span class="string">TechArticles.vue</span>
+│   ├── <span class="string">ProjectShare.vue</span>
+│   ├── <span class="string">LifeThoughts.vue</span>
+│   └── <span class="property">articles</span>/       <span class="comment"># 文章详情页</span>
+│       ├── <span class="property">tech</span>/
+│       ├── <span class="property">projects</span>/
+│       └── <span class="property">life</span>/
+├── <span class="property">styles</span>/             <span class="comment"># 样式文件</span>
+├── <span class="property">utils</span>/              <span class="comment"># 工具函数</span>
+└── <span class="string">router.js</span>           <span class="comment"># 路由配置</span></code></pre>
             </div>
           </div>
 
@@ -605,59 +605,6 @@ export default {
 .feature-list li {
   margin-bottom: 8px;
   padding-left: 0;
-}
-
-/* 代码块样式 */
-.code-block {
-  background: #1f2937;
-  border-radius: 8px;
-  margin: 20px 0;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.code-header {
-  background: #374151;
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #4b5563;
-}
-
-.code-title {
-  color: #e5e7eb;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.copy-btn {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.copy-btn:hover {
-  background: #2563eb;
-}
-
-.code-block pre {
-  margin: 0;
-  padding: 20px;
-  overflow-x: auto;
-}
-
-.code-block code {
-  color: #e5e7eb;
-  background: none;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.5;
 }
 
 /* 开发心得样式 */

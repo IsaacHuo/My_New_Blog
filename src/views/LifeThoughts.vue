@@ -30,7 +30,9 @@
       <div class="articles-container">
         <!-- 分类标题 -->
         <header class="category-header">
-          <h1 class="category-title">🌱 生活杂想</h1>
+          <h1 class="category-title">
+            <img src="/icons/LifeArticle.ico" alt="生活杂想" class="title-icon"> 生活杂想
+          </h1>
           <div class="category-stats">
             <span class="article-count">共 {{ lifeArticles.length }} 篇文章</span>
             <span class="last-update">最后更新：{{ lastUpdate }}</span>
@@ -55,7 +57,10 @@
                 <div class="meta-left">
                   <span class="article-author">{{ article.author }}</span>
                   <span class="article-date">{{ article.date }}</span>
-                  <span class="article-mood">{{ article.mood }}</span>
+                  <span class="article-mood">
+                    <img :src="article.moodIcon" :alt="article.mood" class="mood-icon">
+                    {{ article.mood }}
+                  </span>
                 </div>
                 <div class="meta-right">
                   <span class="article-reads">{{ article.readCount }} 阅读</span>
@@ -106,12 +111,14 @@
                 <span class="category-count">(12)</span>
               </li>
               <li class="category-item active">
-                <span class="category-icon">🌱</span>
+                <span class="category-icon">
+                  <img src="/icons/LifeArticle.ico" alt="生活" class="sidebar-icon">
+                </span>
                 <span class="category-name">生活杂想</span>
                 <span class="category-count">({{ lifeArticles.length }})</span>
               </li>
               <li class="category-item" @click="goToCategory('about')">
-                <span class="category-icon">👨‍💻</span>
+                <span class="category-icon">👤</span>
                 <span class="category-name">关于我</span>
                 <span class="category-count">(3)</span>
               </li>
@@ -124,6 +131,7 @@
           <div class="sidebar-content">
             <div class="tag-cloud">
               <span v-for="mood in moodTags" :key="mood.name" class="popular-tag mood-tag" :style="{ fontSize: mood.size + 'px' }">
+                <img :src="mood.icon" :alt="mood.name" class="mood-tag-icon">
                 {{ mood.name }}
               </span>
             </div>
@@ -146,7 +154,9 @@
             <div class="mood-calendar">
               <div v-for="day in recentMoods" :key="day.date" class="mood-day">
                 <div class="mood-date">{{ day.date }}</div>
-                <div class="mood-emoji">{{ day.emoji }}</div>
+                <div class="mood-emoji">
+                  <img :src="day.emoji" :alt="day.mood" class="mood-day-icon">
+                </div>
                 <div class="mood-text">{{ day.mood }}</div>
               </div>
             </div>
@@ -232,7 +242,8 @@ export default {
         summary: '作为一名程序员，我们总是沉浸在代码的世界里。但生活不只有代码，还有诗和远方。这篇文章分享我在工作之余探索生活的一些感悟。',
         author: '霍玮放',
         date: '2025-07-16',
-        mood: '😊 愉快',
+        mood: '愉快',
+        moodIcon: '😊',
         readCount: 867,
         likes: 52,
         tags: ['生活感悟', '工作生活平衡', '个人成长']
@@ -243,7 +254,8 @@ export default {
         summary: '在这个咖啡馆安静的角落，我想聊聊远程工作这两年来的体验。有收获，也有挑战，更多的是对未来工作方式的思考。',
         author: '霍玮放',
         date: '2025-07-15',
-        mood: '☕ 思考',
+        mood: '思考',
+        moodIcon: '🤔',
         readCount: 634,
         likes: 38,
         tags: ['远程工作', '职场思考', '生活方式']
@@ -255,7 +267,8 @@ export default {
         summary: '深夜时分，万籁俱寂，只有键盘敲击声陪伴。这是属于程序员的独特时光，也是我最喜欢的编程时刻。',
         author: '霍玮放',
         date: '2025-07-14',
-        mood: '🌙 专注',
+        mood: '专注',
+        moodIcon: '😎',
         readCount: 1024,
         likes: 76,
         tags: ['深夜编程', '心境感悟', '程序员生活']
@@ -266,7 +279,8 @@ export default {
         summary: '这次云南之行不仅收获了美景，更意外地找到了解决项目难题的灵感。有时候，最好的解决方案往往来自于暂时的放下。',
         author: '霍玮放',
         date: '2025-07-13',
-        mood: '🚗 兴奋',
+        mood: '兴奋',
+        moodIcon: '🎉',
         readCount: 456,
         likes: 29,
         tags: ['旅行', '技术灵感', '生活体验']
@@ -277,7 +291,8 @@ export default {
         summary: '重读这本经典，依然有很多新的收获。书中的很多观点不仅适用于编程，更是做人做事的智慧。',
         author: '霍玮放',
         date: '2025-07-12',
-        mood: '📚 学习',
+        mood: '学习',
+        moodIcon: '📚',
         readCount: 723,
         likes: 45,
         tags: ['读书笔记', '技术成长', '人生感悟']
@@ -288,7 +303,8 @@ export default {
         summary: '离开城市的喧嚣，来到郊外的农场。亲手种菜、喂鸡、采摘，体验最原始的生活方式，找回内心的宁静。',
         author: '霍玮放',
         date: '2025-07-11',
-        mood: '🌾 放松',
+        mood: '放松',
+        moodIcon: '😌',
         readCount: 392,
         likes: 33,
         tags: ['农场体验', '自然生活', '周末休闲']
@@ -299,7 +315,8 @@ export default {
         summary: '谁说程序员不会做饭？把写代码的逻辑思维运用到厨房里，竟然意外地做出了不错的菜品。',
         author: '霍玮放',
         date: '2025-07-10',
-        mood: '👨‍🍳 创造',
+        mood: '创造',
+        moodIcon: '💡',
         readCount: 589,
         likes: 41,
         tags: ['学做饭', '生活技能', '创意料理']
@@ -310,7 +327,8 @@ export default {
         summary: '雨夜，一个人，一首歌，一段代码。发现音乐的节奏和代码的逻辑有着奇妙的相似性。',
         author: '霍玮放',
         date: '2025-07-09',
-        mood: '🎵 感性',
+        mood: '感性',
+        moodIcon: '💕',
         readCount: 445,
         likes: 37,
         tags: ['音乐', '代码艺术', '情感表达']
@@ -318,14 +336,14 @@ export default {
     ])
 
     const moodTags = reactive([
-      { name: '😊 愉快', size: 14 },
-      { name: '☕ 思考', size: 13 },
-      { name: '🌙 专注', size: 15 },
-      { name: '🚗 兴奋', size: 12 },
-      { name: '📚 学习', size: 13 },
-      { name: '🌾 放松', size: 11 },
-      { name: '👨‍🍳 创造', size: 12 },
-      { name: '🎵 感性', size: 14 }
+      { name: '愉快', icon: '😊', size: 14 },
+      { name: '思考', icon: '🤔', size: 13 },
+      { name: '专注', icon: '😎', size: 15 },
+      { name: '兴奋', icon: '🎉', size: 12 },
+      { name: '学习', icon: '📚', size: 13 },
+      { name: '放松', icon: '😌', size: 11 },
+      { name: '创造', icon: '💡', size: 12 },
+      { name: '感性', icon: '💕', size: 14 }
     ])
 
     const lifeMilestones = reactive([
@@ -355,7 +373,7 @@ export default {
       { date: '07-17', emoji: '😊', mood: '愉快' },
       { date: '07-16', emoji: '🤔', mood: '思考' },
       { date: '07-15', emoji: '💪', mood: '充实' },
-      { date: '07-14', emoji: '😴', mood: '放松' },
+      { date: '07-14', emoji: '😌', mood: '放松' },
       { date: '07-13', emoji: '🎉', mood: '兴奋' },
       { date: '07-12', emoji: '📚', mood: '学习' },
       { date: '07-11', emoji: '🌱', mood: '成长' }
@@ -822,6 +840,21 @@ export default {
   color: white;
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+/* 图标样式 */
+.title-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.sidebar-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 /* 生活杂想特定样式 */
