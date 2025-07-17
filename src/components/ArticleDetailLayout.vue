@@ -46,6 +46,18 @@
           </div>
         </header>
 
+        <!-- 移动端目录（仅在小屏幕显示） -->
+        <div class="mobile-toc sidebar-section">
+          <div class="sidebar-header">文章目录</div>
+          <div class="sidebar-content">
+            <ul class="toc-list">
+              <li v-for="toc in tableOfContents" :key="toc.id" :class="{ 'active': activeSection === toc.id }">
+                <a @click="scrollToSection(toc.id)" class="toc-link">{{ toc.title }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <!-- 文章正文 -->
         <article class="article-content">
           <!-- 动态内容插槽 -->
@@ -74,6 +86,17 @@
             <span class="article-tag" v-for="tag in article.tags" :key="tag">{{ tag }}</span>
           </div>
         </footer>
+
+        <!-- 移动端相关文章（仅在小屏幕显示） -->
+        <div class="mobile-related sidebar-section">
+          <div class="sidebar-header">相关文章</div>
+          <div class="sidebar-content">
+            <div class="related-article" v-for="related in relatedArticles" :key="related.id">
+              <a href="#" class="related-link" @click="goToRelatedArticle(related)">{{ related.title }}</a>
+              <div class="related-meta">{{ related.date }}</div>
+            </div>
+          </div>
+        </div>
 
         <!-- 评论区域 -->
         <section v-if="showComments" class="comments-section">
@@ -107,8 +130,8 @@
         </section>
       </div>
 
-      <!-- 侧边栏 -->
-      <aside class="article-sidebar">
+      <!-- 桌面端侧边栏 -->
+      <aside class="article-sidebar desktop-sidebar">
         <!-- 相关文章固定在顶部 -->
         <div class="sidebar-section sidebar-fixed">
           <div class="sidebar-header">相关文章</div>
@@ -418,6 +441,12 @@ export default {
 
 <style scoped>
 @import '../styles/style.css';
+
+/* 移动端专用元素默认隐藏 */
+.mobile-toc,
+.mobile-related {
+  display: none;
+}
 
 /* 文章详情页通用样式 */
 .article-banner {
@@ -896,37 +925,25 @@ export default {
 }
 
 @media (max-width: 968px) {
+  /* 桌面端侧边栏在移动端隐藏 */
+  .desktop-sidebar {
+    display: none;
+  }
+  
+  /* 移动端专用目录和相关文章显示 */
+  .mobile-toc,
+  .mobile-related {
+    display: block;
+    margin: 20px 0;
+  }
+  
   .article-main {
     flex-direction: column;
-    gap: 15px;
+    gap: 0;
   }
   
   .article-container {
     width: 100%;
-  }
-  
-  .article-sidebar {
-    width: 100%;
-    order: -1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-  }
-  
-  /* 在移动端禁用吸顶功能 */
-  .sidebar-sticky.is-sticky {
-    position: static !important;
-    width: 100% !important;
-    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08) !important;
-    animation: none !important;
-  }
-  
-  .sidebar-fixed {
-    order: 0;
-  }
-  
-  .sidebar-sticky {
-    order: 0;
   }
   
   .article-header {
@@ -945,6 +962,20 @@ export default {
   
   .article-actions {
     flex-wrap: wrap;
+  }
+}
+
+/* 桌面端样式 */
+@media (min-width: 969px) {
+  /* 桌面端隐藏移动端专用元素 */
+  .mobile-toc,
+  .mobile-related {
+    display: none;
+  }
+  
+  /* 桌面端侧边栏显示 */
+  .desktop-sidebar {
+    display: block;
   }
 }
 
