@@ -631,29 +631,29 @@ export default {
 .article-footer {
   background: white;
   border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
 }
 
 .article-actions {
   display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 15px;
 }
 
 .action-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
+  gap: 5px;
+  padding: 6px 12px;
   background: #2563eb;
   color: #ffd700;
   border: 1px solid #1d4ed8;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 500;
@@ -819,7 +819,7 @@ export default {
 .sidebar-section {
   background: white;
   border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.08);
 }
@@ -827,14 +827,14 @@ export default {
 .sidebar-header {
   background: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
   color: white;
-  padding: 12px 15px;
-  font-size: 14px;
+  padding: 10px 12px;
+  font-size: 13px;
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-content {
-  padding: 15px;
+  padding: 12px;
   background: #f8fafc;
 }
 
@@ -934,7 +934,7 @@ export default {
   .mobile-toc,
   .mobile-related {
     display: block;
-    margin: 20px 0;
+    margin: 15px 0;
   }
   
   .article-main {
@@ -947,41 +947,75 @@ export default {
   }
   
   .article-header {
-    padding: 20px;
+    padding: 15px 20px;
   }
   
   .article-title {
-    font-size: 24px;
+    font-size: 22px;
   }
   
   .article-meta {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 6px;
   }
   
   .article-actions {
     flex-wrap: wrap;
   }
-}
-
-/* 桌面端样式 */
-@media (min-width: 969px) {
-  /* 桌面端隐藏移动端专用元素 */
-  .mobile-toc,
-  .mobile-related {
-    display: none;
+  
+  /* 移动端内容区域优化 */
+  .content-section {
+    padding: 15px 18px;
   }
   
-  /* 桌面端侧边栏显示 */
-  .desktop-sidebar {
-    display: block;
+  .content-section:last-child {
+    padding-bottom: 20px;
+  }
+  
+  .sidebar-content {
+    padding: 10px;
   }
 }
 
-@media (max-width: 768px) {
-  .sidebar-section {
-    margin-bottom: 0;
+/* 小屏幕进一步优化 */
+@media (max-width: 480px) {
+  .content-section {
+    padding: 12px 15px;
+  }
+  
+  .content-section h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    margin-top: 15px;
+  }
+  
+  .content-section h3 {
+    font-size: 16px;
+    margin: 20px 0 10px 0;
+  }
+  
+  .content-section p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .article-header {
+    padding: 12px 15px;
+  }
+  
+  .article-title {
+    font-size: 20px;
+  }
+  
+  .sidebar-content {
+    padding: 8px;
+  }
+  
+  .toc-list .toc-link {
+    padding: 5px 8px;
+    font-size: 12px;
   }
 }
 </style>

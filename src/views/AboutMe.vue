@@ -1123,10 +1123,38 @@ export default {
   
   .sidebar {
     width: 100%;
-    order: -1; /* 在移动端将侧边栏移到上方 */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
+  }
+  
+  /* 移动端卡片优先级排序 */
+  .intro-section {
+    order: 1; /* 个人简介最优先 */
+  }
+  
+  .sidebar {
+    order: 2; /* 联系方式第二位 */
+  }
+  
+  .skills-section {
+    order: 3; /* 技能专长第三位 */
+  }
+  
+  .education-section {
+    order: 4; /* 教育背景第四位 */
+  }
+  
+  .experience-section {
+    order: 5; /* 项目经历第五位 */
+  }
+  
+  .tech-overview-section {
+    order: 6; /* 技术栈概览第六位 */
+  }
+  
+  .recent-activities-section {
+    order: 7; /* 最近动态最后 */
   }
   
   .skills-grid {
