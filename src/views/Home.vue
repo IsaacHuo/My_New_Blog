@@ -86,9 +86,31 @@
 
     <!-- 主要内容区域 -->
     <main class="main-content">
-      <!-- 侧边栏 - 移到最左边 -->
+      <!-- 侧边栏 - 根据搜索状态显示不同内容 -->
       <aside class="sidebar">
-        <div class="sidebar-section">
+        <!-- 搜索结果页显示热门文章 -->
+        <div v-if="showSearchResults" class="sidebar-section">
+          <div class="sidebar-header">热门文章</div>
+          <div class="sidebar-content">
+            <div class="popular-articles">
+              <div 
+                v-for="article in popularArticles" 
+                :key="'popular-' + article.id"
+                class="popular-article-item"
+                @click="selectArticle(article)"
+              >
+                <div class="popular-article-title">{{ article.title }}</div>
+                <div class="popular-article-meta">
+                  <span class="popular-article-reads">{{ article.readCount }} 阅读</span>
+                  <span class="popular-article-likes">{{ article.likes }} 点赞</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 非搜索结果页显示个人介绍 -->
+        <div v-else class="sidebar-section">
           <div class="sidebar-header">个人介绍</div>
           <div class="sidebar-content">
             <div class="profile-intro">
@@ -321,7 +343,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { hasArticleDetail } from '../utils/helpers.js'
 
@@ -463,6 +485,22 @@ export default {
         summary: '整理常用算法和数据结构的学习笔记，包括时间复杂度分析、代码实现和实际应用场景的讲解。'
       }
     ])
+
+    // 热门文章计算属性 - 按阅读量和点赞数排序
+    const popularArticles = computed(() => {
+      return [...articles]
+        .sort((a, b) => {
+          // 综合阅读量和点赞数排序
+          const scoreA = a.readCount + (a.likes || 0) * 10
+          const scoreB = b.readCount + (b.likes || 0) * 10
+          return scoreB - scoreA
+        })
+        .slice(0, 6) // 只显示前6篇
+        .map(article => ({
+          ...article,
+          likes: article.likes || Math.floor(article.readCount / 20) // 如果没有点赞数，根据阅读量估算
+        }))
+    })
 
     const getSectionTitle = () => {
       const titles = {
@@ -694,6 +732,7 @@ export default {
       searchPageSize,
       stats,
       articles,
+      popularArticles,
       getSectionTitle,
       getArticlesByTab,
       getArticlesByCategory,
@@ -1219,6 +1258,65 @@ button, .category-item-flat span, .article-title-compact {
   border-radius: 6px;
   border: 1px solid #e5e7eb;
   font-family: 'WenQuanYi Bitmap Song', sans-serif;
+}
+
+/* 热门文章样式 */
+.popular-articles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.popular-article-item {
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popular-article-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+.popular-article-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.popular-article-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.popular-article-reads,
+.popular-article-likes {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.popular-article-reads::before {
+  content: "👁";
+  font-size: 10px;
+}
+
+.popular-article-likes::before {
+  content: "👍";
+  font-size: 10px;
 }
 
 /* 响应式设计 */

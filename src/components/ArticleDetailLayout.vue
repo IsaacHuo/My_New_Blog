@@ -389,6 +389,55 @@ export default {
       router.push(`/article/${props.category}/${article.id}`)
     }
 
+    // 代码复制功能
+    const copyCode = (event) => {
+      const copyBtn = event.target
+      const codeBlock = copyBtn.closest('.code-block')
+      if (!codeBlock) return
+      
+      const codeContent = codeBlock.querySelector('pre code')
+      if (!codeContent) return
+      
+      // 获取纯文本内容（去除HTML标签）
+      const textContent = codeContent.textContent || codeContent.innerText
+      
+      // 复制到剪贴板
+      navigator.clipboard.writeText(textContent)
+        .then(() => {
+          // 显示复制成功反馈
+          const originalText = copyBtn.textContent
+          copyBtn.textContent = '已复制!'
+          copyBtn.style.background = '#10b981'
+          
+          setTimeout(() => {
+            copyBtn.textContent = originalText
+            copyBtn.style.background = '#0366d6'
+          }, 2000)
+        })
+        .catch(() => {
+          // 降级方案：使用document.execCommand
+          const textArea = document.createElement('textarea')
+          textArea.value = textContent
+          document.body.appendChild(textArea)
+          textArea.select()
+          try {
+            document.execCommand('copy')
+            const originalText = copyBtn.textContent
+            copyBtn.textContent = '已复制!'
+            copyBtn.style.background = '#10b981'
+            
+            setTimeout(() => {
+              copyBtn.textContent = originalText
+              copyBtn.style.background = '#0366d6'
+            }, 2000)
+          } catch (err) {
+            console.error('复制失败:', err)
+            alert('复制失败，请手动选择代码')
+          }
+          document.body.removeChild(textArea)
+        })
+    }
+
     onMounted(() => {
       // 不直接修改props，而是通过emit传递阅读数增加事件
       emit('read-count-increased')
@@ -411,6 +460,12 @@ export default {
             }
           })
         }
+        
+        // 绑定代码复制按钮事件
+        const copyButtons = document.querySelectorAll('.copy-btn')
+        copyButtons.forEach(btn => {
+          btn.addEventListener('click', copyCode)
+        })
       })
     })
 
@@ -433,7 +488,8 @@ export default {
       shareArticle,
       addComment,
       goToRelatedArticle,
-      scrollToSection
+      scrollToSection,
+      copyCode
     }
   }
 }
@@ -545,7 +601,7 @@ export default {
   order: 1;
 }
 
-/* 文章目录支持吸顶 */
+/* 文章目录支持吸顶滚动 */
 .sidebar-sticky {
   order: 2;
   transition: all 0.3s ease;
