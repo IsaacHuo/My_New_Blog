@@ -824,7 +824,6 @@ export default {
 .category-emoji {
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   font-weight: normal !important;
   font-style: normal !important;
   margin-right: 8px;

@@ -906,7 +906,6 @@ export default {
   text-align: center;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
 }
 
 .contact-info {
@@ -976,7 +975,6 @@ export default {
   font-size: 16px;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
 }
 
 .hobby-name {
@@ -1093,7 +1091,6 @@ export default {
   text-align: center;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
 }
 
 .activity-content {
@@ -1141,7 +1138,6 @@ export default {
 .sidebar-content .hobby-icon {
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   font-weight: normal !important;
   font-style: normal !important;
 }

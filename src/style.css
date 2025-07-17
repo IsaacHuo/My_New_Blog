@@ -1015,7 +1015,6 @@ body {
   align-items: center;
   justify-content: center;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   vertical-align: middle;
 }
 

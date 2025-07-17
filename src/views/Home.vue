@@ -1420,7 +1420,6 @@ button, .category-item-flat span, .article-title-compact {
   align-items: center;
   justify-content: center;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   vertical-align: middle;
 }
 
@@ -1499,7 +1498,6 @@ script[src*="busuanzi"],
 .icon-emoji {
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", "Android Emoji", "EmojiOne Color", sans-serif !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   font-weight: normal !important;
   font-style: normal !important;
   font-size: 16px;
