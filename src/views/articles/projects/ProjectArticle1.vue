@@ -564,34 +564,37 @@ export default {
 .tech-stack {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .tech-item {
   display: flex;
   align-items: flex-start;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  padding: 15px;
-  border-radius: 8px;
-  border-left: 4px solid #10b981;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 3px solid #10b981;
+  min-height: 50px;
 }
 
 .tech-icon {
-  font-size: 20px;
-  margin-right: 12px;
+  font-size: 18px;
+  margin-right: 10px;
   flex-shrink: 0;
 }
 
 .tech-content h4 {
   color: #1f2937;
-  margin-bottom: 5px;
-  font-size: 16px;
+  margin-bottom: 3px;
+  font-size: 15px;
+  line-height: 1.3;
 }
 
 .tech-content p {
   color: #6b7280;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
+  font-size: 13px;
 }
 
 /* 功能列表样式 */

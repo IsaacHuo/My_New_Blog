@@ -326,62 +326,65 @@ export default {
 /* 生活语录样式 */
 .life-quote {
   background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  border-left: 4px solid #10b981;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px 0;
+  border-left: 3px solid #10b981;
+  border-radius: 6px;
+  padding: 15px 18px;
+  margin: 18px 0;
   display: flex;
   align-items: flex-start;
-  gap: 15px;
+  gap: 12px;
 }
 
 .quote-icon {
-  font-size: 24px;
+  font-size: 18px;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 0;
 }
 
 .quote-content p {
   font-style: italic;
   color: #059669;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* 生活时刻样式 */
 .life-moments {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin: 20px 0;
+  gap: 10px;
+  margin: 18px 0;
 }
 
 .moment-item {
   display: flex;
   align-items: flex-start;
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  padding: 15px;
-  border-radius: 8px;
-  border-left: 4px solid #f59e0b;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 3px solid #f59e0b;
+  min-height: 50px;
 }
 
 .moment-icon {
-  font-size: 20px;
-  margin-right: 12px;
+  font-size: 18px;
+  margin-right: 10px;
   flex-shrink: 0;
 }
 
 .moment-content h4 {
   color: #1f2937;
-  margin-bottom: 5px;
-  font-size: 16px;
+  margin-bottom: 3px;
+  font-size: 15px;
+  line-height: 1.3;
 }
 
 .moment-content p {
   color: #6b7280;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
+  font-size: 13px;
 }
 
 /* 平衡法则样式 */
@@ -401,35 +404,38 @@ export default {
 .inspiration-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin: 20px 0;
+  gap: 10px;
+  margin: 18px 0;
 }
 
 .inspiration-item {
   display: flex;
   align-items: flex-start;
   background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
-  padding: 15px;
-  border-radius: 8px;
-  border-left: 4px solid #8b5cf6;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border-left: 3px solid #8b5cf6;
+  min-height: 50px;
 }
 
 .inspiration-icon {
-  font-size: 20px;
-  margin-right: 12px;
+  font-size: 18px;
+  margin-right: 10px;
   flex-shrink: 0;
 }
 
 .inspiration-content h4 {
   color: #1f2937;
-  margin-bottom: 5px;
-  font-size: 16px;
+  margin-bottom: 3px;
+  font-size: 15px;
+  line-height: 1.3;
 }
 
 .inspiration-content p {
   color: #6b7280;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
+  font-size: 13px;
 }
 
 /* 文章底部操作 */
