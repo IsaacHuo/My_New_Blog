@@ -2,7 +2,7 @@
 
 基于 Vue 3 + Vite 构建的响应式个人博客网站。模仿winXP的蓝色风格
 
-**在线访问**: https://isaachuo.github.io/My_New_Blog/
+[Blog](https://isaachuo.github.io/My_New_Blog/)
 
 ## 功能特性
 
